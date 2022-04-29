@@ -4,7 +4,16 @@
 >
 > - Unmanaged vs. Managed Clusters
 > - Tanzu CLI and CLI plugins
-> - Tanzu Package Management with Kapp
+
+## Install TCE on MacOS/Linux
+
+Install Tanzu Community Edition (TCE) with Homebrew:
+
+```shell
+brew install tanzu-community-edition
+```
+
+## Install TCE on Windows
 
 Install Tanzu Community Edition (TCE) with Chocolatey:
 
@@ -14,6 +23,8 @@ choco install tanzu-community-edition --version 0.11.0
 
 Note that it is important to specify the version! TCE is currently a moderated package at Chocolatey and this version is not
 set as the default.
+
+## Create a Cluster
 
 Installing TCE does not create Kubernetes clusters. Rather, it installs the Tanzu CLI and several plugins that enable
 you to create clusters and manage packages in clusters.
@@ -63,3 +74,5 @@ the pod:
 ```shell
 kubectl delete pod kuard
 ```
+
+[&lt;- Previous](Exercise00-PreReqs.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](Exercise02-ExplorePackages.md)

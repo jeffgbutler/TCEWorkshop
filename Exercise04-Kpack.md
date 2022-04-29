@@ -1,4 +1,8 @@
-# Exercise 4: Configure Kpack
+# Exercise 4: Configure and Test Kpack
+
+> Important Concepts to cover in an overview:
+>
+> - Overview of Kpack (stacks, stores, builders)
 
 Kpack is a system that builds container images from source code and publishes them to a registry. Kpack uses
 Cloud Native Buildpacks (https://buildpacks.io/) to build container images from source. Cloud Native Buildpacks
@@ -10,16 +14,19 @@ particular buildpack can make a contributions to the image, and then build the i
 buildpacks can recognize Gradle or Maven projects, build packs exist for many other languages including
 .Net Core (C#, F#, etc.), NodeJS, Go, Ruby, etc.
 
-Cloud NAtive Buildpacks define a standard API for creating and executing buildpacks. Another project - Paketo
-Buildpacks (https://paketo.io/) - provides open source implementations of buildpacks for many different languages.
+Cloud Native Buildpacks define a standard API for creating and executing buildpacks. Another project - Paketo
+Buildpacks (https://paketo.io/) - provides open source buildpack implementations for many different languages.
 
-We installed Kpack when we installed the app toolkit above. In this exercise, we will configure Kpack so that
+We installed Kpack when we installed the app toolkit previously. In this exercise, we will configure Kpack so that
 it knows how to build Java, .Net Core, and NodeJS applications.
 
 Instructions adapted from here: https://github.com/pivotal/kpack/blob/main/docs/tutorial.md
 
-Create a registry secret:
+Create a registry secret with credentials to your container registry:
 
+**Important:** alter this command with the proper URL and credentials for your registry!
+
+Windows Powershell:
 ```powershell
 kubectl create secret docker-registry kpack-registry-credentials `
     --docker-username=admin `
@@ -28,16 +35,34 @@ kubectl create secret docker-registry kpack-registry-credentials `
     --namespace default
 ```
 
-Define the Cluster stores, CLusterstacks, and builders for this cluster:
+MacOS/Linux:
+```shell
+kubectl create secret docker-registry kpack-registry-credentials \
+    --docker-username=admin \
+    --docker-password=Harbor12345 \
+    --docker-server=harbor.tanzuathome.net \
+    --namespace default
+```
+
+Look at the file [03-kpack-resources.yaml](03-kpack-resources.yaml) in this directory. This file contains definitions for the Kpack
+resources required in this workshop (ServiceAccount, ClusterStore, ClusterStack, and Builder).
+
+**Important:** alter `spec.tag` in the `Builder` definition with a proper tag for images in your registry!
 
 ```shell
 kubectl apply -f 03-kpack-resources.yaml
 ```
 
 Kpack is now ready to begin building images! As with Knative, you can define image builds with a CLI, or with Kubectl.
-We will show different options below - feel free to try one or all of the options!
+We're going to use the Kubectl version because of the way we've created the service account - the Kpack CLI can only work with the
+default service account. Feel free to try one or all of the options below!
 
 ## .Net Core Image Build with Kubectl
+
+Look at the file [04-kpack-test-image-dotnet.yaml](04-kpack-test-image-dotnet.yaml) in this directory. This file contains a definition
+for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the image should be published.
+
+**Important:** alter `spec.tag` in the `Image` definition with a proper tag for images in your registry!
 
 ```shell
 kubectl apply -f 04-kpack-test-image-dotnet.yaml
@@ -58,9 +83,17 @@ kp image list
 For me, the image was `harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0`.
 Now lets deploy that image with Knative (you will need to change this command to use the image you built):
 
+Windows Powershell:
 ```powershell
 kn service create dotnet-sample `
   --image harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0 `
+  --pull-secret kpack-registry-credentials
+```
+
+MacOS/Linux:
+```shell
+kn service create dotnet-sample \
+  --image harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0 \
   --pull-secret kpack-registry-credentials
 ```
 
@@ -76,7 +109,10 @@ kn service delete dotnet-sample
 
 ## Java Image Build with Kubectl
 
-Deploy a test build:
+Look at the file [05-kpack-test-image-java.yaml](05-kpack-test-image-java.yaml) in this directory. This file contains a definition
+for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the image should be published.
+
+**Important:** alter `spec.tag` in the `Image` definition with a proper tag for images in your registry!
 
 ```shell
 kubectl apply -f 05-kpack-test-image-java.yaml
@@ -97,9 +133,17 @@ kp image list
 For me, the image was `harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50`.
 Now lets deploy that image with Knative (you will need to change this command to use the image you built):
 
+Windows Powershell:
 ```powershell
 kn service create spring-pet-clinic `
   --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50 `
+  --pull-secret kpack-registry-credentials
+```
+
+MacOS/Linux:
+```rshell
+kn service create spring-pet-clinic \
+  --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50 \
   --pull-secret kpack-registry-credentials
 ```
 
@@ -113,3 +157,4 @@ Once you are finished experimenting, you can delete the service with the followi
 kn service delete spring-pet-clinic
 ```
 
+[&lt;- Previous](Exercise03-AppToolkit.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](Exercise05-Cartographer.md)

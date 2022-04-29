@@ -66,4 +66,4 @@ Examples of the various values are as follows:
    of "foo" (typically your GCP user name), and a repository named "tce". The repository must be created before pushing
    artifacts.
 
-[Next](Exercise01-Install.md)
+[Next -&gt;](Exercise01-Install.md)
