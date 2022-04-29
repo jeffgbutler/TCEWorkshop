@@ -1,0 +1,15 @@
+apiVersion: kpack.io/v1alpha2
+kind: Image
+metadata:
+  name: spring-pet-clinic
+  namespace: default
+spec:
+  tag: harbor.tanzuathome.net/tce/spring-pet-clinic
+  serviceAccountName: kpack-service-account
+  builder:
+    name: my-builder
+    kind: Builder
+  source:
+    git:
+      url: https://github.com/spring-projects/spring-petclinic
+      revision: 82cb521d636b282340378d80a6307a08e3d4a4c4
