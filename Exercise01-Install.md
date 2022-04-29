@@ -13,6 +13,8 @@ Install Tanzu Community Edition (TCE) with Homebrew:
 brew install tanzu-community-edition
 ```
 
+Proceed to [Create a Cluster](#create-a-cluster)
+
 ## Install TCE on Windows
 
 Install Tanzu Community Edition (TCE) with Chocolatey:
@@ -23,6 +25,8 @@ choco install tanzu-community-edition --version 0.11.0
 
 Note that it is important to specify the version! TCE is currently a moderated package at Chocolatey and this version is not
 set as the default.
+
+Proceed to [Create a Cluster](#create-a-cluster)
 
 ## Create a Cluster
 
@@ -35,9 +39,9 @@ Create a cluster:
 tanzu unmanaged-cluster create tceworkshop --port-map '80:80,443:443'
 ```
 
-This will create a single node unmanaged Kubernetes cluster using **Kind** (Kubernetes in Docker) on your local workstation.
-Unmanaged clusters are suitable for short lived experimentation and learning (such as this workshop). They also start very quickly.
-This cluster will have the following characteristics:
+This will create a single node unmanaged Kubernetes cluster using [Kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker)
+on your local workstation. Unmanaged clusters are suitable for short lived experimentation and learning (such as this workshop).
+They also start very quickly. This cluster will have the following characteristics:
 
 - Ports 80 and 443 are exposed on your workstation to allow easier access to workloads deployed on the cluster
 - The kapp controller will be installed to support Tanzu package management

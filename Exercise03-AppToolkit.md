@@ -4,6 +4,9 @@
 >
 > - Overview of the App Toolkit Package
 
+**Important!** Shell commands on this page should be executed from a terminal open in the root directory of the
+git repo you cloned in the pre-requisites!
+
 The App Toolkit is a composite package (it bundles other packages together). It is a simple way to install
 a group of packages that are relevant to application developers including:
 
@@ -32,8 +35,15 @@ For now, the important things to know are these:
 
 Now we can install the app toolkit with the following command:
 
+Windows PowerShell:
 ```powershell
 tanzu package install app-toolkit --package-name app-toolkit.community.tanzu.vmware.com `
+  --version 0.1.0 --values-file config/app-toolkit-values.yaml
+```
+
+MacOS/Linux:
+```shell
+tanzu package install app-toolkit --package-name app-toolkit.community.tanzu.vmware.com \
   --version 0.1.0 --values-file config/app-toolkit-values.yaml
 ```
 

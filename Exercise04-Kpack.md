@@ -4,6 +4,9 @@
 >
 > - Overview of Kpack (stacks, stores, builders)
 
+**Important!** Shell commands on this page should be executed from a terminal open in the root directory of the
+git repo you cloned in the pre-requisites!
+
 Kpack is a system that builds container images from source code and publishes them to a registry. Kpack uses
 Cloud Native Buildpacks (https://buildpacks.io/) to build container images from source. Cloud Native Buildpacks
 started as a collaboration between Heroku and Pivotal(now VMware) and are now the CNCF's recommended
@@ -11,7 +14,7 @@ method for building container images. You will never have to write another Docke
 
 Buildpacks can inspect source code from many different languages and frameworks, determine if any
 particular buildpack can make a contributions to the image, and then build the image. For Java projects,
-buildpacks can recognize Gradle or Maven projects, build packs exist for many other languages including
+buildpacks can recognize Gradle or Maven projects. Build packs exist for many other languages including
 .Net Core (C#, F#, etc.), NodeJS, Go, Ruby, etc.
 
 Cloud Native Buildpacks define a standard API for creating and executing buildpacks. Another project - Paketo
@@ -22,7 +25,7 @@ it knows how to build Java, .Net Core, and NodeJS applications.
 
 Instructions adapted from here: https://github.com/pivotal/kpack/blob/main/docs/tutorial.md
 
-Create a registry secret with credentials to your container registry:
+First, create a registry secret with credentials to your container registry:
 
 **Important:** alter this command with the proper URL and credentials for your registry!
 
@@ -44,9 +47,11 @@ kubectl create secret docker-registry kpack-registry-credentials \
     --namespace default
 ```
 
-Look at the file [config/templates/kpack-resources.yaml](config/templates/kpack-resources.yaml). This file contains definitions
-for the Kpack resources required in this workshop (ServiceAccount, ClusterStore, ClusterStack, and Builder). The file contains
-some placeholder values that we will fill in using YTT.
+Now look at the file [config/templates/kpack-resources.yaml](config/templates/kpack-resources.yaml). This file contains definitions
+for the Kpack resources required in this workshop (ServiceAccount, ClusterStore, ClusterStack, and Builder). YOu should be able to
+see that we are installing buildpacks for .Net core, Java, and NodeJS. The file contains some placeholder values that we will fill
+in using YTT. The following command will merge the configuration values with the template, and then pass the results to kubectl.
+A neat trick!
 
 ```shell
 ytt -f config/templates/kpack-resources.yaml --data-values-file config/values.yaml | kubectl apply -f-
@@ -74,7 +79,9 @@ You can follow the build with this comand:
 kp build logs dotnet-sample
 ```
 
-Once the build completes, an image will be published. You can get the full image address with the following command:
+The build will be slow the first time it runs because the buildpack will need to download all the dependencies (like a .Net
+SDK!). Subsequent builds would be faster. Once the build completes, an image will be published. You can get the full image
+address with the following command:
 
 ```shell
 kp image list
@@ -126,7 +133,8 @@ You can follow the build with this comand:
 kp build logs spring-pet-clinic
 ```
 
-Once the build completes, an image will be published. You can get the full image address with the following command:
+The build will be slow the first time it runs because the buildpack will need to download all the dependencies (like a Java
+SDK!). Once the build completes, an image will be published. You can get the full image address with the following command:
 
 ```shell
 kp image list

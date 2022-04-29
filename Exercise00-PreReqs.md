@@ -1,13 +1,17 @@
 # Pre-Requisites
 
-This workshop requires Docker. A package manager (Homebrew or Chocolatey) makes it easier to install some of the other
-componants, but is not strictly required. We will only write instructions based on package managers.
+This workshop requires Docker and several other tools. Using package manager (Homebrew or Chocolatey) makes it
+easier to install some of the componants, but is not strictly required. We will only write instructions based on
+package managers.
 
-You will also need write access to a container registry you can access from your workstation.
+You will need to have Internet access to run the exercises in the workshop.
+
+You will also need write access to a container registry you can access from your workstation. Dockerhub certainly works, but
+you might experience rate limiting if you are on an unpaid Docker account.
 
 To complete the pre-requisites, do the following:
 
-1. Follow the platform specific initial setup instructions below for your platform
+1. Follow the platform specific initial setup instructions below for your platform:
    [MacOS](#initial-setup---macos), [Windows](#initial-setup---windows), or [Linux](#initial-setup---linux)
 2. Follow the instructions in [Container Registry Setup](#container-registry-setup)
 
@@ -43,8 +47,8 @@ Install required tools:
    ```shell
    choco install ytt
    ```
-- Knative CLI: https://github.com/knative/client/releases (download latest binary, rename to "kn", add to path)
-- Kpack CLI: https://github.com/vmware-tanzu/kpack-cli/releases (download latest binary, rename to "kp", add to path)
+- Knative CLI: Go to https://github.com/knative/client/releases, download latest Windows binary, rename it to "kn", than add it to the path
+- Kpack CLI: Go to https://github.com/vmware-tanzu/kpack-cli/releases, download latest Windows binary, rename it to "kp", add it to the path
 
 Proceed to [Container Registry Setup](#container-registry-setup)
 
@@ -81,7 +85,7 @@ First, clone the repo:
 git clone https://github.com/jeffgbutler/TCEWorkshop.git
 ```
 
-Now you will need to edit the `config/values.yaml` file and supply values for your registry. In that file are three
+Now edit the `config/values.yaml` file and supply values for your registry. In that file are three
 values that you must change:
 
 1. `registry.username` - user with write access to your registry
