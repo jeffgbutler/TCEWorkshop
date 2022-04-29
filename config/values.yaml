@@ -1,0 +1,13 @@
+registry:
+  username: admin
+  password: Harbor12345
+  tags:
+    prefix: harbor.tanzuathome.net/tce
+
+    # the following are sensible defaults and do not need to change unless there is a collision
+    # with an existing tag in your repository. The tag prefix will be prepended to each tag below
+    # to calculate a complete image tag
+    kpack: /kpack
+    builder: /builder
+    spring-pet-clinic: /spring-pet-clinic
+    dotnet-sample: /dotnet-sample
