@@ -5,13 +5,22 @@ componants, but is not strictly required. We will only write instructions based 
 
 You will also need write access to a container registry you can access from your workstation.
 
-Details follow:
+To complete the pre-requisites, do the following:
 
-## MacOS
-Install:
+1. Follow the platform specific initial setup instructions below for your platform
+   [MacOS](#initial-setup---macos), [Windows](#initial-setup---windows), or [Linux](#initial-setup---linux)
+2. Follow the instructions in [Container Registry Setup](#container-registry-setup)
 
+## Initial Setup - MacOS
+Install required tools:
+
+- Git: https://git-scm.com/downloads
 - Docker Desktop: https://www.docker.com/products/docker-desktop/
 - Homebrew: https://brew.sh/
+- YTT (YAML Templating Tool):
+   ```shell
+   brew install ytt
+   ```
 - Knative CLI:
    ```shell
    brew install kn
@@ -22,19 +31,33 @@ Install:
    brew install kp
    ```
 
-## Windows
-Install:
+Proceed to [Container Registry Setup](#container-registry-setup)
 
+## Initial Setup - Windows
+Install required tools:
+
+- Git: https://git-scm.com/downloads
 - Docker Desktop: https://www.docker.com/products/docker-desktop/
 - Chocolatey: https://chocolatey.org/install
+- YTT (YAML Templating Tool):
+   ```shell
+   choco install ytt
+   ```
 - Knative CLI: https://github.com/knative/client/releases (download latest binary, rename to "kn", add to path)
 - Kpack CLI: https://github.com/vmware-tanzu/kpack-cli/releases (download latest binary, rename to "kp", add to path)
 
-## Linux
-Install:
+Proceed to [Container Registry Setup](#container-registry-setup)
 
+## Initial Setup - Linux
+Install required tools:
+
+- Git: https://git-scm.com/downloads
 - Docker Engine: https://docs.docker.com/engine/install/
 - Homebrew: https://brew.sh/
+- YTT (YAML Templating Tool):
+   ```shell
+   brew install ytt
+   ```
 - Knative CLI:
    ```shell
    brew install kn
@@ -45,25 +68,46 @@ Install:
    brew install kp
    ```
 
-## Container Registry
+Proceed to [Container Registry Setup](#container-registry-setup)
 
-You must also have write access to a container registry. There are several places in the workshop where you will need
-to enter credentials and configuration information for your registry.
+## Container Registry Setup
 
-Examples of the various values are as follows:
+You must also have write access to a container registry. There are several places in the workshop where registry credentials
+are required. We will use the YTT tool to reduce the amount of typing of credentials.
 
-| Registry                  | Example Server Name         | Example Tag                               |
-|---------------------------|-----------------------------|-------------------------------------------|
-| Azure Container Registry  | foo.azurecr.io              | foo.azurecr/kpack                         |
-| Dockerhub                 | https://index.docker.io/v1/ | jeffgbutler/kpack                         |
-| Harbor                    | harbor.tanzuathome.net      | harbor.tanzuathome.net/tce/kpack (1)      |
-| Google Artifact Registry  | us-east1-docker.pkg.dev     | us-east1-docker.pkg.dev/foo/tce/kpack (2) |
-| Google Container Registry | gcr.io                      | gcr.io/foo/kpack                          |
+First, clone the repo:
+
+```shell
+git clone https://github.com/jeffgbutler/TCEWorkshop.git
+```
+
+Now you will need to edit the `config/values.yaml` file and supply values for your registry. In that file are three
+values that you must change:
+
+1. `registry.username` - user with write access to your registry
+2. `registry.password` - password
+3. `registry.tags.prefix` - an image tag prefix. The prefix will be combined with the other tags in the `values.yaml` file
+    to compute full image tags for images pushed by the platform into your registry. If you complete all the parts of this
+    workshop, there will be four images pushed into your registry.
+
+You will also need the username, password, and server name when creating a secret later in the workshop.
+
+Examples of the values for various container registries are as follows:
+
+| Registry                  | Example Server Name         | Example Tag Prefix                  |
+|---------------------------|-----------------------------|-------------------------------------|
+| Azure Container Registry  | foo.azurecr.io              | foo.azurecr.io                      |
+| Dockerhub                 | https://index.docker.io/v1/ | jeffgbutler                         |
+| Harbor                    | harbor.tanzuathome.net      | harbor.tanzuathome.net/tce (1)      |
+| Google Artifact Registry  | us-east1-docker.pkg.dev     | us-east1-docker.pkg.dev/foo/tce (2) |
+| Google Container Registry | gcr.io                      | gcr.io/foo                          |
 
 1. Harbor has the concept of projects in a repository. You must create the project in Harbor before pushing artifacts.
    In this case, we have a project named "tce"
 2. Google Artifact repository has two levels of naming - project-id, and repository. In this case we have project-id
    of "foo" (typically your GCP user name), and a repository named "tce". The repository must be created before pushing
    artifacts.
+
+Once you have updated the `config/values.yaml` file, you are ready to proceed with the workshop.
 
 [Next -&gt;](Exercise01-Install.md)
