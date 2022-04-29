@@ -13,22 +13,28 @@ a group of packages that are relevant to application developers including:
 - Cartographer - a tool for creating software supply chains
 - Several others
 
-With this exercise we will install and configure the app toolkit for use on a local workstation. Take a look
-at the file [01-app-toolkit-values.yaml](01-app-toolkit-values.yaml) in this directory. This file contains
-configuration values for several of the packages in the app toolkit (Contour, Knative, and Kpack). For now, the
-important things to know are these:
+With this exercise we will install and configure the app toolkit for use on a local workstation. First let's create a
+configuration file for the app toolkit using ytt:
+
+```shell
+ytt -f config/templates/app-toolkit-values.yaml --data-values-file config/values.yaml --output-files config
+```
+
+This command will combine the registry configuration you completed in the pre-requisites with a template and
+will write the resulting file into `config/app-toolkit-values.yaml`. Let's take a look at that file. The file
+contains configuration values for several of the packages in the app toolkit (Contour, Knative, and Kpack).
+For now, the important things to know are these:
 
 - Applications deployed to the app toolkit will have generated DNS names that are sub-domains of
   `127-0-0-1.nip.io`. This is a convenient DNS trick - the IP address for this domain is
   `127.0.0.1` - or `localhost` - so it will work on everyone's workstation.
-- Kpack is configured to talk to a Harbor instance in Jeff's homelab. You will need to change these
-  values to match a container registry you have access to
+- Kpack is configured to talk to a the registry you configures in the pre-requisites
 
-Once you have updated the default repository values, install the app toolkit with the following command:
+Now we can install the app toolkit with the following command:
 
 ```powershell
 tanzu package install app-toolkit --package-name app-toolkit.community.tanzu.vmware.com `
-  --version 0.1.0 --values-file 01-app-toolkit-values.yaml
+  --version 0.1.0 --values-file config/app-toolkit-values.yaml
 ```
 
 This command will run for a few minutes. Once the package install finishes reconciling, you can see the full list

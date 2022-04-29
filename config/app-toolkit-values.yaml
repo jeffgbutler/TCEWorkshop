@@ -1,17 +1,14 @@
-#@ load("@ytt:data", "data")
 contour:
   envoy:
     service:
       type: ClusterIP
     hostPorts:
       enable: true
-
 knative_serving:
   domain:
     type: real
     name: 127-0-0-1.nip.io
-
 kpack:
-  kp_default_repository: #@ data.values.registry.tags.prefix + data.values.registry.tags.kpack
-  kp_default_repository_username: #@ data.values.registry.username
-  kp_default_repository_password: #@ data.values.registry.password
+  kp_default_repository: harbor.tanzuathome.net/tce/kpack
+  kp_default_repository_username: admin
+  kp_default_repository_password: Harbor12345
