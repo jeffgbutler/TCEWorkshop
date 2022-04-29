@@ -5,7 +5,7 @@ metadata:
   name: spring-pet-clinic
   namespace: default
 spec:
-  tag: #@ #@ data.values.registry.tags.prefix + data.values.registry.tags.spring-pet-clinic
+  tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.spring_pet_clinic
   serviceAccountName: kpack-service-account
   builder:
     name: my-builder

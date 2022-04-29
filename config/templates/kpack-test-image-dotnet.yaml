@@ -1,10 +1,11 @@
+#@ load("@ytt:data", "data")
 apiVersion: kpack.io/v1alpha2
 kind: Image
 metadata:
   name: dotnet-sample
   namespace: default
 spec:
-  tag: harbor.tanzuathome.net/tce/dotnet-sample
+  tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.dotnet_sample
   serviceAccountName: kpack-service-account
   builder:
     name: my-builder

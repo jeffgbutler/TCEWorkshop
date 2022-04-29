@@ -84,14 +84,14 @@ kn service delete kuard
 
 ## Deploy a Knative Application with Kubectl
 
-The file [02-kuard-service.yaml](02-kuard-service.yaml) in this directory contains YAML for acheiving the
+The file [config/kuard-service.yaml](config/kuard-service.yaml) contains YAML for acheiving the
 same deployment of Kuard we did above with one exception - we turn off "scale to zero" functionality. This can
 also be accomplished with the CLI (see the `--scale-min` parameter).
 
 Deploy the service with Kubectl:
 
 ```shell
-kubectl apply -f 02-kuard-service.yaml
+kubectl apply -f config/kuard-service.yaml
 ```
 
 The app should be avilable at http://kuard.default.127-0-0-1.nip.io/
@@ -103,7 +103,7 @@ Once you are finished experimenting, you can delete the service with the CLI as 
 ```shell
 kn service delete kuard
 
-kubectl delete -f 02-kuard-service.yaml
+kubectl delete -f config/kuard-service.yaml
 ```
 
 Knative has many features and configuration options. For details see the official documentation

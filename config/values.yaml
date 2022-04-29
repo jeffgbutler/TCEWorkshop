@@ -9,5 +9,5 @@ registry:
     # to calculate a complete image tag
     kpack: /kpack
     builder: /builder
-    spring-pet-clinic: /spring-pet-clinic
-    dotnet-sample: /dotnet-sample
+    spring_pet_clinic: /spring-pet-clinic
+    dotnet_sample: /dotnet-sample

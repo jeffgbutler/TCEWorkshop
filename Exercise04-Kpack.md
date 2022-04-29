@@ -44,13 +44,12 @@ kubectl create secret docker-registry kpack-registry-credentials \
     --namespace default
 ```
 
-Look at the file [03-kpack-resources.yaml](03-kpack-resources.yaml) in this directory. This file contains definitions for the Kpack
-resources required in this workshop (ServiceAccount, ClusterStore, ClusterStack, and Builder).
-
-**Important:** alter `spec.tag` in the `Builder` definition with a proper tag for images in your registry!
+Look at the file [config/templates/kpack-resources.yaml](config/templates/kpack-resources.yaml). This file contains definitions
+for the Kpack resources required in this workshop (ServiceAccount, ClusterStore, ClusterStack, and Builder). The file contains
+some placeholder values that we will fill in using YTT.
 
 ```shell
-kubectl apply -f 03-kpack-resources.yaml
+ytt -f config/templates/kpack-resources.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 Kpack is now ready to begin building images! As with Knative, you can define image builds with a CLI, or with Kubectl.
@@ -59,13 +58,14 @@ default service account. Feel free to try one or all of the options below!
 
 ## .Net Core Image Build with Kubectl
 
-Look at the file [04-kpack-test-image-dotnet.yaml](04-kpack-test-image-dotnet.yaml) in this directory. This file contains a definition
-for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the image should be published.
+Look at the file [config/templates/kpack-test-image-dotnet.yaml](config/templates/kpack-test-image-dotnet.yaml). This file
+contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the
+image should be published. The file contains some placeholder values that we will fill in using YTT.
 
-**Important:** alter `spec.tag` in the `Image` definition with a proper tag for images in your registry!
+Create the image with the following command:
 
 ```shell
-kubectl apply -f 04-kpack-test-image-dotnet.yaml
+ytt -f config/templates/kpack-test-image-dotnet.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 You can follow the build with this comand:
@@ -74,14 +74,15 @@ You can follow the build with this comand:
 kp build logs dotnet-sample
 ```
 
-Once the build completes, am image will be published. You can get the full image address with the following command:
+Once the build completes, an image will be published. You can get the full image address with the following command:
 
 ```shell
 kp image list
 ```
 
 For me, the image was `harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0`.
-Now lets deploy that image with Knative (you will need to change this command to use the image you built):
+
+Now we can deploy that image with Knative (you will need to change this command to use the image you built):
 
 Windows Powershell:
 ```powershell
@@ -109,13 +110,14 @@ kn service delete dotnet-sample
 
 ## Java Image Build with Kubectl
 
-Look at the file [05-kpack-test-image-java.yaml](05-kpack-test-image-java.yaml) in this directory. This file contains a definition
-for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the image should be published.
+Look at the file [config/templates/kpack-test-image-java.yaml](config/templates/kpack-test-image-java.yaml) in this directory.
+This file contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag
+for where the image should be published. The file contains some placeholder values that we will fill in using YTT.
 
-**Important:** alter `spec.tag` in the `Image` definition with a proper tag for images in your registry!
+Create the image with the following command:
 
 ```shell
-kubectl apply -f 05-kpack-test-image-java.yaml
+ytt -f config/templates/kpack-test-image-java.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 You can follow the build with this comand:
@@ -124,7 +126,7 @@ You can follow the build with this comand:
 kp build logs spring-pet-clinic
 ```
 
-Once the build completes, am image will be published. You can get the full image address with the following command:
+Once the build completes, an image will be published. You can get the full image address with the following command:
 
 ```shell
 kp image list
@@ -141,7 +143,7 @@ kn service create spring-pet-clinic `
 ```
 
 MacOS/Linux:
-```rshell
+```shell
 kn service create spring-pet-clinic \
   --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50 \
   --pull-secret kpack-registry-credentials
