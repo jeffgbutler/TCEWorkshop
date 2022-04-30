@@ -4,4 +4,4 @@
 tanzu unmanaged-cluster delete tceworkshop
 ```
 
-[&lt;- Previous](Exercise05-Cartographer.md)
+[&lt;- Previous](06-Cartographer.md)

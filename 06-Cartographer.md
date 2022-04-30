@@ -1,4 +1,4 @@
-# Exercise 5: Configure and Test Cartographer 
+# Exercise 6: Configure and Test Cartographer 
 
 > Important Concepts to cover in an overview:
 >
@@ -25,4 +25,4 @@ Cartographer is open source and you can read all about it here: https://cartogra
 
 TODO - build out this exercise
 
-[&lt;- Previous](Exercise04-Kpack.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](Exercise99-Cleanup.md)
+[&lt;- Previous](05-Kpack.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](99-Cleanup.md)

@@ -114,4 +114,4 @@ Examples of the values for various container registries are as follows:
 
 Once you have updated the `config/values.yaml` file, you are ready to proceed with the workshop.
 
-[Next -&gt;](Exercise01-Install.md)
+[Next -&gt;](01-Install.md)

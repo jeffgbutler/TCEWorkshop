@@ -79,4 +79,4 @@ the pod:
 kubectl delete pod kuard
 ```
 
-[&lt;- Previous](Exercise00-PreReqs.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](Exercise02-ExplorePackages.md)
+[&lt;- Previous](00-PreReqs.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](02-ExplorePackages.md)
