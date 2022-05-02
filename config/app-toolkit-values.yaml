@@ -1,0 +1,11 @@
+contour:
+  envoy:
+    service:
+      type: ClusterIP
+    hostPorts:
+      enable: true
+
+knative_serving:
+  domain:
+    type: real
+    name: 127-0-0-1.nip.io

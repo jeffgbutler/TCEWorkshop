@@ -16,22 +16,11 @@ a group of packages that are relevant to application developers including:
 - Cartographer - a tool for creating software supply chains
 - Several others
 
-With this exercise we will install and configure the app toolkit for use on a local workstation. First let's create a
-configuration file for the app toolkit using ytt:
-
-```shell
-ytt -f config/templates/app-toolkit-values.yaml --data-values-file config/values.yaml --output-files config
-```
-
-This command will combine the registry configuration you completed in the pre-requisites with a template and
-will write the resulting file into `config/app-toolkit-values.yaml`. Let's take a look at that file. The file
-contains configuration values for several of the packages in the app toolkit (Contour, Knative, and Kpack).
-For now, the important things to know are these:
-
-- Applications deployed to the app toolkit will have generated DNS names that are sub-domains of
-  `127-0-0-1.nip.io`. This is a convenient DNS trick - the IP address for this domain is
-  `127.0.0.1` - or `localhost` - so it will work on everyone's workstation.
-- Kpack is configured to talk to a the registry you configures in the pre-requisites
+With this exercise we will install and configure the app toolkit for use on a local workstation. First take a look at
+the file `config/app-toolkit-values.yaml`. The file contains configuration values for two packages in the app toolkit
+(Contour, and Knative). For now, the important thing to know is that applications deployed to the app toolkit will
+have generated DNS names that are sub-domains of `127-0-0-1.nip.io`. This is a convenient DNS trick - the IP address
+for this domain is `127.0.0.1` - or `localhost` - so it will work on everyone's workstation.
 
 Now we can install the app toolkit with the following command:
 

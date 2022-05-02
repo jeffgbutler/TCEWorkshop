@@ -7,7 +7,6 @@ registry:
     # the following are sensible defaults and do not need to change unless there is a collision
     # with an existing tag in your repository. The tag prefix will be prepended to each tag below
     # to calculate a complete image tag
-    kpack: /kpack
     builder: /builder
     spring_pet_clinic: /spring-pet-clinic
     dotnet_sample: /dotnet-sample
