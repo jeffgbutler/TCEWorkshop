@@ -4,6 +4,9 @@
 >
 > - Overview of Knative
 
+**Important!** Shell commands on this page should be executed from a terminal open in the root directory of the
+git repo you cloned in the pre-requisites!
+
 Let's deploy an application with Knative as a test. This can be done in two ways - with the Knative CLI or with Kubectl
 and a YAML file.
 
