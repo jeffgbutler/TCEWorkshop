@@ -38,7 +38,7 @@ kubectl apply -f config/cartographer/app-deploy-template.yaml
 ```
 
 ```shell
-ytt -f  config/cartographer/supply-chain.yaml --data-values-file config/values.yaml | kubectl apply -f-
+ytt -f  config/cartographer/supply-chain.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 ```shell

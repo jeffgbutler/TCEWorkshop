@@ -92,7 +92,7 @@ values that you must change:
 2. `registry.password` - password
 3. `registry.tags.prefix` - an image tag prefix. The prefix will be combined with the other tags in the `values.yaml` file
     to compute full image tags for images pushed by the platform into your registry. If you complete all the parts of this
-    workshop, there will be three images pushed into your registry.
+    workshop, there will be several images pushed into your registry.
 
 You will also need the username, password, and server name when creating a secret later in the workshop.
 
