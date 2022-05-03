@@ -6,7 +6,7 @@ metadata:
   namespace: default
 spec:
   tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.dotnet_sample
-  serviceAccountName: #@ data.values.service.account
+  serviceAccountName: #@ data.values.service.account.name
   builder:
     name: my-builder
     kind: Builder

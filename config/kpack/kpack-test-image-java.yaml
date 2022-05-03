@@ -6,7 +6,7 @@ metadata:
   namespace: default
 spec:
   tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.spring_pet_clinic
-  serviceAccountName: #@ data.values.service.account
+  serviceAccountName: #@ data.values.service.account.name
   builder:
     name: my-builder
     kind: Builder

@@ -41,6 +41,7 @@ spec:
       fetch:
         - inline:
             paths:
+              #@yaml/text-templated-strings
               manifest.yml: |
                 ---
                 apiVersion: kapp.k14s.io/v1alpha1
@@ -75,7 +76,7 @@ spec:
                       annotations:
                         autoscaling.knative.dev/minScale: "1"
                     spec:
-                      serviceAccountName: #@ data.values.service.account.name
+                      serviceAccountName: (@= data.values.service.account.name @)
                       containers:
                         - name: workload
                           image: $(images.image.image)$
