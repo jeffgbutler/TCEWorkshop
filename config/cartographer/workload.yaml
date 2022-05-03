@@ -1,0 +1,14 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: java-payment-calculator
+  labels:
+    app.tanzu.vmware.com/workload-type: web
+spec:
+  serviceAccountName: kpack-service-account
+  source:
+    git:
+      url: https://github.com/jeffgbutler/java-payment-calculator
+      ref:
+        branch: main

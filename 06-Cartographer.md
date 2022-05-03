@@ -25,4 +25,28 @@ Cartographer is open source and you can read all about it here: https://cartogra
 
 TODO - build out this exercise
 
+```shell
+kubectl apply -f config/cartographer/git-source-template.yaml
+```
+
+```shell
+kubectl apply -f config/cartographer/kpack-image-template.yaml
+```
+
+```shell
+kubectl apply -f config/cartographer/app-deploy-template.yaml
+```
+
+```shell
+ytt -f  config/cartographer/supply-chain.yaml --data-values-file config/values.yaml | kubectl apply -f-
+```
+
+```shell
+kubectl apply -f config/cartographer/rbac.yaml
+```
+
+```shell
+kubectl apply -f config/cartographer/workload.yaml
+```
+
 [&lt;- Previous](05-Kpack.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](99-Cleanup.md)
