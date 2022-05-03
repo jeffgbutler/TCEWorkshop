@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -29,4 +31,4 @@ roleRef:
   name: cartographer-permissions
 subjects:
   - kind: ServiceAccount
-    name: kpack-service-account
+    name: #@ data.values.service.account.name

@@ -85,16 +85,15 @@ First, clone the repo:
 git clone https://github.com/jeffgbutler/TCEWorkshop.git
 ```
 
-Now edit the `config/values.yaml` file and supply values for your registry. In that file are three
+Now edit the `config/values.yaml` file and supply values for your registry. In that file are four
 values that you must change:
 
-1. `registry.username` - user with write access to your registry
-2. `registry.password` - password
-3. `registry.tags.prefix` - an image tag prefix. The prefix will be combined with the other tags in the `values.yaml` file
+1. `registry.server` - the server where your registry is installed
+2. `registry.username` - user with write access to your registry
+3. `registry.password` - password
+4. `registry.tags.prefix` - an image tag prefix. The prefix will be combined with the other tags in the `values.yaml` file
     to compute full image tags for images pushed by the platform into your registry. If you complete all the parts of this
     workshop, there will be several images pushed into your registry.
-
-You will also need the username, password, and server name when creating a secret later in the workshop.
 
 Examples of the values for various container registries are as follows:
 

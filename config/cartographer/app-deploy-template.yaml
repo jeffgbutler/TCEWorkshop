@@ -25,6 +25,7 @@
 # yet), we're able to bridge that gap with the use of `kapp-ctrl/App`.
 #
 #
+#@ load("@ytt:data", "data")
 apiVersion: carto.run/v1alpha1
 kind: ClusterTemplate
 metadata:
@@ -36,7 +37,7 @@ spec:
     metadata:
       name: $(workload.metadata.name)$
     spec:
-      serviceAccountName: kpack-service-account
+      serviceAccountName: #@ data.values.service.account.name
       fetch:
         - inline:
             paths:
@@ -74,7 +75,7 @@ spec:
                       annotations:
                         autoscaling.knative.dev/minScale: "1"
                     spec:
-                      serviceAccountName: kpack-service-account
+                      serviceAccountName: #@ data.values.service.account.name
                       containers:
                         - name: workload
                           image: $(images.image.image)$

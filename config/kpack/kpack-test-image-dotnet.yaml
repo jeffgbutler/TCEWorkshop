@@ -6,7 +6,7 @@ metadata:
   namespace: default
 spec:
   tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.dotnet_sample
-  serviceAccountName: kpack-service-account
+  serviceAccountName: #@ data.values.service.account
   builder:
     name: my-builder
     kind: Builder

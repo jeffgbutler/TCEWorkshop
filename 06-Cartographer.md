@@ -55,7 +55,7 @@ will be sufficient for the supply chain in this exercise, but you may need to cr
 if you create a different supply chain.
 
 ```shell
-kubectl apply -f config/cartographer/rbac.yaml
+ytt -f config/cartographer/rbac.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 ## Templates
@@ -74,11 +74,11 @@ kubectl apply -f config/cartographer/git-source-template.yaml
 ```
 
 ```shell
-kubectl apply -f config/cartographer/kpack-image-template.yaml
+ytt -f config/cartographer/kpack-image-template.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 ```shell
-kubectl apply -f config/cartographer/app-deploy-template.yaml
+ytt -f config/cartographer/app-deploy-template.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 ## Supply Chain
@@ -90,7 +90,7 @@ ytt -f  config/cartographer/supply-chain.yaml --ignore-unknown-comments --data-v
 ## Workload
 
 ```shell
-kubectl apply -f config/cartographer/workload.yaml
+ytt -f  config/cartographer/workload.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 ## Debugging

@@ -25,36 +25,14 @@ it knows how to build Java, .Net Core, and NodeJS applications.
 
 Instructions adapted from here: https://github.com/pivotal/kpack/blob/main/docs/tutorial.md
 
-First, create a registry secret with credentials to your container registry:
-
-**Important:** alter this command with the proper URL and credentials for your registry!
-
-Windows Powershell:
-```powershell
-kubectl create secret docker-registry kpack-registry-credentials `
-    --docker-username=admin `
-    --docker-password=Harbor12345 `
-    --docker-server=harbor.tanzuathome.net `
-    --namespace default
-```
-
-MacOS/Linux:
-```shell
-kubectl create secret docker-registry kpack-registry-credentials \
-    --docker-username=admin \
-    --docker-password=Harbor12345 \
-    --docker-server=harbor.tanzuathome.net \
-    --namespace default
-```
-
-Now look at the file [config/templates/kpack-resources.yaml](config/templates/kpack-resources.yaml). This file contains definitions
-for the Kpack resources required in this workshop (ServiceAccount, ClusterStore, ClusterStack, and Builder). YOu should be able to
+Take a look at the file [config/kpack/kpack-resources.yaml](config/kpack/kpack-resources.yaml). This file contains definitions
+for the Kpack resources required in this workshop (Secret, ServiceAccount, ClusterStore, ClusterStack, and Builder). You should be able to
 see that we are installing buildpacks for .Net core, Java, and NodeJS. The file contains some placeholder values that we will fill
 in using YTT. The following command will merge the configuration values with the template, and then pass the results to kubectl.
 A neat trick!
 
 ```shell
-ytt -f config/templates/kpack-resources.yaml --data-values-file config/values.yaml | kubectl apply -f-
+ytt -f config/kpack/kpack-resources.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 Kpack is now ready to begin building images! As with Knative, you can define image builds with a CLI, or with Kubectl.
@@ -63,14 +41,14 @@ default service account. Feel free to try one or all of the options below!
 
 ## .Net Core Image Build with Kubectl
 
-Look at the file [config/templates/kpack-test-image-dotnet.yaml](config/templates/kpack-test-image-dotnet.yaml). This file
+Look at the file [config/kpack/kpack-test-image-dotnet.yaml](config/kpack/kpack-test-image-dotnet.yaml). This file
 contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the
 image should be published. The file contains some placeholder values that we will fill in using YTT.
 
 Create the image with the following command:
 
 ```shell
-ytt -f config/templates/kpack-test-image-dotnet.yaml --data-values-file config/values.yaml | kubectl apply -f-
+ytt -f config/kpack/kpack-test-image-dotnet.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 You can follow the build with this comand:
@@ -117,14 +95,14 @@ kn service delete dotnet-sample
 
 ## Java Image Build with Kubectl
 
-Look at the file [config/templates/kpack-test-image-java.yaml](config/templates/kpack-test-image-java.yaml) in this directory.
+Look at the file [config/kpack/kpack-test-image-java.yaml](config/kpack/kpack-test-image-java.yaml) in this directory.
 This file contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag
 for where the image should be published. The file contains some placeholder values that we will fill in using YTT.
 
 Create the image with the following command:
 
 ```shell
-ytt -f config/templates/kpack-test-image-java.yaml --data-values-file config/values.yaml | kubectl apply -f-
+ytt -f config/kpack/kpack-test-image-java.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 You can follow the build with this comand:

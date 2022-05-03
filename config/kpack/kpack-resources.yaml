@@ -1,14 +1,24 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:json", "json")
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: #@ data.values.registry.secret.name
+type: kubernetes.io/dockerconfigjson
+stringData:
+  #@ registry_creds = {"username": data.values.registry.username, "password": data.values.registry.password}
+  .dockerconfigjson: #@ json.encode({"auths": {data.values.registry.server: registry_creds}})
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: kpack-service-account
+  name: #@ data.values.service.account.name
   namespace: default
 secrets:
-- name: kpack-registry-credentials
+- name: #@ data.values.registry.secret.name
 imagePullSecrets:
-- name: kpack-registry-credentials
+- name: #@ data.values.registry.secret.name
 ---
 apiVersion: kpack.io/v1alpha2
 kind: ClusterStore
@@ -37,7 +47,7 @@ metadata:
   name: my-builder
   namespace: default
 spec:
-  serviceAccountName: kpack-service-account
+  serviceAccountName: #@ data.values.service.account.name
   tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.builder
   stack:
     name: base

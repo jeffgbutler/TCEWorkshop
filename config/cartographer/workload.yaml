@@ -1,3 +1,4 @@
+#@ load("@ytt:data", "data")
 ---
 apiVersion: carto.run/v1alpha1
 kind: Workload
@@ -6,7 +7,7 @@ metadata:
   labels:
     app.tanzu.vmware.com/workload-type: web
 spec:
-  serviceAccountName: kpack-service-account
+  serviceAccountName: #@ data.values.service.account.name
   source:
     git:
       url: https://github.com/jeffgbutler/java-payment-calculator
