@@ -49,14 +49,11 @@ It gets very meta!
 
 ## RBAC
 
-Before we create the supply chain, we need to give some permissions to our service account so that
-it will be able to create the objects needed for the supply chain. The permissions in the following command
-will be sufficient for the supply chain in this exercise, but you may need to create other permissions
+Before we create the supply chain, we will need to give some permissions to our service account so that
+it will be able to create the objects needed for the supply chain. Take a look at
+[config/cartographer/app-operator/rbac.yaml](config/cartographer/app-operator/rbac.yaml). The permissions in that 
+file are sufficient for the supply chain in this exercise, but you may need to create other permissions
 if you create a different supply chain.
-
-```shell
-ytt -f config/cartographer/rbac.yaml --data-values-file config/values.yaml | kubectl apply -f-
-```
 
 ## Templates
 
@@ -66,31 +63,27 @@ We'll create a supply chain with three templates:
 2. A ClusterImageTemplate that knows how to create an instance of a Kpack Image CRD that will build a container image from source
 3. A ClusterTemplate that knows how to create an instance of a Kapp that will deploy to Knative
 
-First let's look at the [ClusterSourceTemplate](config/cartographer/git-source-template.yaml). This is a simple template that
-will accept values from a workload
-
-```shell
-kubectl apply -f config/cartographer/git-source-template.yaml
-```
-
-```shell
-ytt -f config/cartographer/kpack-image-template.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
-```
-
-```shell
-ytt -f config/cartographer/app-deploy-template.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
-```
+First let's look at the `ClusterSourceTemplate`:
+[config/cartographer/app-operator/git-source-template.yaml](config/cartographer/app-operator/git-source-template.yaml).
+This is a simple template that will accept values from a workload
 
 ## Supply Chain
 
+## Install the Supply Chain
+
+Let's install the supply chain. The following command will install the templates and supply chain as well as
+configuring RBAC for Cartographer. Essentially, the command will consolodate all YAML files in the
+`config/cartographer/app-operator` directoy into a single file, apply the YTT overrides, then pipe it to
+Kubectl.
+
 ```shell
-ytt -f  config/cartographer/supply-chain.yaml --ignore-unknown-comments --data-values-file config/values.yaml | kubectl apply -f-
+ytt -f config/cartographer/app-operator --data-values-file config/values.yaml --ignore-unknown-comments | kubectl apply -f-
 ```
 
 ## Workload
 
 ```shell
-ytt -f  config/cartographer/workload.yaml --data-values-file config/values.yaml | kubectl apply -f-
+ytt -f  config/cartographer/developer/workload.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
 ## Debugging
