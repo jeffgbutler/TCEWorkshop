@@ -23,9 +23,6 @@ Install Tanzu Community Edition (TCE) with Chocolatey:
 choco install tanzu-community-edition --version 0.11.0
 ```
 
-Note that it is important to specify the version! TCE is currently a moderated package at Chocolatey and this version is not
-set as the default.
-
 Proceed to [Create a Cluster](#create-a-cluster)
 
 ## Create a Cluster
