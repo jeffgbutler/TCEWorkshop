@@ -105,13 +105,13 @@ Examples of the values for various container registries are as follows:
 | Google Artifact Registry  | us-east1-docker.pkg.dev     | us-east1-docker.pkg.dev/foo/tce [^2] |
 | Google Container Registry | gcr.io                      | gcr.io/foo                           |
 
+Once you have updated the `config/values.yaml` file, you are ready to proceed with the workshop.
+
+[Next -&gt;](01-Install.md)
+
 [^1]: Harbor has the concept of projects in a repository. You must create the project in Harbor before pushing artifacts.
       In this case, we have a project named "tce"
 
 [^2]: Google Artifact repository has two levels of naming - project-id, and repository. In this case we have project-id
       of "foo" (typically your GCP user name), and a repository named "tce". The repository must be created before pushing
       artifacts.
-
-Once you have updated the `config/values.yaml` file, you are ready to proceed with the workshop.
-
-[Next -&gt;](01-Install.md)
