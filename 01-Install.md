@@ -10,7 +10,7 @@
 Install Tanzu Community Edition (TCE) with Homebrew:
 
 ```shell
-brew install tanzu-community-edition
+brew install vmware-tanzu/tanzu/tanzu-community-edition
 ```
 
 Proceed to [Create a Cluster](#create-a-cluster)
