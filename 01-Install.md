@@ -13,6 +13,14 @@ Install Tanzu Community Edition (TCE) with Homebrew:
 brew install vmware-tanzu/tanzu/tanzu-community-edition
 ```
 
+There will be a script to run after the install - something like
+
+```shell
+/usr/local/Cellar/tanzu-community-edition/v0.11.0/libexec/configure-tce.sh
+```
+
+For future reference, uninstall looks like this: `/usr/local/Cellar/tanzu-community-edition/v0.11.0/libexec/uninstall.sh`
+
 Proceed to [Create a Cluster](#create-a-cluster)
 
 ## Install TCE on Windows
