@@ -27,13 +27,13 @@ Now we can install the app toolkit with the following command:
 Windows PowerShell:
 ```powershell
 tanzu package install app-toolkit --package-name app-toolkit.community.tanzu.vmware.com `
-  --version 0.1.0 --values-file config/app-toolkit/app-toolkit-values.yaml
+  --version 0.2.0 --values-file config/app-toolkit/app-toolkit-values.yaml
 ```
 
 MacOS/Linux:
 ```shell
 tanzu package install app-toolkit --package-name app-toolkit.community.tanzu.vmware.com \
-  --version 0.1.0 --values-file config/app-toolkit/app-toolkit-values.yaml
+  --version 0.2.0 --values-file config/app-toolkit/app-toolkit-values.yaml
 ```
 
 This command will run for a few minutes. Once the package install finishes reconciling, you can see the full list

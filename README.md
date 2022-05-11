@@ -2,7 +2,7 @@
 
 Workshop for Tanzu Community Edition (TCE) covering basic installation, Knative, Kpack, and Cartographer.
 
-**Important:** this workshop is based on version 0.11.0 or greater of Tanzu Community Edition.
+**Important:** this workshop is based on version 0.12.0 or greater of Tanzu Community Edition.
 The instructions will not work if you use earlier versions.
 
 ## Workshop Agenda

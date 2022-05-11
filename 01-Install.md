@@ -16,10 +16,10 @@ brew install vmware-tanzu/tanzu/tanzu-community-edition
 There will be a script to run after the install - something like
 
 ```shell
-/usr/local/Cellar/tanzu-community-edition/v0.11.0/libexec/configure-tce.sh
+/usr/local/Cellar/tanzu-community-edition/v0.12.0/libexec/configure-tce.sh
 ```
 
-For future reference, uninstall looks like this: `/usr/local/Cellar/tanzu-community-edition/v0.11.0/libexec/uninstall.sh`
+For future reference, uninstall looks like this: `/usr/local/Cellar/tanzu-community-edition/v0.12.0/libexec/uninstall.sh`
 
 Proceed to [Create a Cluster](#create-a-cluster)
 
@@ -28,7 +28,7 @@ Proceed to [Create a Cluster](#create-a-cluster)
 Install Tanzu Community Edition (TCE) with Chocolatey:
 
 ```powershell
-choco install tanzu-community-edition --version 0.11.0
+choco install tanzu-community-edition --version 0.12.0
 ```
 
 Proceed to [Create a Cluster](#create-a-cluster)
