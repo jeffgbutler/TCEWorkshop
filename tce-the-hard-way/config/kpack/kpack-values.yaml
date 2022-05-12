@@ -1,0 +1,3 @@
+kp_default_repository: harbor.tanzuathome.net/tce/kpack
+kp_default_repository_username: admin
+kp_default_repository_password: Harbor12345
