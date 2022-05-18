@@ -4,8 +4,7 @@
 >
 > - Overview of Kpack (stacks, stores, builders)
 
-**Important!** Shell commands on this page should be executed from a terminal open in the root directory of the
-git repo you cloned in the pre-requisites!
+**Important** the commands below assume you have a terminal window open in the same directory as this file.
 
 Kpack is a system that builds container images from source code and publishes them to a registry. Kpack uses
 Cloud Native Buildpacks (https://buildpacks.io/) to build container images from source. Cloud Native Buildpacks

@@ -4,8 +4,7 @@
 >
 > - Overview of the App Toolkit Package
 
-**Important!** Shell commands on this page should be executed from a terminal open in the root directory of the
-git repo you cloned in the pre-requisites!
+**Important** the commands below assume you have a terminal window open in the same directory as this file.
 
 The App Toolkit is a composite package (it bundles other packages together). It is a simple way to install
 a group of packages that are relevant to application developers including:

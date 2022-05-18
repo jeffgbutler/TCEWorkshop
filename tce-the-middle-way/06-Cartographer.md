@@ -4,8 +4,7 @@
 >
 > - Overview of Cartographer (templates, supply chains, workloads)
 
-**Important!** Shell commands on this page should be executed from a terminal open in the root directory of the
-git repo you cloned in the pre-requisites!
+**Important** the commands below assume you have a terminal window open in the same directory as this file.
 
 So far we've seen that we can simply build images with Kpack, and we can simply deploy applications with Knative.
 But there's a lot of manual work involved:

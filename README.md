@@ -19,21 +19,22 @@ where developers can iterate on appliction development.
 
 There are three ways to do the workshop:
 
-1. The "hard way" - where we install each componant individually
+1. The "hard way" - where we install each component individually
 1. The "easy way" - where we install and configure everything in minimal steps
-1. The "middle way" - where install all the componants, but we configure some componants
+1. The "middle way" - where install all the components, but we configure some components
    manually.
 
 When we do this as a guided workshop, we'll follow the "hard way" path so we can discuss each step
 along the way. When I'm setting up a cluster for my own use, I use the "easy way" just to get going
 faster.
 
+## The Middle Way
 
-- [Pre-Requisites](00-PreReqs.md)
-- [Exercise 1 - Install TCE](01-Install.md)
-- [Exercise 2 - Explore Packages](02-ExplorePackages.md)
-- [Exercise 3 - Install, configure, and test App Toolkit](03-AppToolkit.md)
-- [Exercise 4 - Deploy applications with Knative](04-Knative.md)
-- [Exercise 5 - Configure and test Kpack](05-Kpack.md)
-- [Exercise 6 - Configure and test Cartographer](06-Cartographer.md)
-- [Cleanup](99-Cleanup.md)
+- [Pre-Requisites](tce-the-middle-way/00-PreReqs.md)
+- [Exercise 1 - Install TCE](tce-the-middle-way/01-Install.md)
+- [Exercise 2 - Explore Packages](tce-the-middle-way/02-ExplorePackages.md)
+- [Exercise 3 - Install, configure, and test App Toolkit](tce-the-middle-way/03-AppToolkit.md)
+- [Exercise 4 - Deploy applications with Knative](tce-the-middle-way/04-Knative.md)
+- [Exercise 5 - Configure and test Kpack](tce-the-middle-way/05-Kpack.md)
+- [Exercise 6 - Configure and test Cartographer](tce-the-middle-way/06-Cartographer.md)
+- [Cleanup](tce-the-middle-way/99-Cleanup.md)
