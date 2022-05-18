@@ -12,6 +12,7 @@ Here's what we'll install:
 1. Kpack
 1. Kpack configuration
 1. FluxCD source controller
+1. Cert Manager
 1. Cartographer
 1. Supply chain for cartographer
 
@@ -147,3 +148,32 @@ kp image save tutorial-image-k `
   --builder my-builder-k `
   -n default
 ```
+
+## FluxCD Source Controller
+### Install FluxCD Source Controller
+
+```powershell
+tanzu package install fluxcd-source-controller `
+  --package-name fluxcd-source-controller.community.tanzu.vmware.com `
+  --version 0.21.5
+```
+
+## Certmanager
+### Install Certmanager
+
+```powershell
+tanzu package install cert-manager `
+   --package-name cert-manager.community.tanzu.vmware.com `
+   --version 1.8.0
+```
+
+## Cartographer
+### Install Cartographer
+
+```powershell
+tanzu package install cartographer `
+   --package-name cartographer.community.tanzu.vmware.com `
+   --version 0.3.0
+```
+
+### Configure a Supply Chain
