@@ -29,7 +29,7 @@ Install required tools:
    ```shell
    brew install kn
    ```
-- Kpack CLI:
+- Kpack CLI - for Intel Macs Only!!!:
    ```shell
    brew tap vmware-tanzu/kpack-cli
    brew install kp

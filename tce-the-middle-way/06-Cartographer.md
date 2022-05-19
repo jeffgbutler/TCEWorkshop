@@ -81,9 +81,26 @@ ytt -f config/cartographer/app-operator --data-values-file config/values.yaml --
 
 ## Workload
 
+Once the supply chain is installed, you can use it to create a workload. The file `config\developer\workload.yaml` contains
+a sample workload. Note that this file essentially contains the name of the application, the source code location, and the name
+of the supply chain to use. The developer does not need to know how the supply chain operates - only the name.
+
+Use the following command to create a workload using the supply chain you just installed:
+
 ```shell
 ytt -f  config/cartographer/developer/workload.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
+
+You can follow the progress of the workload with the following command:
+
+```shell
+kubectl get workload java-payment-calculator
+```
+
+You may see a status reason of "MissingValueAtPath" - this is not necessarily an error, it happens when the supply chain
+has not finished running. When the supply chain completes, the status reacon will change to "Ready".
+
+Once the workload is finished running, you should be able to access the application at: http://java-payment-calculator.default.127-0-0-1.nip.io/swagger-ui/
 
 ## Debugging
 
@@ -119,7 +136,13 @@ kn service describe java-payment-calculator
 
 Kapp is something we haven't looked at previously in much detail. It is part of the Carvel tooling (https://carvel.dev/)
 installed when the cluster is first created. If you are familiar with Kapp and have the CLI installed you can use it to show
-information about the application.
+information about the application. With the following commands:
+
+```shell
+kapp list
+
+kapp inspect -a java-payment-calculator-ctrl
+```
 
 You can also look at the Kapp application object with a command like this:
 

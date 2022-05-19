@@ -56,12 +56,32 @@ You can follow the build with this comand:
 kp build logs dotnet-sample
 ```
 
+If you do not have the "kp" CLI installed, you can obtain the build logs with the following commands (assuming your build
+pod is named the same as mine). The build works through a series of init containers before the final container "completion"
+is started. The commands below show the order of execution of the containers at the time of this writing:
+
+```shell
+kubectl logs spring-pet-clinic-build-1-build-pod -c prepare
+kubectl logs spring-pet-clinic-build-1-build-pod -c analyze
+kubectl logs spring-pet-clinic-build-1-build-pod -c detect
+kubectl logs spring-pet-clinic-build-1-build-pod -c restore
+kubectl logs spring-pet-clinic-build-1-build-pod -c build
+kubectl logs spring-pet-clinic-build-1-build-pod -c export
+kubectl logs spring-pet-clinic-build-1-build-pod -c completion
+```
+
 The build will be slow the first time it runs because the buildpack will need to download all the dependencies (like a .Net
 SDK!). Subsequent builds would be faster. Once the build completes, an image will be published. You can get the full image
 address with the following command:
 
 ```shell
 kp image list
+```
+
+If you do not have the "kp" CLI installed, you can obtain the full image with the following command:
+
+```shell
+kubectl get cnbimage
 ```
 
 For me, the image was `harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0`.
@@ -72,14 +92,14 @@ Windows Powershell:
 ```powershell
 kn service create dotnet-sample `
   --image harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0 `
-  --pull-secret kpack-registry-credentials
+  --pull-secret tce-workshop-registry-secret
 ```
 
 MacOS/Linux:
 ```shell
 kn service create dotnet-sample \
   --image harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0 \
-  --pull-secret kpack-registry-credentials
+  --pull-secret tce-workshop-registry-secret
 ```
 
 Note that we have to specify the image pull secret this time as we are pulling from a private registry.
@@ -110,6 +130,20 @@ You can follow the build with this comand:
 kp build logs spring-pet-clinic
 ```
 
+If you do not have the "kp" CLI installed, you can obtain the build logs with the following commands (assuming your build
+pod is named the same as mine). The build works through a series of init containers before the final container "completion"
+is started. The commands below show the order of execution of the containers at the time of this writing:
+
+```shell
+kubectl logs spring-pet-clinic-build-1-build-pod -c prepare
+kubectl logs spring-pet-clinic-build-1-build-pod -c analyze
+kubectl logs spring-pet-clinic-build-1-build-pod -c detect
+kubectl logs spring-pet-clinic-build-1-build-pod -c restore
+kubectl logs spring-pet-clinic-build-1-build-pod -c build
+kubectl logs spring-pet-clinic-build-1-build-pod -c export
+kubectl logs spring-pet-clinic-build-1-build-pod -c completion
+```
+
 The build will be slow the first time it runs because the buildpack will need to download all the dependencies (like a Java
 SDK!). Once the build completes, an image will be published. You can get the full image address with the following command:
 
@@ -117,21 +151,27 @@ SDK!). Once the build completes, an image will be published. You can get the ful
 kp image list
 ```
 
-For me, the image was `harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50`.
+If you do not have the "kp" CLI installed, you can obtain the full image with the following command:
+
+```shell
+kubectl get cnbimage
+```
+
+For me, the image was `harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:d150b6b0b9a28d72795efb2f9e6c1a353eeec84691e965cb110d787215f8941c`.
 Now lets deploy that image with Knative (you will need to change this command to use the image you built):
 
 Windows Powershell:
 ```powershell
 kn service create spring-pet-clinic `
-  --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50 `
-  --pull-secret kpack-registry-credentials
+  --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:d150b6b0b9a28d72795efb2f9e6c1a353eeec84691e965cb110d787215f8941c `
+  --pull-secret tce-workshop-registry-secret
 ```
 
 MacOS/Linux:
 ```shell
 kn service create spring-pet-clinic \
-  --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:57977aa16b7234080a7b9d3fdec2b663d247ee32cc2444add58e2dfd26c51b50 \
-  --pull-secret kpack-registry-credentials
+  --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:d150b6b0b9a28d72795efb2f9e6c1a353eeec84691e965cb110d787215f8941c \
+  --pull-secret tce-workshop-registry-secret
 ```
 
 Note that we have to specify the image pull secret this time as we are pulling from a private registry.
