@@ -1,7 +1,7 @@
 # Tanzu Community Edition Overview
 
 Tanzu Community Edition (TCE) is a free and open source Kubernetes based platform from VMware. It includes
-many of the componants that undergird VMware's commercial offerings.
+many of the components that undergird VMware's commercial offerings.
 
 So, what do we mean by "Kubernetes Based Platform"?
 
@@ -11,7 +11,7 @@ One common misconception about Kubernetes is that it is a complete platform for 
 it is not. Rather, Kubernetes provides a tremendous starting point for building platforms and clusters that make
 sense in differnet contexts. For example, you might see the following types of Kubernetes clusters:
 
-1. A cluster built for developer experience that provides automation and runtime support for rapid and
+1. A cluster built for developers that provides automation and runtime support for rapid and
    iterative application development
 1. A cluster focused built for production runtimes that provides a very secure, reliable, and observable
    environment for production workloads
@@ -36,7 +36,7 @@ We'll talk a bit about what this means...
 
 ### Managed Clusters
 
-In Tanzu Community Edition, a "managed cluster" is a cluster that is intended to be a long-lived Kubernetes cluster. Managed clusters are
+In Tanzu Community Edition, a "managed cluster" is a cluster that is intended to be long-lived. Managed clusters are
 appropriate for production workloads. TCE manages clusters using [Cluster API](https://cluster-api.sigs.k8s.io/). Cluster API is a Kubernetes
 sub-project providing tooling for provisioning, upgrading, and operating Kubernetes clusters.
 
@@ -51,14 +51,15 @@ Currently, TCE can create management and workload clusters on the following infr
 1. VMware vSphere
 1. Docker - although this would be an ununsual usage
 
-We won't say more about managed clusters as they are not the focus of this workshop.
+We won't say more about managed clusters as they are not the focus of this workshop. But the tools we install in the workshop should
+work just fine in managed clusters.
 
 ### Unmanaged Clusters
 
 In Tanzu Community Edition, an "unmanaged cluster" is a short-lived Kubernetes cluster that is not managed by Cluster API. Unmanaged clusters
 start very quickly and consume fewer resources than managed clusters. They are appropriate for developer use and experimentation.
 
-Currently, TCE can create unmanaged clusters using wither [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/).
+Currently, TCE can create unmanaged clusters using either [Kind](https://kind.sigs.k8s.io/) or [Minikube](https://minikube.sigs.k8s.io/docs/).
 
 Under the covers, an unmanaged cluster is a Kind or Minikube cluster that has been "Tanzu-ified".
 
@@ -73,7 +74,7 @@ With unmanaged clusters, TCE also configures access to a package repository so y
 
 ## What is Actually Installed with TCE?
 
-When you installl TCE, you are actually installing a command line tool - or CLI - that is used to manage other parts of TCE. We'll explain
-more about this in the next section.
+When you install TCE, you are actually installing a command line tool - or CLI - that is used to manage other parts of TCE. We'll explain
+more about this in the [next section](tce-clis.md).
 
-[Next -&gt;](tce-clis.md)
+[Back](index.md)
