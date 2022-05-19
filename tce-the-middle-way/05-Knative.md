@@ -1,4 +1,4 @@
-# Exercise 4: Deploying Applications with Knative
+# Exercise 5: Deploying Applications with Knative
 
 > Important Concepts to cover in an overview:
 >
@@ -71,4 +71,4 @@ kubectl delete -f config/kuard-service.yaml
 Knative has many features and configuration options. For details see the official documentation
 here: https://knative.dev/docs/
 
-[&lt;- Previous](03-AppToolkit.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](05-Kpack.md)
+[&lt;- Previous](04-AppToolkit.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](06-Kpack.md)

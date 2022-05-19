@@ -1,4 +1,4 @@
-# Exercise 3: Configure and Install the App Toolkit
+# Exercise 4: Configure and Install the App Toolkit
 
 > Important Concepts to cover in an overview:
 >
@@ -42,4 +42,4 @@ of installed packages with the following command:
 tanzu package installed list -A
 ```
 
-[&lt;- Previous](02-ExplorePackages.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](04-Knative.md)
+[&lt;- Previous](03-ExplorePackages.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](05-Knative.md)

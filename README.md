@@ -31,10 +31,11 @@ faster.
 ## The Middle Way
 
 - [Pre-Requisites](tce-the-middle-way/00-PreReqs.md)
-- [Exercise 1 - Install TCE](tce-the-middle-way/01-Install.md)
-- [Exercise 2 - Explore Packages](tce-the-middle-way/02-ExplorePackages.md)
-- [Exercise 3 - Install, configure, and test App Toolkit](tce-the-middle-way/03-AppToolkit.md)
-- [Exercise 4 - Deploy applications with Knative](tce-the-middle-way/04-Knative.md)
-- [Exercise 5 - Configure and test Kpack](tce-the-middle-way/05-Kpack.md)
-- [Exercise 6 - Configure and test Cartographer](tce-the-middle-way/06-Cartographer.md)
+- [Exercise 1 - Install TCE](tce-the-middle-way/01-InstallTCE.md)
+- [Exercise 2 - Create and Test a Cluster](tce-the-middle-way/02-CreateCluster.md)
+- [Exercise 3 - Explore Packages](tce-the-middle-way/03-ExplorePackages.md)
+- [Exercise 4 - Install, configure, and test App Toolkit](tce-the-middle-way/04-AppToolkit.md)
+- [Exercise 5 - Deploy applications with Knative](tce-the-middle-way/05-Knative.md)
+- [Exercise 6 - Configure and test Kpack](tce-the-middle-way/06-Kpack.md)
+- [Exercise 7 - Configure and test Cartographer](tce-the-middle-way/07-Cartographer.md)
 - [Cleanup](tce-the-middle-way/99-Cleanup.md)

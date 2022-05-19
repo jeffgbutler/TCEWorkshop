@@ -107,7 +107,7 @@ Examples of the values for various container registries are as follows:
 
 Once you have updated the `config/values.yaml` file, you are ready to proceed with the workshop.
 
-[Next -&gt;](01-Install.md)
+[Next -&gt;](01-InstallTCE.md)
 
 [^1]: Harbor has the concept of projects in a repository. You must create the project in Harbor before pushing artifacts.
       In this case, we have a project named "tce"

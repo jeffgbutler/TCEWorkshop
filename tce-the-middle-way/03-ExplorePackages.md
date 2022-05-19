@@ -1,4 +1,4 @@
-# Exercise 2: Explore Tanzu Packages
+# Exercise 3: Explore Tanzu Packages
 
 > Important Concepts to cover in an overview:
 >
@@ -32,4 +32,4 @@ This command will show that cert manager version 1.6.1 accepts a single paramete
 value is `cert-manager`. Package installs can accept a YAML "values file" that contains configuration parameters.
 We will see an example of this in the next section.
 
-[&lt;- Previous](01-Install.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](03-AppToolkit.md)
+[&lt;- Previous](02-CreateCluster.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](04-AppToolkit.md)

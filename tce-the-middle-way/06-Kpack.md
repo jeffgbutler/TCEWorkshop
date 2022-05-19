@@ -1,4 +1,4 @@
-# Exercise 5: Configure and Test Kpack
+# Exercise 6: Configure and Test Kpack
 
 > Important Concepts to cover in an overview:
 >
@@ -184,4 +184,4 @@ Once you are finished experimenting, you can delete the service with the followi
 kn service delete spring-pet-clinic
 ```
 
-[&lt;- Previous](04-Knative.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](06-Cartographer.md)
+[&lt;- Previous](05-Knative.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](07-Cartographer.md)

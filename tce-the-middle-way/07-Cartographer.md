@@ -1,4 +1,4 @@
-# Exercise 6: Configure and Test a Supply Chain in Cartographer 
+# Exercise 7: Configure and Test a Supply Chain in Cartographer 
 
 > Important Concepts to cover in an overview:
 >
@@ -156,4 +156,4 @@ You can use the the Kubectl Tree plugin (https://github.com/ahmetb/kubectl-tree)
 kubectl tree workload java-payment-calculator
 ```
 
-[&lt;- Previous](05-Kpack.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](99-Cleanup.md)
+[&lt;- Previous](06-Kpack.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](99-Cleanup.md)

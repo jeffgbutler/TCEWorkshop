@@ -1,39 +1,4 @@
-# Exercise 1: Install and Test Tanzu Community Edition
-
-> Important Concepts to cover in an overview:
->
-> - Unmanaged vs. Managed Clusters
-> - Tanzu CLI and CLI plugins
-
-## Install TCE on MacOS/Linux
-
-Install Tanzu Community Edition (TCE) with Homebrew:
-
-```shell
-brew install vmware-tanzu/tanzu/tanzu-community-edition
-```
-
-There will be a script to run after the install - something like
-
-```shell
-/usr/local/Cellar/tanzu-community-edition/v0.12.0/libexec/configure-tce.sh
-```
-
-For future reference, uninstall looks like this: `/usr/local/Cellar/tanzu-community-edition/v0.12.0/libexec/uninstall.sh`
-
-Proceed to [Create a Cluster](#create-a-cluster)
-
-## Install TCE on Windows
-
-Install Tanzu Community Edition (TCE) with Chocolatey:
-
-```powershell
-choco install tanzu-community-edition --version 0.12.0
-```
-
-Proceed to [Create a Cluster](#create-a-cluster)
-
-## Create a Cluster
+# Exercise 2: Create and Test a Cluster
 
 Installing TCE does not create Kubernetes clusters. Rather, it installs the Tanzu CLI and several plugins that enable
 you to create clusters and manage packages in clusters.
@@ -63,6 +28,8 @@ kubectl get nodes
 
 You should see a single node named something like `tceworkshop-control-plane`.
 
+## Test Your Cluster
+
 You can deploy a test image with the following command:
 
 ```shell
@@ -84,4 +51,4 @@ the pod:
 kubectl delete pod kuard
 ```
 
-[&lt;- Previous](00-PreReqs.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](02-ExplorePackages.md)
+[&lt;- Previous](01-InstallTCE.md) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Next -&gt;](03-ExplorePackages.md)
