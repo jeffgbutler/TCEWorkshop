@@ -27,3 +27,12 @@ kubectl tree workload java-payment-calculator
 The output looks like this:
 
 ![Workload Tree](images/WorkloadTree.png)
+
+Here you see a Workload resource named "java-payment-calculator" that is the parent of three other resources:
+an App, a GitRepository, and an Image. These correspond to the three parts of the supply chain. Notice
+that the Image resource also has child resources - we'll leave that alone for now.
+
+From this you can know that there is something called a "workload" that knows about three other things.
+In Cartographer, we say that the workload "choreographs" the interactions between those three other things.
+
+## Examining the GitRepository Resource
