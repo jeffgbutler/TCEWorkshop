@@ -37,7 +37,7 @@ tanzu package install contour `
 ### Test Contour
 
 ```shell
-kubectl apply -f config/contour-test.yaml
+kubectl apply -f config/contour/contour-test.yaml
 ```
 
 Nginx should be available at http://nginx-example.127-0-0-1.nip.io/
@@ -69,13 +69,13 @@ kn service delete kuard
 ```
 
 ```shell
-kubectl apply -f config/kuard-service.yaml
+kubectl apply -f config/knative/kuard-service.yaml
 ```
 
 Service should be available at http://kuard.default.127-0-0-1.nip.io/
 
 ```shell
-kubectl delete -f config/kuard-service.yaml
+kubectl delete -f config/knative/kuard-service.yaml
 ```
 
 ## Kpack
@@ -135,6 +135,18 @@ kp image save tutorial-image `
 ```
 
 ### Configure Kpack with Kubectl
+
+```powershell
+kubectl create secret docker-registry tutorial-registry-credentials `
+--docker-username=ynamadi676 `
+--docker-password=9faa4ef2-cb07-40bc-beac-41b18a940829 `
+--docker-server=https://index.docker.io/v1/
+--namespace=default
+```
+
+
+
+
 
 ```shell
 kubectl apply -f config/kpack/kpack-resources.yaml
