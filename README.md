@@ -26,8 +26,7 @@ to the details and what's going on behind the scenes.
 1. [Install Tanzu Community Edition](InstallTCE.md)
 1. Create a Cluster
    - [Create an unmanaged cluster using Kind](creating-clusters/CreateUnmanagedCluster.md)
-1. Install the App Toolkit
-   - [Install]
+1. [Install the App Toolkit](app-toolkit/README.md)
 
 ## Workshop Agenda
 

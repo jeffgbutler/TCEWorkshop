@@ -93,17 +93,18 @@ are required.
 
 Examples of the values required for various container registries are as follows:
 
-| Registry                  | Example Server Name         | Example Tag Prefix                   |
-|---------------------------|-----------------------------|--------------------------------------|
-| Azure Container Registry  | foo.azurecr.io              | foo.azurecr.io                       |
-| Dockerhub                 | https://index.docker.io/v1/ | jeffgbutler                          |
-| Harbor                    | harbor.tanzuathome.net      | harbor.tanzuathome.net/tce [^1]      |
-| Google Artifact Registry  | us-east1-docker.pkg.dev     | us-east1-docker.pkg.dev/foo/tce [^2] |
-| Google Container Registry | gcr.io                      | gcr.io/foo                           |
+| Registry                  | Cartographer Server Name | Kpack Default Repository                   | Cartographer Repository |
+|---------------------------|----------------------- --|--------------------------------------------|-------------------------|
+| Azure Container Registry  | foo.azurecr.io           | foo.azurecr.io/tce/kpack                   | tce                     |
+| Dockerhub                 | index.docker.io          | jeffgbutler/tce/kpack [^1]                 | jeffgbutler/tce         |
+| Harbor                    | harbor.tanzuathome.net   | harbor.tanzuathome.net/tce/kpack [^2]      | tce                     |
+| Google Artifact Registry  | us-east1-docker.pkg.dev  | us-east1-docker.pkg.dev/foo/tce/kpack [^3] | foo/tce                 |
 
-[^1]: Harbor has the concept of projects in a repository. You must create the project in Harbor before pushing artifacts.
+[^1]: We recommend you create a repository in Dockerhub specifically for TCE. In this case we are assuming the repository is named "tce"
+
+[^2]: Harbor has the concept of projects in a repository. You must create the project in Harbor before pushing artifacts.
       In this case, we have a project named "tce"
 
-[^2]: Google Artifact repository has two levels of naming - project-id, and repository. In this case we have project-id
+[^3]: Google Artifact repository has two levels of naming - project-id, and repository. In this case we have project-id
       of "foo" (typically your GCP user name), and a repository named "tce". The repository must be created before pushing
       artifacts.
