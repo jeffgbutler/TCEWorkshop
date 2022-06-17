@@ -94,7 +94,7 @@ are required.
 Examples of the values required for various container registries are as follows:
 
 | Registry                  | Cartographer Server Name | Kpack Default Repository                   | Cartographer Repository |
-|---------------------------|----------------------- --|--------------------------------------------|-------------------------|
+|---------------------------|--------------------------|--------------------------------------------|-------------------------|
 | Azure Container Registry  | foo.azurecr.io           | foo.azurecr.io/tce/kpack                   | tce                     |
 | Dockerhub                 | index.docker.io          | jeffgbutler/tce/kpack [^1]                 | jeffgbutler/tce         |
 | Harbor                    | harbor.tanzuathome.net   | harbor.tanzuathome.net/tce/kpack [^2]      | tce                     |
