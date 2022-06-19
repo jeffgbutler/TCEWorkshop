@@ -1,4 +1,4 @@
-# Install App Toolkit
+# Install The App Toolkit
 
 The app-toolkit will install and configure the following with a single command:
 
@@ -170,3 +170,5 @@ When you are finished experimenting with Knative, you can delete the service wit
 ```shell
 kn service delete kuard
 ```
+
+[Next -&gt;](../04-knative/)
