@@ -17,7 +17,7 @@ for developer experience. The cluster we build will have the following character
 In the VMware parlance, this is an "iterate" cluster - meaning that it is meant to be used as a cluster
 where developers can iterate on appliction development.
 
-We will start with install TCE, create a cluster, and deploy a simple workload. Then we will dig in
+We will start with installing TCE, creating a cluster, and deploying a simple workload. Then we will dig in
 to the details and what's going on behind the scenes.
 
 ## How to Proceed
@@ -29,38 +29,6 @@ to the details and what's going on behind the scenes.
    - [Create and configure a managed cluster](01-creating-clusters/CreateManagedCluster.md)
 1. [Explore Packages](02-explore-packages/)
 1. [Install the App Toolkit](03-app-toolkit/)
-
-## Workshop Agenda
-
-In this workshop we are going to focus on building a Kubernetes cluster that is customized for developer
-experience. The cluster we build will have the following characteristics:
-
-1. It will easily run on a developer workstation
-1. It will automatically build and publish imagaes from source code
-1. It will automatically deploy images and expose a URL through a Kubernetes ingress controller using Knative
-
-In the VMware parlance, this is an "iterate" cluster - meaning that it is meant to be used as a cluster
-where developers can iterate on appliction development.
-
-There are three ways to do the workshop:
-
-1. The "hard way" - where we install each component individually
-1. The "easy way" - where we install and configure everything in minimal steps
-1. The "middle way" - where install all the components, but we configure some components
-   manually.
-
-When we do this as a guided workshop, we'll follow the "hard way" path so we can discuss each step
-along the way. When I'm setting up a cluster for my own use, I use the "easy way" just to get going
-faster.
-
-## The Middle Way
-
-- [Pre-Requisites](tce-the-middle-way/00-PreReqs.md)
-- [Exercise 1 - Install TCE](tce-the-middle-way/01-InstallTCE.md)
-- [Exercise 2 - Create and Test a Cluster](tce-the-middle-way/02-CreateCluster.md)
-- [Exercise 3 - Explore Packages](tce-the-middle-way/03-ExplorePackages.md)
-- [Exercise 4 - Install, configure, and test App Toolkit](tce-the-middle-way/04-AppToolkit.md)
-- [Exercise 5 - Deploy applications with Knative](tce-the-middle-way/05-Knative.md)
-- [Exercise 6 - Configure and test Kpack](tce-the-middle-way/06-Kpack.md)
-- [Exercise 7 - Configure and test Cartographer](tce-the-middle-way/07-Cartographer.md)
-- [Cleanup](tce-the-middle-way/99-Cleanup.md)
+1. [Deploy Applications with Knative](04-knative/)
+1. [Build OCI Images with Kpack](05-kpack/)
+1. [Software Supply Chains with Cartographer](06-cartographer/)

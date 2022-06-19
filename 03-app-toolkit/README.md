@@ -15,7 +15,7 @@ The app-toolkit will install and configure the following with a single command:
 
 ## Update Configuration Values
 
-The file [config/app-toolkit/app-toolkit-values.yaml](config/app-toolkit/app-toolkit-values.yaml) must be modified to
+The file [config/app-toolkit-values.yaml](config/app-toolkit-values.yaml) must be modified to
 values suitable for your environment. The following table has details of what needs to change. There are example for
 the various registry values on the [pre-requisites](../PreRequisites.md) page.
 
@@ -125,7 +125,7 @@ kubectl create secret docker-registry registry-credentials \
 tanzu package install app-toolkit `
   --package-name app-toolkit.community.tanzu.vmware.com `
   --version 0.2.0 `
-  --values-file config/app-toolkit/app-toolkit-values.yaml
+  --values-file config/app-toolkit-values.yaml
 ```
 
 ### Linux/MacOS Shell
@@ -134,7 +134,7 @@ tanzu package install app-toolkit `
 tanzu package install app-toolkit \
   --package-name app-toolkit.community.tanzu.vmware.com \
   --version 0.2.0 \
-  --values-file config/app-toolkit/app-toolkit-values.yaml
+  --values-file config/app-toolkit-values.yaml
 ```
 
 ## Setup DNS (LoadBalancer Installs Only)
