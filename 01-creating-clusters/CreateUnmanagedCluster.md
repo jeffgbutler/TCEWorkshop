@@ -51,4 +51,4 @@ the pod:
 kubectl delete pod kuard
 ```
 
-[Next -&gt;](../02-explore-packages/
+[Next -&gt;](../02-explore-packages/)
