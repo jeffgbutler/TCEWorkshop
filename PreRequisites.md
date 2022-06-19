@@ -100,6 +100,8 @@ Examples of the values required for various container registries are as follows:
 | Harbor                    | harbor.tanzuathome.net   | harbor.tanzuathome.net/tce/kpack [^2]      | tce                     |
 | Google Artifact Registry  | us-east1-docker.pkg.dev  | us-east1-docker.pkg.dev/foo/tce/kpack [^3] | foo/tce                 |
 
+[Next -&gt;](InstallTCE.md)
+
 [^1]: We recommend you create a repository in Dockerhub specifically for TCE. In this case we are assuming the repository is named "tce"
 
 [^2]: Harbor has the concept of projects in a repository. You must create the project in Harbor before pushing artifacts.

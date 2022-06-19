@@ -139,3 +139,5 @@ tanzu package available list -A
 ```
 
 You can see that the list of available packages has expanded significantly!
+
+[Next -&gt;](../02-explore-packages/
