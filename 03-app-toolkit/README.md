@@ -32,24 +32,23 @@ the various registry values on the [pre-requisites](../PreRequisites.md) page.
 
 ## App Toolkit Pre-Requisites
 
-The app toolkit only needs a secret registry secret. There are several ways to do this.
+The app toolkit only needs a registry secret. The secret must be named "registry-credentials". 
 
-### Use the Secret-Gen Controller
+On a fully "Tanzu-ified" cluster, the Carvel secretgen-controller will be installed. When the secretgen-controller is installed,
+you should create the secret using the Tanzu CLI. If the secretgen-controller is not installed, you can create the secret
+using kubectl.
 
-The secret-gen controller can be used to create the secret in one namespace, and then make that secret available
-to other namespaces.
+You can check to see if the secretgen-controller is installed with the following command:
 
-#### Powershell
-
-```powershell
-tanzu package install secretgen-controller `
-  --package-name secretgen-controller.community.tanzu.vmware.com `
-  --version 0.7.1 `
-  --namespace tkg-system
+```shell
+tanzu package installed list -A
 ```
 
-This creates a secret in the defaul namespace and makes it avaible for export to other namespaces:
+On a fully Tanzu-ified cluster, you will see the secretgen-controller - usually in the tkg-system namespace.
 
+If you have the secret-gen controller installed, create the secret with a command like this:
+
+Powershell...
 ```powershell
 tanzu secret registry add registry-credentials `
   --server harbor.tanzuathome.net `
@@ -58,37 +57,7 @@ tanzu secret registry add registry-credentials `
   --export-to-all-namespaces
 ```
 
-You can see the configuration of the secret exporter with ths command:
-
-```shell
-kubectl get SecretExport registry-credentials
-```
-
-If you want to make the secret available in another namespace, do the following:
-
-```shell
-kubectl create namespace testnamespace
-
-cat <<EOF | kubectl apply -f -
-apiVersion: secretgen.carvel.dev/v1alpha1
-kind: SecretImport
-metadata:
-  name: registry-credentials
-  namespace: testnamespace
-spec:
-  fromNamespace: default
-EOF
-```
-
-#### Linux/MacOS Shell
-
-```shell
-tanzu package install secretgen-controller \
-  --package-name secretgen-controller.community.tanzu.vmware.com \
-  --version 0.7.1 \
-  --namespace tkg-system
-```
-
+Linux/MacOS shell...
 ```shell
 tanzu secret registry add registry-credentials \
   --server harbor.tanzuathome.net \
@@ -97,10 +66,16 @@ tanzu secret registry add registry-credentials \
   --export-to-all-namespaces
 ```
 
-### Create a Secret Using Kubectl
+If you do not have the secregen-controller installed, create the secret either with the Tanzu CLI or Kubectl:
 
-#### Powershell
-
+Powershell...
+```powershell
+tanzu secret registry add registry-credentials `
+  --server harbor.tanzuathome.net `
+  --username admin `
+  --password Harbor12345
+```
+or
 ```powershell
 kubectl create secret docker-registry registry-credentials `
   --docker-server=harbor.tanzuathome.net `
@@ -108,8 +83,14 @@ kubectl create secret docker-registry registry-credentials `
   --docker-password=Harbor12345
 ```
 
-#### Linux/MacOS Shell
-
+Linux/MacOS shell...
+```shell
+tanzu secret registry add registry-credentials \
+  --server harbor.tanzuathome.net \
+  --username admin \
+  --password Harbor12345
+```
+or
 ```shell
 kubectl create secret docker-registry registry-credentials \
   --docker-server=harbor.tanzuathome.net \
@@ -119,8 +100,7 @@ kubectl create secret docker-registry registry-credentials \
 
 ## Install App-Toolkit
 
-### Powershell
-
+Powershell...
 ```powershell
 tanzu package install app-toolkit `
   --package-name app-toolkit.community.tanzu.vmware.com `
@@ -128,8 +108,7 @@ tanzu package install app-toolkit `
   --values-file config/app-toolkit-values.yaml
 ```
 
-### Linux/MacOS Shell
-
+Linux/MacOS shell...
 ```shell
 tanzu package install app-toolkit \
   --package-name app-toolkit.community.tanzu.vmware.com \
