@@ -46,7 +46,7 @@ tanzu package installed list -A
 
 On a fully Tanzu-ified cluster, you will see the secretgen-controller - usually in the tkg-system namespace.
 
-If you have the secret-gen controller installed, create the secret with a command like this:
+If you have the secretgen-controller installed, create the secret with a command like this:
 
 Powershell...
 ```powershell
@@ -66,16 +66,8 @@ tanzu secret registry add registry-credentials \
   --export-to-all-namespaces
 ```
 
-If you do not have the secregen-controller installed, create the secret either with the Tanzu CLI or Kubectl:
+If you do not have the secretgen-controller installed, create the secret with Kubectl:
 
-Powershell...
-```powershell
-tanzu secret registry add registry-credentials `
-  --server harbor.tanzuathome.net `
-  --username admin `
-  --password Harbor12345
-```
-or
 ```powershell
 kubectl create secret docker-registry registry-credentials `
   --docker-server=harbor.tanzuathome.net `
@@ -84,13 +76,6 @@ kubectl create secret docker-registry registry-credentials `
 ```
 
 Linux/MacOS shell...
-```shell
-tanzu secret registry add registry-credentials \
-  --server harbor.tanzuathome.net \
-  --username admin \
-  --password Harbor12345
-```
-or
 ```shell
 kubectl create secret docker-registry registry-credentials \
   --docker-server=harbor.tanzuathome.net \
