@@ -12,10 +12,10 @@ you might experience rate limiting if you are on an unpaid Docker account.
 To complete the pre-requisites, do the following:
 
 1. Follow the platform specific initial setup instructions below for your platform:
-   [MacOS](#initial-setup---macos), [Windows](#initial-setup---windows), or [Linux](#initial-setup---linux)
+   [MacOS](#install-prerequisites---macos), [Windows](#install-prerequisites---windows), or [Linux](#install-prerequisites---linux)
 2. Follow the instructions in [Container Registry Setup](#container-registry-setup)
 
-## Initial Setup - MacOS
+## Install Prerequisites - MacOS
 Install required tools:
 
 - Git: https://git-scm.com/downloads
@@ -38,10 +38,15 @@ Install required tools:
    brew tap vmware-tanzu/kpack-cli
    brew install kp
    ```
+- Kubectl Krew Plugin Manager (Optional, but helpful): https://krew.sigs.k8s.io/docs/user-guide/setup/install/
+- Kubectl tree plugin (Optional, but helpful. Requres Krew Plugin Manager):
+   ```shell
+   kubectl krew install tree
+   ```
 
 Proceed to [Container Registry Setup](#container-registry-setup)
 
-## Initial Setup - Windows
+## Install Prerequisites - Windows
 Install required tools:
 
 - Git: https://git-scm.com/downloads
@@ -57,10 +62,15 @@ Install required tools:
    ```
 - Knative CLI: Go to https://github.com/knative/client/releases, download latest Windows binary, rename it to "kn", than add it to the path
 - Kpack CLI: Go to https://github.com/vmware-tanzu/kpack-cli/releases, download latest Windows binary, rename it to "kp", add it to the path
+- Kubectl Krew Plugin Manager (Optional, but helpful): https://krew.sigs.k8s.io/docs/user-guide/setup/install/
+- Kubectl tree plugin (Optional, but helpful. Requres Krew Plugin Manager):
+   ```shell
+   kubectl krew install tree
+   ```
 
 Proceed to [Container Registry Setup](#container-registry-setup)
 
-## Initial Setup - Linux
+## Install Prerequisites - Linux
 Install required tools:
 
 - Git: https://git-scm.com/downloads
@@ -83,6 +93,11 @@ Install required tools:
    brew tap vmware-tanzu/kpack-cli
    brew install kp
    ```
+- Kubectl Krew Plugin Manager (Optional, but helpful): https://krew.sigs.k8s.io/docs/user-guide/setup/install/
+- Kubectl tree plugin (Optional, but helpful. Requres Krew Plugin Manager):
+   ```shell
+   kubectl krew install tree
+   ```
 
 Proceed to [Container Registry Setup](#container-registry-setup)
 
@@ -93,12 +108,12 @@ are required.
 
 Examples of the values required for various container registries are as follows:
 
-| Registry                  | Cartographer Server Name | Kpack Default Repository                   | Cartographer Repository |
-|---------------------------|--------------------------|--------------------------------------------|-------------------------|
-| Azure Container Registry  | foo.azurecr.io           | foo.azurecr.io/tce/kpack                   | tce                     |
-| Dockerhub                 | index.docker.io          | jeffgbutler/tce/kpack [^1]                 | jeffgbutler/tce         |
-| Harbor                    | harbor.tanzuathome.net   | harbor.tanzuathome.net/tce/kpack [^2]      | tce                     |
-| Google Artifact Registry  | us-east1-docker.pkg.dev  | us-east1-docker.pkg.dev/foo/tce/kpack [^3] | foo/tce                 |
+| Registry                  | Kpack Default Repository                   | Cartographer Server Name | Cartographer Repository |
+|---------------------------|--------------------------------------------|--------------------------|-------------------------|
+| Azure Container Registry  | foo.azurecr.io/tce/kpack                   | foo.azurecr.io           | tce                     |
+| Dockerhub                 | jeffgbutler/tce/kpack [^1]                 | index.docker.io          | jeffgbutler/tce         |
+| Harbor                    | harbor.tanzuathome.net/tce/kpack [^2]      | harbor.tanzuathome.net   | tce                     |
+| Google Artifact Registry  | us-east1-docker.pkg.dev/foo/tce/kpack [^3] | us-east1-docker.pkg.dev  | foo/tce                 |
 
 [Next -&gt;](InstallTCE.md)
 
