@@ -32,4 +32,4 @@ This command will show that cert manager version 1.6.1 accepts a single paramete
 value is `cert-manager`. Package installs can accept a YAML "values file" that contains configuration parameters.
 We will see an example of this in the next section.
 
-[Next -&gt;](../03-app-toolkit/)
+[Next (Install App Toolkit) -&gt;](../03-app-toolkit/)

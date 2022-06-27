@@ -37,7 +37,7 @@ tanzu apps workload create java-payment-calculator \
   -n default
 ```
 
-## Examine the Pipeline
+## Examine the Supply Chain
 
 Tail the pipeline logs...
 
@@ -95,33 +95,17 @@ You can also look at the Kapp application object with a command like this:
 kubectl describe app java-payment-calculator
 ```
 
-You can use the the Kubectl Tree plugin (https://github.com/ahmetb/kubectl-tree) to get a good picture of how everything is related:
+You can use the the Kubectl Tree plugin to get a good picture of how everything is related:
 
 ```shell
 kubectl tree workload java-payment-calculator
 ```
 
-## Examining the Workload
+## Access the Application
 
-When we ran the `tanzu apps workload create...` command, we created a workload - which
-is an instance of a supply chain. We'll define those terms in more detail later. The workload
-created three custom resources in the cluster - one for each of the steps outlined above.
-In addition, there is a workload resource that manages the interactions between the three other
-resources. You can see these object using the "tree" plugin for kubectl:
+Once the supply chain completes, you should be able to access the application in the cluster.
+If you are using an unmanaged cluster, the application should be available at http://java-payment-calculator.default.127-0-0-1.nip.io.
+If you are using a real domain on a managed cluster, the application should be available
+at http://java-payment-calculator.default.YOUR_DOMAIN
 
-```shell
-kubectl tree workload java-payment-calculator
-```
-
-The output looks like this:
-
-![Workload Tree](images/WorkloadTree.png)
-
-Here you see a Workload resource named "java-payment-calculator" that is the parent of three other resources:
-an App, a GitRepository, and an Image. These correspond to the three parts of the supply chain. Notice
-that the Image resource also has child resources - we'll leave that alone for now.
-
-From this you can know that there is something called a "workload" that knows about three other things.
-In Cartographer, we say that the workload "choreographs" the interactions between those three other things.
-
-## Examining the GitRepository Resource
+[Next (Cartographer Deep Dive) -&gt;](CartographerDeepDive.md)

@@ -71,4 +71,4 @@ kubectl delete -f config/kuard-service.yaml
 Knative has many features and configuration options. For details see the official documentation
 here: https://knative.dev/docs/
 
-[Next -&gt;](../05-kpack/)
+[Next (Explore Kpack) -&gt;](../05-kpack/)

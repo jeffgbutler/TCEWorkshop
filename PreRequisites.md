@@ -115,7 +115,7 @@ Examples of the values required for various container registries are as follows:
 | Harbor                    | harbor.tanzuathome.net/tce/kpack [^2]      | harbor.tanzuathome.net   | tce                     |
 | Google Artifact Registry  | us-east1-docker.pkg.dev/foo/tce/kpack [^3] | us-east1-docker.pkg.dev  | foo/tce                 |
 
-[Next -&gt;](InstallTCE.md)
+[Next (Install TCE) -&gt;](InstallTCE.md)
 
 [^1]: We recommend you create a repository in Dockerhub specifically for TCE. In this case we are assuming the repository is named "tce"
 

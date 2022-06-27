@@ -174,4 +174,4 @@ Once you are finished experimenting, you can delete the service with the followi
 kn service delete spring-pet-clinic
 ```
 
-[Next -&gt;](../06-cartographer/)
+[Next (Explore Cartographer) -&gt;](../06-cartographer/)
