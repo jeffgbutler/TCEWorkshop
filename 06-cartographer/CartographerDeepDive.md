@@ -199,9 +199,11 @@ load balancer and a real domain name, so my service is available at http://java-
 ## Examining the Supply Chain
 
 We have seen how the individual templates in the supply chain stamp out Kubernetes resources and how Cartographer can
-understand dependencies between the templates and forward values from one resource to another. Let's look at
-the supply chain definition
+understand dependencies between the templates and forward values from one resource to another. Here are links to the templates
+and the supply chain itself on GitHub:
 
-https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/supply-chains/source-to-url/supply-chain.yaml#L22-L62
-
-
+- Templates:
+   - [ClusterSourceTemplate (Stamps Out a GitRepository)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/git-repository.yaml)
+   - [ClusterImageTemplate (Stamps Out a Kpak Image)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/image.yaml)
+   - [ClusterTemplate (Stamps Out an App with Knative)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/app.yaml)
+- [Supply Chain](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/supply-chains/source-to-url/supply-chain.yaml)
