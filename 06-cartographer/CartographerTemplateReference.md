@@ -17,8 +17,8 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.urlPath | &dollar;&lpar;source.url&rpar;&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.url)&dollar; (Multiple Templates)| &num;&commat; data.values.source.url (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.url (Multiple Templates) |
-|spec.revision | &dollar;(source.revision)&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.revision)&dollar; (Multiple Templates)| &num;&commat; data.values.source.revision (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.revision (Multiple Templates) |
+|spec.urlPath | <span>&dollar;</span>(source.url)<span>&dollar;</span> (Single Template) <br/> <span>&dollar;</span>(sources.&lt;name&gt;.url)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.source.url (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.url (Multiple Templates) |
+|spec.revision | <span>&dollar;</span>(source.revision)<span>&dollar;</span> (Single Template) <br/> <span>&dollar;</span>(sources.&lt;name&gt;.revision)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.source.revision (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.revision (Multiple Templates) |
 
 ## ClusterImageTemplate
 
@@ -46,4 +46,4 @@ made those values available to the supply chain.
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.configPath | &dollar;(config)&dollar; (Single Template) <br/> &dollar;(configs.&lt;name&gt;.config)&dollar; (Multiple Templates)| &num;&commat; data.values.config (Single Template) <br/> &num;&commat; data.values.configs.&lt;name&gt;.config (Multiple Templates) |
+|spec.configPath | `$(config)$` (Single Template) <br/> <span>&dollar;</span>(configs.&lt;name&gt;.config)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.config (Single Template) <br/> &num;&commat; data.values.configs.&lt;name&gt;.config (Multiple Templates) |
