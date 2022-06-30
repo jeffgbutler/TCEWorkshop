@@ -17,8 +17,8 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.urlPath | <span>&dollar;</span>(source.url)<span>&dollar;</span> (Single Template) <br/> <span>&dollar;</span>(sources.&lt;name&gt;.url)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.source.url (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.url (Multiple Templates) |
-|spec.revision | <span>&dollar;</span>(source.revision)<span>&dollar;</span> (Single Template) <br/> <span>&dollar;</span>(sources.&lt;name&gt;.revision)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.source.revision (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.revision (Multiple Templates) |
+|spec.urlPath | `$(source.url)$` (Single Template) <br/> `$(sources.<name>.url)$` (Multiple Templates)| `#@ data.values.source.url` (Single Template) <br/> `#@ data.values.sources.<name>.url` (Multiple Templates) |
+|spec.revision | `$(source.revision)$` (Single Template) <br/> `$(sources.<name>.revision)$` (Multiple Templates)| `#@ data.values.source.revision` (Single Template) <br/> `#@ data.values.sources.<name>.revision` (Multiple Templates) |
 
 ## ClusterImageTemplate
 
@@ -32,7 +32,7 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable | YTT Variable|
 |---|---|---|
-|spec.imagePath | <span>&dollar;</span>(image)<span>&dollar;</span> (Single Template) <br/> <span>&dollar;</span>(images.&lt;name&gt;.image)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.image (Single Template) <br/> &num;&commat; data.values.images.&lt;name&gt;.image (Multiple Templates) |
+|spec.imagePath | `$(image)$` (Single Template) <br/> `$(images.<name>.image)$` (Multiple Templates)| `#@ data.values.image` (Single Template) <br/> `#@ data.values.images.<name>.image` (Multiple Templates) |
 
 ## ClusterConfigTemplate
 
