@@ -30,9 +30,9 @@ image when the input `url` or `revision` changes.
 The `source-to-url` supply chain supplied with TCE stamps out a
 [Kpack Image](https://github.com/pivotal/kpack/blob/main/docs/image.md) resource to perform this function for each workload.
 
-| Configuration | Template Variable| YTT Variable|
+| Configuration | Template Variable | YTT Variable|
 |---|---|---|
-|spec.imagePath | &dollar;(image)&dollar; (Single Template) <br/> &dollar;(images.&lt;name&gt;.image)&dollar; (Multiple Templates)| &num;&commat; data.values.image (Single Template) <br/> &num;&commat; data.values.images.&lt;name&gt;.image (Multiple Templates) |
+|spec.imagePath | <span>&dollar;</span>(image)<span>$</span> (Single Template) <br/> &dollar;(images.&lt;name&gt;.image)&dollar; (Multiple Templates)| &num;&commat; data.values.image (Single Template) <br/> &num;&commat; data.values.images.&lt;name&gt;.image (Multiple Templates) |
 
 ## ClusterConfigTemplate
 
