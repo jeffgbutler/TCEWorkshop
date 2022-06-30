@@ -46,4 +46,4 @@ made those values available to the supply chain.
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.configPath | ```$(config)$ (Single Template) <br/> <span>&dollar;</span>(configs.&lt;name&gt;.config)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.config (Single Template) <br/> &num;&commat; data.values.configs.&lt;name&gt;.config (Multiple Templates) |
+|spec.configPath | `$(config)$` (Single Template) <br/> `$(configs.<name>.config)$` (Multiple Templates)| `#@ data.values.config` (Single Template) <br/> `#@ data.values.configs.<name>.config` (Multiple Templates) |
