@@ -17,7 +17,7 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.urlPath | &dollar;(source.url)&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.url)&dollar; (Multiple Templates)| &num;&commat; data.values.source.url (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.url (Multiple Templates) |
+|spec.urlPath | &dollar;&lpar;source.url&rpar;&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.url)&dollar; (Multiple Templates)| &num;&commat; data.values.source.url (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.url (Multiple Templates) |
 |spec.revision | &dollar;(source.revision)&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.revision)&dollar; (Multiple Templates)| &num;&commat; data.values.source.revision (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.revision (Multiple Templates) |
 
 ## ClusterImageTemplate
