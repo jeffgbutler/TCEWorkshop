@@ -17,8 +17,8 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.urlPath | \$\(source.url\)\$ (Single Template) <br/> \$\(sources.&lt;name&gt;.url\)\$ (Multiple Templates)| data.values.source.url (Single Template) <br/> data.values.sources.&lt;name&gt;.url (Multiple Templates) |
-|spec.revision | \$\(source.revision\)\$ (Single Template) <br/> \$\(sources.&lt;name&gt;.revision\)\$ (Multiple Templates)| data.values.source.revision (Single Template) <br/> data.values.sources.&lt;name&gt;.revision (Multiple Templates) |
+|spec.urlPath | &dollar;(source.url)&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.url)&dollar; (Multiple Templates)| &num;&commat; data.values.source.url (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.url (Multiple Templates) |
+|spec.revision | &dollar;(source.revision)&dollar; (Single Template) <br/> &dollar;(sources.&lt;name&gt;.revision)&dollar; (Multiple Templates)| &num;&commat; data.values.source.revision (Single Template) <br/> &num;&commat; data.values.sources.&lt;name&gt;.revision (Multiple Templates) |
 
 ## ClusterImageTemplate
 
@@ -32,7 +32,7 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.imagePath | \$\(image\)\$ (Single Template) <br/> \$\(images.&lt;name&gt;.image\)\$ (Multiple Templates)| data.values.image (Single Template) <br/> data.values.images.&lt;name&gt;.image (Multiple Templates) |
+|spec.imagePath | &dollar;(image)&dollar; (Single Template) <br/> &dollar;(images.&lt;name&gt;.image)&dollar; (Multiple Templates)| &num;&commat; data.values.image (Single Template) <br/> &num;&commat; data.values.images.&lt;name&gt;.image (Multiple Templates) |
 
 ## ClusterConfigTemplate
 
@@ -46,4 +46,4 @@ made those values available to the supply chain.
 
 | Configuration | Template Variable| YTT Variable|
 |---|---|---|
-|spec.configPath | \$\(config\)\$ (Single Template) <br/> \$\(configs.&lt;name&gt;.config\)\$ (Multiple Templates)| data.values.config (Single Template) <br/> data.values.configs.&lt;name&gt;.config (Multiple Templates) |
+|spec.configPath | &dollar;(config)&dollar; (Single Template) <br/> &dollar;(configs.&lt;name&gt;.config)&dollar; (Multiple Templates)| &num;&commat; data.values.config (Single Template) <br/> &num;&commat; data.values.configs.&lt;name&gt;.config (Multiple Templates) |
