@@ -9,7 +9,7 @@ Some basic definitions:
 
 | Term | Meaning |
 |---|---|
-| Template | A resource that can create (or "stamp out") other Kubernetes resources. Some templates have well defined output variables. |
+| Template | A resource that can create (or "stamp out") other Kubernetes resources. Some templates have well defined output variables. See [Cartographer Template Reference](CartographerTemplateReference.md) for details on how output variables are configured. |
 | Supply Chain | A blueprint composed of one or more templates. Templates can be dependant on other templates and can access their output variables. This can define an order of execution that will be managed by the supply chain (somewhat similar to Terraform). |
 | Workload | An instance of a supply chain |
 

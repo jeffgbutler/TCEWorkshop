@@ -6,6 +6,29 @@ the receiving templates. In addition, there are "short cut" variables available 
 of a particular template type in a supply chain. The following tables show the possibilities for
 the different templates that emit values.
 
+In each section we describe:
+
+1. The template configuration setting - which tells the template where to find a value in the stamped out resource's configuration
+1. The simple template variables available in the supply chain
+1. The YTT variables available in the supply chain
+
+For example, suppose you configure a `ClusterSourceTemplate` to stamp out a Flux `GitRepository` resource. The `GitRepository`
+exposes status values denoting the source URL and revision of the resource (`status.artifact.url` and `status.artifact.revision`
+respectively). So we would configure the `ClusterSourceTemplate` to look in those values of the stamped out resource to find
+the values:
+
+```yaml
+apiVersion: carto.run/v1alpha1
+kind: ClusterSourceTemplate
+metadata:
+  name: git-repository
+spec:
+  urlPath: .status.artifact.url
+  revisionPath: .status.artifact.revision
+
+  ...
+```
+
 ## ClusterSourceTemplate
 
 A `ClusterSourceTemplate` is responsible for supplying `url` and `revision` variables to a supply chain. Typically the template
