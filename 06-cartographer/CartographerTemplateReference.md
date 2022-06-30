@@ -32,7 +32,7 @@ The `source-to-url` supply chain supplied with TCE stamps out a
 
 | Configuration | Template Variable | YTT Variable|
 |---|---|---|
-|spec.imagePath | <span>$</span>(image)<span>$</span> (Single Template) <br/> <span>$</span>(images.&lt;name&gt;.image)<span>$</span> (Multiple Templates)| &num;&commat; data.values.image (Single Template) <br/> &num;&commat; data.values.images.&lt;name&gt;.image (Multiple Templates) |
+|spec.imagePath | <span>&dollar;</span>(image)<span>&dollar;</span> (Single Template) <br/> <span>&dollar;</span>(images.&lt;name&gt;.image)<span>&dollar;</span> (Multiple Templates)| &num;&commat; data.values.image (Single Template) <br/> &num;&commat; data.values.images.&lt;name&gt;.image (Multiple Templates) |
 
 ## ClusterConfigTemplate
 
