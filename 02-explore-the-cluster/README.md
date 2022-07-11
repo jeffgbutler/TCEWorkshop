@@ -1,11 +1,11 @@
 # Explore Your Tanzu Cluster
 
-When you created a cluster - eiath managed or unmanaged - you created a "Tanzu" cluster. We will talk briefly about what that
+When you created a cluster - either managed or unmanaged - you created a "Tanzu" cluster. We will talk briefly about what that
 means and then we'll explore the cluster.
 
 ## What is a Tanzu cluster?
 
-There is some debate internally within VMware as to the definition of a "Tanzu" cluster. Of course, it is 
+There is some debate internally within VMware as to the precise definition of a "Tanzu" cluster. Of course, it is 
 just Kubernetes. But it is also Kubernetes with a few additions. In general, a Tanzu cluster
 will have the following componants installed on top of the standard Kubernetes stuff:
 
@@ -78,4 +78,4 @@ Carvel Tools:
 - [Secretgen-controller Overview -&gt;](./secretgen-controller/)
 - [Kapp-controller Overview -&gt;](./kapp-controller/)
 
-[Install App Toolkit -&gt;](../03-app-toolkit/)
+[Next (Install App Toolkit) -&gt;](../03-app-toolkit/)

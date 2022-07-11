@@ -199,3 +199,5 @@ ytt -f Secret.yaml --data-values-file SecretValues.yaml | kubectl create -f-
 
 Many of the Tanzu configuration commands make use of YTT to perform functions like this. In addition, Kapp and Cartographer
 both support YTT templating in their CRDs as we shall see shortly.
+
+[Next (Secretgen-Controller Overview) -&gt;](../secretgen-controller/)
