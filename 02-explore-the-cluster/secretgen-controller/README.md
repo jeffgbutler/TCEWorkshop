@@ -116,6 +116,6 @@ tanzu secret registry add some-secret \
   --export-to-all-namespaces
 ```
 
-You will still need to create the `SecretImport` using regular kubectl commands as shown above.
+You will still need to create the `SecretImport` in the other namespaces using regular kubectl commands as shown above.
 
 [Next (Kapp-Controller Overview) -&gt;](../kapp-controller/)

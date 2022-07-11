@@ -204,6 +204,6 @@ and the supply chain itself on GitHub:
 
 - Templates:
    - [ClusterSourceTemplate (Stamps Out a GitRepository)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/git-repository.yaml)
-   - [ClusterImageTemplate (Stamps Out a Kpak Image)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/image.yaml)
+   - [ClusterImageTemplate (Stamps Out a Kpack Image)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/image.yaml)
    - [ClusterTemplate (Stamps Out an App with Knative)](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/templates/app.yaml)
 - [Supply Chain](https://github.com/vmware-tanzu/cartographer-catalog/blob/de7af88643cc432739b28b758b56398345d038cf/src/supply-chains/source-to-url/supply-chain.yaml)
