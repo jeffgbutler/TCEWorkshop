@@ -27,7 +27,7 @@ to the details and what's going on behind the scenes.
 1. Create a Cluster
    - [Create an unmanaged cluster using Kind](01-creating-clusters/CreateUnmanagedCluster.md)
    - [Create and configure a managed cluster](01-creating-clusters/CreateManagedCluster.md)
-1. [Explore Packages](02-explore-packages/)
+1. [Explore the Cluster](02-explore-the-cluster/)
 1. [Install the App Toolkit](03-app-toolkit/)
 1. [Deploy Applications with Knative](04-knative/)
 1. [Build OCI Images with Kpack](05-kpack/)

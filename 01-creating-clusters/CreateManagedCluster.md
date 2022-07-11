@@ -140,4 +140,4 @@ tanzu package available list -A
 
 You can see that the list of available packages has expanded significantly!
 
-[Next (Explore Packages) -&gt;](../02-explore-packages/)
+[Next (Explore the Cluster) -&gt;](../02-explore-the-cluster/)
