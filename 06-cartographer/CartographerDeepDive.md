@@ -84,6 +84,10 @@ kubectl describe GitRepository java-payment-calculator
 
 We'll look at the `spec` section with the following command:
 
+```powershell
+kubectl get GitRepository java-payment-calculator -o=jsonpath='{.spec}' | ConvertFrom-Json
+```
+
 ```shell
 kubectl get GitRepository java-payment-calculator -o=jsonpath='{.spec}' | jq
 ```
@@ -98,6 +102,10 @@ somewhere else. Those items came from the `ClusterSourceTemplate`. This illustra
 resources are built (or "stamped out") from templates, and templates can receive input values from different sources.
 
 Now let's look at the `status` section (all Kubernetes resources expose a status object)
+
+```powershell
+kubectl get GitRepository java-payment-calculator -o=jsonpath='{.status}' | ConvertFrom-Json
+```
 
 ```shell
 kubectl get GitRepository java-payment-calculator -o=jsonpath='{.status}' | jq
@@ -126,6 +134,10 @@ kubectl describe cnbimage java-payment-calculator
 
 We'll look at part of the `spec` section with the following command:
 
+```powershell
+kubectl get cnbimage java-payment-calculator -o=jsonpath='{.spec.source}' | ConvertFrom-Json
+```
+
 ```shell
 kubectl get cnbimage java-payment-calculator -o=jsonpath='{.spec.source}' | jq
 ```
@@ -139,6 +151,10 @@ This is Cartographer in action - Cartographer took the output of the GitReposito
 with the value.
 
 Now let's look at the `status` section:
+
+```powershell
+kubectl get cnbimage java-payment-calculator -o=jsonpath='{.status}' | ConvertFrom-Json
+```
 
 ```shell
 kubectl get cnbimage java-payment-calculator -o=jsonpath='{.status}' | jq
@@ -173,6 +189,10 @@ kubectl get App java-payment-calculator -o=jsonpath="{.spec.fetch[0].inline.path
 
 With that command you can see the YAML that Kapp uses to create the Knative service. Let's look
 at a part of the Knative service's `spec` section:
+
+```powershell
+kubectl get kservice java-payment-calculator -o=jsonpath="{.spec.template.spec.containers[0]}" | ConvertFrom-Json
+```
 
 ```shell
 kubectl get kservice java-payment-calculator -o=jsonpath="{.spec.template.spec.containers[0]}" | jq
