@@ -21,6 +21,10 @@ Install required tools:
 - Git: https://git-scm.com/downloads
 - Docker Desktop: https://www.docker.com/products/docker-desktop/
 - Homebrew: https://brew.sh/
+- JQ (JSON Formatter):
+   ```shell
+   brew install jq
+   ```
 - YTT (YAML Templating Tool):
    ```shell
    brew install ytt
@@ -52,6 +56,10 @@ Install required tools:
 - Git: https://git-scm.com/downloads
 - Docker Desktop: https://www.docker.com/products/docker-desktop/
 - Chocolatey: https://chocolatey.org/install
+- JQ (JSON Formatter):
+   ```shell
+   choco install jq
+   ```
 - YTT (YAML Templating Tool):
    ```shell
    choco install ytt
@@ -76,6 +84,10 @@ Install required tools:
 - Git: https://git-scm.com/downloads
 - Docker Engine: https://docs.docker.com/engine/install/
 - Homebrew: https://brew.sh/
+- JQ (JSON Formatter):
+   ```shell
+   brew install jq
+   ```
 - YTT (YAML Templating Tool):
    ```shell
    brew install ytt
