@@ -101,7 +101,16 @@ tanzu package install app-toolkit \
   --values-file config/app-toolkit-values.yaml
 ```
 
-## Setup DNS (LoadBalancer Installs Only)
+## Setup DNS on an Unmanaged Cluster (Optional)
+
+If you created an unmanaged cluster and specified a domain name other than the default (an `nip.io` domain),
+then you should add a DNS wildcard record using the domain you specified with and answer of the cluster's
+IP address. The IP address can be:
+
+1. `127.0.0.1` (localhost) if you installed everything locally and only want to access applications from a local browser
+1. The IP address of the VM if you used the Guard Dog OVA to create a VM
+
+## Setup DNS With a LoadBalancer (Optional)
 
 If you enabled load balancing and a domain in your app toolkit install, then you should add a DNS record.
 
