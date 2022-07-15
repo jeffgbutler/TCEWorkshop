@@ -22,11 +22,10 @@ to the details and what's going on behind the scenes.
 
 ## How to Proceed
 
-1. [Install the Pre-Requisites](PreRequisites.md)
-1. [Install Tanzu Community Edition](InstallTCE.md)
-1. Create a Cluster
-   - [Create an unmanaged cluster using Kind](01-creating-clusters/CreateUnmanagedCluster.md)
-   - [Create and configure a managed cluster](01-creating-clusters/CreateManagedCluster.md)
+To proceed, start with the pre-requisites page and follow the links through the workshop.
+
+1. [Install the Pre-Requisites](00-basic-setup)
+1. [Create a Cluster](01-creating-clusters/)
 1. [Explore the Cluster](02-explore-the-cluster/)
 1. [Install the App Toolkit](03-app-toolkit/)
 1. [Deploy Applications with Knative](04-knative/)
