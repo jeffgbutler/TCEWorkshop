@@ -10,7 +10,7 @@ So far we've seen that we can simply build images with Kpack, and we can simply 
 But there's a lot of manual work involved:
 
 - We have to define a Kpack image for the source code
-- Once the image is built, we need to retrive the new SHA
+- Once the image is built, we need to retrieve the new SHA
 - We need to deploy or update the Knative service with the new image
 
 We have not talked about how the images and services should be updated if a developer were to commit a code
@@ -71,8 +71,8 @@ This is a simple template that will accept values from a workload
 ## Install the Supply Chain
 
 Let's install the supply chain. The following command will install the templates and supply chain as well as
-configuring RBAC for Cartographer. Essentially, the command will consolodate all YAML files in the
-`config/cartographer/app-operator` directoy into a single file, apply the YTT overrides, then pipe it to
+configuring RBAC for Cartographer. Essentially, the command will consolidate all YAML files in the
+`config/cartographer/app-operator` directory into a single file, apply the YTT overrides, then pipe it to
 Kubectl.
 
 ```shell
@@ -98,7 +98,7 @@ kubectl get workload java-payment-calculator
 ```
 
 You may see a status reason of "MissingValueAtPath" - this is not necessarily an error, it happens when the supply chain
-has not finished running. When the supply chain completes, the status reacon will change to "Ready".
+has not finished running. When the supply chain completes, the status reason will change to "Ready".
 
 Once the workload is finished running, you should be able to access the application at: http://java-payment-calculator.default.127-0-0-1.nip.io/swagger-ui/
 

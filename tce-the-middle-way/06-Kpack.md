@@ -50,7 +50,7 @@ Create the image with the following command:
 ytt -f config/kpack/kpack-test-image-dotnet.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
-You can follow the build with this comand:
+You can follow the build with this command:
 
 ```shell
 kp build logs dotnet-sample
@@ -124,7 +124,7 @@ Create the image with the following command:
 ytt -f config/kpack/kpack-test-image-java.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
-You can follow the build with this comand:
+You can follow the build with this command:
 
 ```shell
 kp build logs spring-pet-clinic

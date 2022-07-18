@@ -1,17 +1,17 @@
 # Cartographer Deep Dive
 
-Cartographer is an open source supply chain choreographer. That sentance may not make a lot of sense just yet, so we'll
+Cartographer is an open source supply chain choreographer. That sentence may not make a lot of sense just yet, so we'll
 dig into the details of how it works.
 
 ## Cartographer Basics
 
 Some basic definitions:
 
-| Term | Meaning |
-|---|---|
-| Template | A resource that can create (or "stamp out") other Kubernetes resources. Some templates have well defined output variables. See [Cartographer Template Reference](CartographerTemplateReference.md) for details on how output variables are configured. |
-| Supply Chain | A blueprint composed of one or more templates. Templates can be dependant on other templates and can access their output variables. This can define an order of execution that will be managed by the supply chain (somewhat similar to Terraform). |
-| Workload | An instance of a supply chain |
+| Term         | Meaning                                                                                                                                                                                                                                                |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Template     | A resource that can create (or "stamp out") other Kubernetes resources. Some templates have well defined output variables. See [Cartographer Template Reference](CartographerTemplateReference.md) for details on how output variables are configured. |
+| Supply Chain | A blueprint composed of one or more templates. Templates can be dependant on other templates and can access their output variables. This can define an order of execution that will be managed by the supply chain (somewhat similar to Terraform).    |
+| Workload     | An instance of a supply chain                                                                                                                                                                                                                          |
 
 When a workload is created, Cartographer uses the templates in the supply chain to "stamp out" the Kubernetes resources
 defined by the templates. The supply chain will watch for each resource becoming ready, and in some cases will forward
@@ -20,7 +20,7 @@ ready, the supply chain is considered complete. If any resource in a supply chai
 dependant resources.
 
 For example, suppose a resource is watching a Git Repository. The resource may self-mutate when a commit happens and change the value
-of the output variables. Cartographer will, in turn, update the dependant resources with new values - whch may cause the
+of the output variables. Cartographer will, in turn, update the dependant resources with new values - which may cause the
 dependant resources to mutate and change their own output variables. This process repeats until the supply chain completely reconciles.
 
 ## About The "Out of the Box" Supply Chain
@@ -40,7 +40,7 @@ The supply chain has three templates:
 1. A `ClusterImageTemplate` named `image` that knows how to stamp out a Kpack Image resource that will build an image based on the current source code and push the image into a repository
 1. A `ClusterTemplate` named `app` that knows how to stamp out resources that will run the image as a Knative service using Kapp
 
-You can retrieve the defeinition of each of these resources using `kubectl`, or you can look at the source code on GitHub.
+You can retrieve the definition of each of these resources using `kubectl`, or you can look at the source code on GitHub.
 
 ## Examining the Workload 
 
@@ -109,7 +109,7 @@ The output looks like this:
 
 There are two important items in this output: `status.artifact.url` and `status.artifact.revision`. The URL
 is a cluster internal URL where the source code is available and the revision is the Git SHA related to the source code.
-The `ClusterSourceTemplate` is configured to read these two values and make them availble to other parts of the supply
+The `ClusterSourceTemplate` is configured to read these two values and make them available to other parts of the supply
 chain.
 
 ## Examining the Image Resource
@@ -149,7 +149,7 @@ The output looks like this:
 ![Kpack Image Status](images/KpackImageStatus.png)
 
 There is one very important item in this output: `status.latestImage`. This is the tag if the image created by Kpack that
-matches the source code revision. The `ClusterImageTemplate` is configured to read this value and make it availble to
+matches the source code revision. The `ClusterImageTemplate` is configured to read this value and make it available to
 other parts of the supply chain.
 
 ## Examining the App Resource

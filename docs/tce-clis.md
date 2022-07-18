@@ -12,7 +12,7 @@ various different packages installed on a Tanzu-ified Kubernetes cluster. For th
 are different ways to accomplish the same task. For a given task...
 
 1. There is always a way to accomplish the task using Kubectl and YAML - we are on Kubernetes after all!
-1. Some tools - like Kpack and Knative - have their own CLIs and you can use them to accomplsh certain tasks
+1. Some tools - like Kpack and Knative - have their own CLIs and you can use them to accomplish certain tasks
    in an easier way than using Kubectl
 1. Lastly, the Tanzu CLI will provide a unified environment for some tools, and will also add capabilities
    that are not in other tools
@@ -86,7 +86,7 @@ The other carvel CLIs are ytt, imgpkg, and vendir. In this workshop we will only
 
 The YAML Templating Tool (YTT) is used to create YAML from templates using substitution values
 and YAML templates. One distinction about YTT is that it parses and fully understands YAML syntax and structure
-rather than just doing simple text substitution. YTT is packaged into some of the tools installed on
+rather than just doing simple text substitution. YTT is packaged into some tools installed on
 clusters - most notably Cartographer - but it is also incredibly useful on your own workstation or in
 a devops toolchain.
 

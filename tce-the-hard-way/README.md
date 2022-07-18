@@ -2,7 +2,7 @@
 
 These instructions create a TCE based Kubernetes platform based on individual packages.
 This is "the hard way" because the "App-Toolkit" package does many of these steps in a
-single install. This method is useful if you want understand the underlying componants -
+single install. This method is useful if you want to understand the underlying components -
 or perhaps make some changes to your platform configuration.
 
 Here's what we'll install:

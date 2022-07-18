@@ -11,16 +11,16 @@ Cloud Native Buildpacks (https://buildpacks.io/) to build container images from 
 started as a collaboration between Heroku and Pivotal(now VMware) and are now the CNCF's recommended
 method for building container images. You will never have to write another Dockerfile!
 
-Buildpacks can inspect source code from many different languages and frameworks, determine if any
+Buildpacks can inspect source code from many languages and frameworks, determine if any
 particular buildpack can make a contributions to the image, and then build the image. For Java projects,
 buildpacks can recognize Gradle or Maven projects. Build packs exist for many other languages including
 .Net Core (C#, F#, etc.), NodeJS, Go, Ruby, etc.
 
 Cloud Native Buildpacks define a standard API for creating and executing buildpacks. Another project - Paketo
-Buildpacks (https://paketo.io/) - provides open source buildpack implementations for many different languages.
+Buildpacks (https://paketo.io/) - provides open source buildpack implementations for many languages.
 
 We installed Kpack when we installed the app toolkit previously. The default app toolkit also includes a
-componant called "kpack dependencies" that sets up many of the requirements to run kpack in our cluster.
+component called "kpack dependencies" that sets up many of the requirements to run Kpack in our cluster.
 
 If you are interested in seeing the details of how kpack is configured, see the page [kpack-the-hard-way.md](kpack-the-hard-way.md).
 
@@ -40,7 +40,7 @@ Create the image with the following command:
 ytt -f config/kpack/kpack-test-image-dotnet.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
-You can follow the build with this comand:
+You can follow the build with this command:
 
 ```shell
 kp build logs dotnet-sample
@@ -114,7 +114,7 @@ Create the image with the following command:
 ytt -f config/kpack/kpack-test-image-java.yaml --data-values-file config/values.yaml | kubectl apply -f-
 ```
 
-You can follow the build with this comand:
+You can follow the build with this command:
 
 ```shell
 kp build logs spring-pet-clinic
@@ -174,4 +174,4 @@ Once you are finished experimenting, you can delete the service with the followi
 kn service delete spring-pet-clinic
 ```
 
-[Next (Explore Cartographer) -&gt;](../06-cartographer/)
+[Next (Explore Cartographer) -&gt;](../06-cartographer/README.md)

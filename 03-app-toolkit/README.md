@@ -15,19 +15,19 @@ The app-toolkit will install and configure the following with a single command:
 
 ## Update Configuration Values
 
-The file [config/app-toolkit-values.yaml](config/app-toolkit-values.yaml) must be modified to
-values suitable for your environment. The following table has details of what needs to change. There are example for
-the various registry values on the [pre-requisites](../PreRequisites.md) page.
+The file [config/app-toolkit-values.yaml](config/app-toolkit-values.yaml) must be modified to contain
+values suitable for your environment. The following table has details of what needs to change. There are examples for
+the various registry values on the [Container Registry](../00-basic-setup/ContainerRegistry.md) page.
 
-| Configuration Value | Notes |
-|---|---|
-| contour.envoy.service.type | Change this to "LoadBalancer" if your cluster has a load balancer available |
-| knative_serving.domain.name | If you have a LoadBalancer and DNS available, specify the domain name you will use. If you are running in Kind, the default value is sufficient. |
-| kpack.kp_default_repository | This is a repository where certain images for Kpack will be pushed during install |
-| kpack.kp_default_repository_username | User name for the repository |
-| kpack.kp_default_repository_password | Password for the repository |
-| cartographer_catalog.registry.server | Server name for images created by the out of the box supply chain. This value will be used to compose tags for images |
-| cartographer_catalog.registry.repository | Tag prefix for images created by the out of the box supply chain. This value will be prepended to image tags created by Cartographer |
+| Configuration Value                      | Notes                                                                                                                                            |
+|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| contour.envoy.service.type               | Change this to "LoadBalancer" if your cluster has a load balancer available                                                                      |
+| knative_serving.domain.name              | If you have a LoadBalancer and DNS available, specify the domain name you will use. If you are running in Kind, the default value is sufficient. |
+| kpack.kp_default_repository              | This is a repository where certain images for Kpack will be pushed during install                                                                |
+| kpack.kp_default_repository_username     | User name for the repository                                                                                                                     |
+| kpack.kp_default_repository_password     | Password for the repository                                                                                                                      |
+| cartographer_catalog.registry.server     | Server name for images created by the out of the box supply chain. This value will be used to compose tags for images                            |
+| cartographer_catalog.registry.repository | Tag prefix for images created by the out of the box supply chain. This value will be prepended to image tags created by Cartographer             |
 
 
 ## App Toolkit Pre-Requisites
@@ -114,7 +114,7 @@ IP address. The IP address can be:
 
 If you enabled load balancing and a domain in your app toolkit install, then you should add a DNS record.
 
-First find the LoadBalancer's address:
+First find the Load Balancer's address:
 
 ```shell
 kubectl get service envoy -n projectcontour
@@ -125,14 +125,14 @@ I added a record "*.tce.tanzuathome.net" with IP address 192.168.140.200.
 
 ## Test the App Toolkit (Optional)
 
-Once the app toolt has finished reconciling, you can try a simple test with a Knative deployment:
+Once the app toolkit has finished reconciling, you can try a simple test with a Knative deployment:
 
 ```shell
 kn service create kuard --image gcr.io/kuar-demo/kuard-amd64:blue
 ```
 
 Once the command completes, the application should be available at http://kuard.default.127-0-0-1.nip.io/. If you
-used a load balancer and changed the domain name, you can retrive the URL with this command:
+used a load balancer and changed the domain name, you can retrieve the URL with this command:
 
 ```shell
 kn service describe kuard

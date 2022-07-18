@@ -12,7 +12,7 @@ tanzu package available list
 ```
 
 You should see a list of 15-20 packages. Many are standard open source building blocks of a Kubernetes platform
-like Prometheus, Grafana, Cert Manager, External DNS, etc. Tanzu makes it very easy to install these componants.
+like Prometheus, Grafana, Cert Manager, External DNS, etc. Tanzu makes it very easy to install these components.
 
 Most packages have several versions available. You can see the available versions of a package with a command like the
 following (this will show all available versions of cert manager):

@@ -9,7 +9,7 @@ So, what do we mean by "Kubernetes Based Platform"?
 
 One common misconception about Kubernetes is that it is a complete platform for modern cloud based applications -
 it is not. Rather, Kubernetes provides a tremendous starting point for building platforms and clusters that make
-sense in differnet contexts. For example, you might see the following types of Kubernetes clusters:
+sense in different contexts. For example, you might see the following types of Kubernetes clusters:
 
 1. A cluster built for developers that provides automation and runtime support for rapid and
    iterative application development
@@ -49,7 +49,7 @@ Currently, TCE can create management and workload clusters on the following infr
 1. Amazon EC2
 1. Microsoft Azure
 1. VMware vSphere
-1. Docker - although this would be an ununsual usage
+1. Docker - although this would be an unusual usage
 
 We won't say more about managed clusters as they are not the focus of this workshop. But the tools we install in the workshop should
 work just fine in managed clusters.

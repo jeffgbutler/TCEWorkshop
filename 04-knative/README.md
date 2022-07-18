@@ -12,7 +12,7 @@ and a YAML file.
 ## Deploy a Knative Application with the Knative CLI
 
 The Knative CLI is a very simple way to deploy an application to Knative. It does not have as much
-flexability as using the full Kubactl/YAML method, but it does have sensable defaults for many situations.
+flexibility as using the full Kubectl/YAML method, but it does have sensible defaults for many situations.
 Let's deploy Kuard with Knative:
 
 ```shell
@@ -46,7 +46,7 @@ kn service delete kuard
 
 ## Deploy a Knative Application with Kubectl
 
-The file [kuard-service.yaml](kuard-service.yaml) contains YAML for acheiving the
+The file [kuard-service.yaml](kuard-service.yaml) contains YAML for achieving the
 same deployment of Kuard we did above with one exception - we turn off "scale to zero" functionality. This can
 also be accomplished with the CLI (see the `--scale-min` parameter).
 
@@ -56,7 +56,7 @@ Deploy the service with Kubectl:
 kubectl apply -f config/kuard-service.yaml
 ```
 
-The app should be avilable at http://kuard.default.127-0-0-1.nip.io/
+The app should be available at http://kuard.default.127-0-0-1.nip.io/
 
 Everything should be the same as before except that with this deployment the app will not scale to zero.
 
@@ -71,4 +71,4 @@ kubectl delete -f config/kuard-service.yaml
 Knative has many features and configuration options. For details see the official documentation
 here: https://knative.dev/docs/
 
-[Next (Explore Kpack) -&gt;](../05-kpack/)
+[Next (Explore Kpack) -&gt;](../05-kpack/README.md)

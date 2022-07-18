@@ -1,7 +1,7 @@
 # Pre-Requisites
 
 This workshop requires Docker and several other tools. Using package manager (Homebrew or Chocolatey) makes it
-easier to install some of the componants, but is not strictly required. We will only write instructions based on
+easier to install some of the components, but is not strictly required. We will only write instructions based on
 package managers.
 
 You will need to have Internet access to run the exercises in the workshop.

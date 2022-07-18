@@ -4,7 +4,7 @@ TCE can create managed clusters on many different infrastructure providers. We w
 of creating a managed cluster as the official documentation does a good job at that. See this page for
 a starting point: https://tanzucommunityedition.io/docs/v0.12/installation-planning/ 
 
-When you create a managed cluster with TCE, the cluster will have some basic componants installed that make
+When you create a managed cluster with TCE, the cluster will have some basic components installed that make
 it a "Tanzu" cluster. These include:
 
 - The Carvel Kapp Controller
@@ -18,7 +18,7 @@ Once the cluster is created, you will need to configure Kubectl so that you can 
 The following commands are the easiest way to do that - they must be run on the same machine you
 you used to create the cluster, and they will configure Kubectl on that machine only.
 
-The following commands assume that you have created a managed clusted named "workload-cluster".
+The following commands assume that you have created a managed cluster named "workload-cluster".
 
 ```shell
 tanzu cluster kubeconfig get workload-cluster --admin
@@ -119,7 +119,7 @@ You can run the following command to see what package repositories are installed
 tanzu package repository list -A
 ```
 
-By default, very few items are installed - only the bare minimum of insfrastructure componants and the
+By default, very few items are installed - only the bare minimum of infrastructure components and the
 secretgen-controller (the kapp controller is also installed - it is what allow several of the tanzu subcommands
 to function).
 
@@ -140,4 +140,4 @@ tanzu package available list -A
 
 You can see that the list of available packages has expanded significantly!
 
-[Next (Explore the Cluster) -&gt;](../02-explore-the-cluster/)
+[Next (Explore the Cluster) -&gt;](../02-explore-the-cluster/README.md)

@@ -7,7 +7,7 @@ means and then we'll explore the cluster.
 
 There is some debate internally within VMware as to the precise definition of a "Tanzu" cluster. Of course, it is 
 just Kubernetes. But it is also Kubernetes with a few additions. In general, a Tanzu cluster
-will have the following componants installed on top of the standard Kubernetes stuff:
+will have the following components installed on top of the standard Kubernetes stuff:
 
 1. The "kapp-controller" - a Kubernetes native package manager that is part of the [Carvel](https://carvel.dev/) suite of tools
 1. The "secretgen-controller" - also from the Carvel tools. The secretgen controller makes it easier to share secrets across namespaces in a Kubernetes cluster
@@ -41,7 +41,7 @@ tanzu package available list
 
 You should see a list of 15-20 packages from the TCE main repository. Many are standard open source building blocks of a
 Kubernetes platform like Prometheus, Grafana, Cert Manager, External DNS, etc. Tanzu makes it very easy to install these
-componants. If you want to see all the packages from every repository, enter the following command:
+components. If you want to see all the packages from every repository, enter the following command:
 
 ```shell
 tanzu package available list -A
@@ -74,8 +74,8 @@ to install the app toolkit. If you are not familiar with those tools, we suggest
 about each one.
 
 Carvel Tools:
-- [YTT Overview -&gt;](./ytt/)
-- [Secretgen-controller Overview -&gt;](./secretgen-controller/)
-- [Kapp-controller Overview -&gt;](./kapp-controller/)
+- [YTT Overview -&gt;](./ytt/README.md)
+- [Secretgen-controller Overview -&gt;](./secretgen-controller/README.md)
+- [Kapp-controller Overview -&gt;](./kapp-controller/README.md)
 
-[Next (Install App Toolkit) -&gt;](../03-app-toolkit/)
+[Next (Install App Toolkit) -&gt;](../03-app-toolkit/README.md)

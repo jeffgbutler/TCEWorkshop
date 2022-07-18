@@ -1,7 +1,7 @@
 # Install Tanzu Community Edition Pre-Requisites
 
 This workshop requires Docker and several other tools. Using package manager (Homebrew or Chocolatey) makes it
-easier to install some of the componants, but is not strictly required. We will only write instructions based on
+easier to install some components, but is not strictly required. We will only write instructions based on
 package managers.
 
 You will need to have Internet access to run the exercises in the workshop.
@@ -41,7 +41,7 @@ Install required tools:
    brew install kp
    ```
 - Kubectl Krew Plugin Manager (Optional, but helpful): https://krew.sigs.k8s.io/docs/user-guide/setup/install/
-- Kubectl tree plugin (Optional, but helpful. Requres Krew Plugin Manager):
+- Kubectl tree plugin (Optional, but helpful. Requires Krew Plugin Manager):
    ```shell
    kubectl krew install tree
    ```
@@ -70,7 +70,7 @@ Install required tools:
 - Knative CLI: Go to https://github.com/knative/client/releases, download latest Windows binary, rename it to "kn", than add it to the path
 - Kpack CLI: Go to https://github.com/vmware-tanzu/kpack-cli/releases, download latest Windows binary, rename it to "kp", add it to the path
 - Kubectl Krew Plugin Manager (Optional, but helpful): https://krew.sigs.k8s.io/docs/user-guide/setup/install/
-- Kubectl tree plugin (Optional, but helpful. Requres Krew Plugin Manager):
+- Kubectl tree plugin (Optional, but helpful. Requires Krew Plugin Manager):
    ```shell
    kubectl krew install tree
    ```
@@ -106,7 +106,7 @@ Install required tools:
    brew install kp
    ```
 - Kubectl Krew Plugin Manager (Optional, but helpful): https://krew.sigs.k8s.io/docs/user-guide/setup/install/
-- Kubectl tree plugin (Optional, but helpful. Requres Krew Plugin Manager):
+- Kubectl tree plugin (Optional, but helpful. Requires Krew Plugin Manager):
    ```shell
    kubectl krew install tree
    ```

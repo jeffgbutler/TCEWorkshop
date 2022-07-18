@@ -20,7 +20,7 @@ The app-toolkit will install and configure the following with a single command:
 ## Create a Cluster
 
 The app toolkit can install on any cluster that has been "Tanzuified" and has the TCE package
-repository registered. The easist way to do this is with an unmanaged cluster.
+repository registered. The easiest way to do this is with an unmanaged cluster.
 
 ### Create an Unmanaged Cluster Using Kind
 
@@ -46,7 +46,7 @@ tanzu package install secretgen-controller `
   --namespace tkg-system
 ```
 
-This creates a secret in the defaul namespace and makes it avaible for export to other namespaces:
+This creates a secret in the default namespace and makes it available for export to other namespaces:
 
 ```powershell
 tanzu secret registry add registry-credentials `

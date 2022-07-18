@@ -38,10 +38,10 @@ The stamped out resource will usually update it's local copy of the source code 
 The `source-to-url` supply chain supplied with TCE stamps out a
 [Flux GitRepository](https://fluxcd.io/docs/components/source/gitrepositories/) resource to perform this function for each workload.
 
-| Configuration | Template Variable| YTT Variable|
-|---|---|---|
-|spec.urlPath | `$(source.url)$` (Single Template) <br/> `$(sources.<name>.url)$` (Multiple Templates)| `#@ data.values.source.url` (Single Template) <br/> `#@ data.values.sources.<name>.url` (Multiple Templates) |
-|spec.revision | `$(source.revision)$` (Single Template) <br/> `$(sources.<name>.revision)$` (Multiple Templates)| `#@ data.values.source.revision` (Single Template) <br/> `#@ data.values.sources.<name>.revision` (Multiple Templates) |
+| Configuration | Template Variable                                                                                | YTT Variable                                                                                                           |
+|---------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| spec.urlPath  | `$(source.url)$` (Single Template) <br/> `$(sources.<name>.url)$` (Multiple Templates)           | `#@ data.values.source.url` (Single Template) <br/> `#@ data.values.sources.<name>.url` (Multiple Templates)           |
+| spec.revision | `$(source.revision)$` (Single Template) <br/> `$(sources.<name>.revision)$` (Multiple Templates) | `#@ data.values.source.revision` (Single Template) <br/> `#@ data.values.sources.<name>.revision` (Multiple Templates) |
 
 ## ClusterImageTemplate
 
@@ -53,20 +53,20 @@ image when the input `url` or `revision` changes.
 The `source-to-url` supply chain supplied with TCE stamps out a
 [Kpack Image](https://github.com/pivotal/kpack/blob/main/docs/image.md) resource to perform this function for each workload.
 
-| Configuration | Template Variable | YTT Variable|
-|---|---|---|
-|spec.imagePath | `$(image)$` (Single Template) <br/> `$(images.<name>.image)$` (Multiple Templates)| `#@ data.values.image` (Single Template) <br/> `#@ data.values.images.<name>.image` (Multiple Templates) |
+| Configuration  | Template Variable                                                                  | YTT Variable                                                                                             |
+|----------------|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| spec.imagePath | `$(image)$` (Single Template) <br/> `$(images.<name>.image)$` (Multiple Templates) | `#@ data.values.image` (Single Template) <br/> `#@ data.values.images.<name>.image` (Multiple Templates) |
 
 ## ClusterConfigTemplate
 
 A `ClusterConfigTemplate` is responsible for supplying a `config` variable to a supply chain. Typically the template will
-stamp out a resource that will read Kubernetes configurations and make their values avaiable. The stamped out resource
+stamp out a resource that will read Kubernetes configurations and make their values available. The stamped out resource
 will make the new configuration values available when the underlying configuration changes.
 
 The `source-to-url` supply chain supplied with TCE does not use a `ClusterConfigurationTemplate`. You could create a
 `ClusterConfigurationTemplate` that stamped out a common Kubernetes ConfigMap, set some values in the ConfigMap, and them
 made those values available to the supply chain.
 
-| Configuration | Template Variable| YTT Variable|
-|---|---|---|
-|spec.configPath | `$(config)$` (Single Template) <br/> `$(configs.<name>.config)$` (Multiple Templates)| `#@ data.values.config` (Single Template) <br/> `#@ data.values.configs.<name>.config` (Multiple Templates) |
+| Configuration   | Template Variable                                                                     | YTT Variable                                                                                                |
+|-----------------|---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| spec.configPath | `$(config)$` (Single Template) <br/> `$(configs.<name>.config)$` (Multiple Templates) | `#@ data.values.config` (Single Template) <br/> `#@ data.values.configs.<name>.config` (Multiple Templates) |
