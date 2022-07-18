@@ -38,6 +38,15 @@ If you don't see the secretgen-controller, follow these steps to install it:
 
 1. Install secretgen-controller
 
+   Powershell...
+   ```powershell
+   tanzu package install secretgen-controller `
+     --package-name secretgen-controller.community.tanzu.vmware.com `
+     --version 0.7.1 `
+     --namespace tkg-system
+   ```
+
+   MacOS/Linux...
    ```shell
    tanzu package install secretgen-controller \
      --package-name secretgen-controller.community.tanzu.vmware.com \
