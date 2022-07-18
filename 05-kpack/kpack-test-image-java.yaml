@@ -1,15 +1,14 @@
-#@ load("@ytt:data", "data")
 apiVersion: kpack.io/v1alpha2
 kind: Image
 metadata:
   name: spring-pet-clinic
   namespace: default
 spec:
-  tag: #@ data.values.registry.tags.prefix + data.values.registry.tags.spring_pet_clinic
-  serviceAccountName: #@ data.values.service.account.name
+  tag: harbor.tanzuathome.net/tce/kpack-java-sample ## Important: CHANGE ME! Docker Hub would be <your_username>/kpack-java-sample
+  serviceAccountName: default
   builder:
-    name: my-builder
-    kind: Builder
+    name: default
+    kind: ClusterBuilder
   source:
     git:
       url: https://github.com/spring-projects/spring-petclinic
