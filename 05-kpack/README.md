@@ -28,12 +28,14 @@ default service account. Feel free to try one or all of the options below!
 
 Look at the file [kpack-test-image-dotnet.yaml](kpack-test-image-dotnet.yaml). This file
 contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag for where the
-image should be published. The file contains some placeholder values that we will fill in using YTT.
+image should be published.
+
+**Important:** You must change the image tag in this file before proceeding!
 
 Create the image with the following command:
 
 ```shell
-ytt -f config/kpack/kpack-test-image-dotnet.yaml --data-values-file config/values.yaml | kubectl apply -f-
+kubectl apply -f kpack-test-image-dotnet.yaml
 ```
 
 You can follow the build with this command:
@@ -102,12 +104,14 @@ kn service delete dotnet-sample
 
 Look at the file [kpack-test-image-java.yaml](kpack-test-image-java.yaml) in this directory.
 This file contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag
-for where the image should be published. The file contains some placeholder values that we will fill in using YTT.
+for where the image should be published.
+
+**Important:** You must change the image tag in this file before proceeding!
 
 Create the image with the following command:
 
 ```shell
-ytt -f config/kpack/kpack-test-image-java.yaml --data-values-file config/values.yaml | kubectl apply -f-
+kubectl apply -f kpack-test-image-java.yaml
 ```
 
 You can follow the build with this command:
