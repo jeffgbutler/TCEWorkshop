@@ -1,15 +1,11 @@
 # Test Kpack
 
-> Important Concepts to cover in an overview:
->
-> - Overview of Kpack (stacks, stores, builders)
-
 **Important** the commands below assume you have a terminal window open in the same directory as this file.
 
 Kpack is a system that builds container images from source code and publishes them to a registry. Kpack uses
 Cloud Native Buildpacks (https://buildpacks.io/) to build container images from source. Cloud Native Buildpacks
 started as a collaboration between Heroku and Pivotal(now VMware) and are now the CNCF's recommended
-method for building container images. You will never have to write another Dockerfile!
+method for building container images.
 
 Buildpacks can inspect source code from many languages and frameworks, determine if any
 particular buildpack can make a contributions to the image, and then build the image. For Java projects,
@@ -22,7 +18,7 @@ Buildpacks (https://paketo.io/) - provides open source buildpack implementations
 We installed Kpack when we installed the app toolkit previously. The default app toolkit also includes a
 component called "kpack dependencies" that sets up many of the requirements to run Kpack in our cluster.
 
-If you are interested in seeing the details of how kpack is configured, see the page [kpack-the-hard-way.md](kpack-the-hard-way.md).
+If you are interested in seeing the details of how kpack is configured, see the page [Kpack Deep Dive](KpackDeepDive.md).
 
 As with Knative, you can define image builds with a CLI, or with Kubectl.
 We're going to use the Kubectl version because of the way we've created the service account - the Kpack CLI can only work with the
@@ -104,7 +100,7 @@ kn service delete dotnet-sample
 
 ## Java Image Build with Kubectl
 
-Look at the file [kpack-test-image-java.yaml](config/kpack/kpack-test-image-java.yaml) in this directory.
+Look at the file [kpack-test-image-java.yaml](kpack-test-image-java.yaml) in this directory.
 This file contains a definition for a Kpack "Image" - importantly it contains a path to the source code in Git, and a tag
 for where the image should be published. The file contains some placeholder values that we will fill in using YTT.
 

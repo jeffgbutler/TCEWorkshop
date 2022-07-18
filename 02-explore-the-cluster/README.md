@@ -1,7 +1,7 @@
 # Explore Your Tanzu Cluster
 
 When you created a cluster - either managed or unmanaged - you created a "Tanzu" cluster. We will talk briefly about what that
-means and then we'll explore the cluster.
+means, and then we'll explore the cluster.
 
 ## What is a Tanzu cluster?
 
@@ -11,6 +11,7 @@ will have the following components installed on top of the standard Kubernetes s
 
 1. The "kapp-controller" - a Kubernetes native package manager that is part of the [Carvel](https://carvel.dev/) suite of tools
 1. The "secretgen-controller" - also from the Carvel tools. The secretgen controller makes it easier to share secrets across namespaces in a Kubernetes cluster
+1. An unmanaged cluster will also be connected to the main TCE package repository
 
 In an unmanaged cluster, the secretgen-controller is available but not installed by default.
 

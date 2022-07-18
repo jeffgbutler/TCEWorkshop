@@ -4,8 +4,8 @@ When you install Tanzu Community Edition (TCE), you are actually installing a co
 running commands in the TCE platform. Further activities like creating clusters and installing packages are all accomplished
 with the Tanzu CLI.
 
-**Warning:** This install will conflict with the Tanzu CLI for Tanzu Application Platform (TAP) from VMware. We recommend
-that you install Tanzu Community Edition on a different machine than the machine you use to manage TAP.
+**Warning:** This installation will conflict with the Tanzu CLI for Tanzu Application Platform (TAP) from VMware.
+We recommend that you install Tanzu Community Edition on a different machine than the machine you use to manage TAP.
 
 ## Clone the Exercise Repository
 
@@ -49,4 +49,4 @@ tanzu plugin list
 
 You should see a list of plugins including apps, builder, unmanaged-cluster, etc. At the time of this writing there are 13 plugins available.
 
-[Next (Create a Cluster) -&gt;](../01-creating-clusters/)
+[Next (Create a Cluster) -&gt;](../01-creating-clusters/README.md)

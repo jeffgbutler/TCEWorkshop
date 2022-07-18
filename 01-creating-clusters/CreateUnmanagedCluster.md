@@ -10,7 +10,7 @@ tanzu unmanaged-cluster create tceworkshop --port-map '80:80,443:443'
 ```
 
 This will create a single node unmanaged Kubernetes cluster using [Kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker)
-on your local workstation. Unmanaged clusters are suitable for short lived experimentation and learning (such as this workshop).
+on your local workstation. Unmanaged clusters are suitable for short-lived experimentation and learning (such as this workshop).
 They also start very quickly. This cluster will have the following characteristics:
 
 - Ports 80 and 443 are exposed on your workstation to allow easier access to workloads deployed on the cluster

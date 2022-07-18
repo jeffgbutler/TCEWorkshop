@@ -6,7 +6,7 @@ have created a VM image (OVA) with everything pre-installed. You can run their i
 or VMware Fusion.
 
 After we create our first cluster, we will install several components in the cluster that are required
-for the later exercises. There are several configuration values you will need to have available for that
+for the remaining exercises. There are several configuration values you will need to have available for that
 step. The following sections will help you determine proper values for your installation.
 
 ## Container Registry Access

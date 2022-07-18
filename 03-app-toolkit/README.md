@@ -144,4 +144,4 @@ When you are finished experimenting with Knative, you can delete the service wit
 kn service delete kuard
 ```
 
-[Next (Explore Knative) -&gt;](../04-knative/)
+[Next (Explore Knative) -&gt;](../04-knative/README.md)

@@ -1,8 +1,13 @@
 # Deploying Applications with Knative
 
-> Important Concepts to cover in an overview:
->
-> - Overview of Knative
+[Knative](https://knative.dev/) is an open source Kubernetes subproject with two primary components:
+
+1. Knative serving is a serverless framework for Kubernetes. It includes scale-to-zero capabilities, but also
+   has capabilities that make it easy to deploy many types of web applications on Kubernetes
+2. Knative eventing is a framework for building event driven applications on Kubernetes
+
+In this workshop, we will focus on Knative serving as that is the part of Knative that is packaged for easy
+installation on a TCE cluster.
 
 **Important** the commands below assume you have a terminal window open in the same directory as this file.
 
@@ -19,7 +24,8 @@ Let's deploy Kuard with Knative:
 kn service create kuard --image gcr.io/kuar-demo/kuard-amd64:blue
 ```
 
-Once the command completes, the application should be available at http://kuard.default.127-0-0-1.nip.io/
+Once the command completes, the application should be available at http://kuard.default.127-0-0-1.nip.io/ (substitute
+your domain name for `127-0-0-1/nip.io` if you changed the default during installation)
 
 Take a look at what got created in your cluster:
 
@@ -35,7 +41,7 @@ configured the ingress controller (Contour in this case). By default, the URL is
 
 By default, Knative sets up "scale to zero" functionality for the services it deploys. This because Knative started
 as a "serverless" toolkit for Kubernetes. You can see this in action by watching the pod - it will eventually go away
-and only the other Knative objects will remain. Once the pod is gone, you can still hit the application but it
+and only the other Knative objects will remain. Once the pod is gone, you can still hit the application, but it
 will be slow initially as Knative will spin up a new pod once traffic starts flowing again.
 
 Once you are finished experimenting with Knative, you can delete the service with the following command:
@@ -53,7 +59,7 @@ also be accomplished with the CLI (see the `--scale-min` parameter).
 Deploy the service with Kubectl:
 
 ```shell
-kubectl apply -f config/kuard-service.yaml
+kubectl apply -f kuard-service.yaml
 ```
 
 The app should be available at http://kuard.default.127-0-0-1.nip.io/

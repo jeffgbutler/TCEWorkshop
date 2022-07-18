@@ -1,6 +1,6 @@
 # Create and Test a Managed Cluster
 
-TCE can create managed clusters on many different infrastructure providers. We will not cover the details
+TCE can create managed clusters on many infrastructure providers. We will not cover the details
 of creating a managed cluster as the official documentation does a good job at that. See this page for
 a starting point: https://tanzucommunityedition.io/docs/v0.12/installation-planning/ 
 
