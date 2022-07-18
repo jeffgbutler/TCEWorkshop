@@ -66,6 +66,17 @@ tanzu secret registry add registry-credentials \
   --export-to-all-namespaces
 ```
 
+**Important Note:** If you are using Docker Hub, change the server to `https://index.docker.io/v1/`:
+
+```powershell
+tanzu secret registry add registry-credentials `
+  --server https://index.docker.io/v1/ `
+  --username jeffgbutler `
+  --password ******* `
+  --export-to-all-namespaces
+```
+
+
 If you do not have the secretgen-controller installed, create the secret with Kubectl:
 
 ```powershell
@@ -81,6 +92,14 @@ kubectl create secret docker-registry registry-credentials \
   --docker-server=harbor.tanzuathome.net \
   --docker-username=admin \
   --docker-password=Harbor12345
+```
+
+**Important Note:** If you are using Docker Hub, change the server to `https://index.docker.io/v1/`
+```powershell
+kubectl create secret docker-registry registry-credentials `
+  --docker-server=https://index.docker.io/v1/ `
+  --docker-username=jeffgbutler `
+  --docker-password=*******
 ```
 
 ## Install App-Toolkit
