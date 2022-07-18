@@ -18,8 +18,6 @@ Buildpacks (https://paketo.io/) - provides open source buildpack implementations
 We installed Kpack when we installed the app toolkit previously. The default app toolkit also includes a
 component called "kpack dependencies" that sets up many of the requirements to run Kpack in our cluster.
 
-If you are interested in seeing the details of how kpack is configured, see the page [Kpack Deep Dive](KpackDeepDive.md).
-
 As with Knative, you can define image builds with a CLI, or with Kubectl.
 We're going to use the Kubectl version because of the way we've created the service account - the Kpack CLI can only work with the
 default service account. Feel free to try one or all of the options below!
