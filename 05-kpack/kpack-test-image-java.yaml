@@ -4,7 +4,8 @@ metadata:
   name: spring-pet-clinic
   namespace: default
 spec:
-  tag: harbor.tanzuathome.net/tce/kpack-java-sample ## Important: CHANGE ME! Docker Hub would be <your_username>/kpack-java-sample
+  ## Important: CHANGE ME! Docker Hub would be <your_username>/kpack-java-sample
+  tag: harbor.tanzuathome.net/tce/kpack-java-sample
   serviceAccountName: default
   builder:
     name: default

@@ -4,7 +4,8 @@ metadata:
   name: dotnet-sample
   namespace: default
 spec:
-  tag: harbor.tanzuathome.net/tce/kpack-dotnet-sample ## Important: CHANGE ME! Docker Hub would be <your_username>/kpack-dotnet-sample
+  ## Important: CHANGE ME! Docker Hub would be <your_username>/kpack-dotnet-sample
+  tag: harbor.tanzuathome.net/tce/kpack-dotnet-sample
   serviceAccountName: default
   builder:
     name: default
