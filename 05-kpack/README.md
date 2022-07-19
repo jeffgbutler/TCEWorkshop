@@ -25,6 +25,7 @@ default service account. Feel free to try one or all of the options below!
 ## Exploring Kpack
 
 Display cluster stores installed and their versions:
+
 ```shell
 kp clusterstore list
 ```
@@ -36,16 +37,19 @@ kp clusterstore status default -v
 ```
 
 Display cluster stacks installed and their versions:
+
 ```shell
 kp clusterstack list
 ```
 
 Display detailed information about a cluster stack:
+
 ```shell
 kp clusterstack status default -v
 ```
 
 Display cluster builders installed and their versions...
+
 ```shell
 kp clusterbuilder list
 ```
@@ -62,22 +66,24 @@ kp clusterbuilder status default
 If you have the Kpack CLI installed, you can ceate images from the command line:
 
 Powershell...
+
 ```powershell
 kp image create dotnet-sample `
  --tag harbor.tanzuathome.net/tce/kpack-dotnet-sample `
  --git https://github.com/paketo-buildpacks/samples `
  --git-revision main `
  --sub-path ./dotnet-core/aspnet
- ``
+```
 
 MacOS/Linux Shell...
+
 ```shell
 kp image create dotnet-sample \
  --tag harbor.tanzuathome.net/tce/kpack-dotnet-sample \
  --git https://github.com/paketo-buildpacks/samples \
  --git-revision main \
  --sub-path ./dotnet-core/aspnet
- ``
+```
 
 You can follow the build with this command:
 
@@ -98,6 +104,7 @@ For me, the image was `harbor.tanzuathome.net/tce/kpack-dotnet-sample@sha256:e64
 Now we can deploy that image with Knative (you will need to change this command to use the image you built):
 
 Powershell:
+
 ```powershell
 kn service create dotnet-sample `
   --image harbor.tanzuathome.net/tce/kpack-dotnet-sample@sha256:e64109703a5293b55882d524d98690ebb73d6d775fd60c286149b1f360de5eba `
@@ -105,6 +112,7 @@ kn service create dotnet-sample `
 ```
 
 MacOS/Linux Shell:
+
 ```shell
 kn service create dotnet-sample \
   --image harbor.tanzuathome.net/tce/kpack-dotnet-sample@sha256:e64109703a5293b55882d524d98690ebb73d6d775fd60c286149b1f360de5eba \
@@ -202,20 +210,22 @@ kn service delete dotnet-sample
 If you have the Kpack CLI installed, you can ceate images from the command line:
 
 Powershell...
+
 ```powershell
 kp image create spring-pet-clinic `
  --tag harbor.tanzuathome.net/tce/kpack-java-sample `
  --git https://github.com/spring-projects/spring-petclinic `
  --git-revision 82cb521d636b282340378d80a6307a08e3d4a4c4
- ``
+```
 
 MacOS/Linux Shell...
+
 ```shell
 kp image create spring-pet-clinic \
  --tag harbor.tanzuathome.net/tce/kpack-java-sample \
  --git https://github.com/spring-projects/spring-petclinic \
  --git-revision 82cb521d636b282340378d80a6307a08e3d4a4c4
- ``
+```
 
 You can follow the build with this command:
 
@@ -236,6 +246,7 @@ For me, the image was `harbor.tanzuathome.net/tce/kpack-java-sample@sha256:7eb23
 Now we can deploy that image with Knative (you will need to change this command to use the image you built):
 
 Powershell:
+
 ```powershell
 kn service create java-sample `
   --image harbor.tanzuathome.net/tce/kpack-java-sample@sha256:7eb23df634e494ecab677434c506b1ad63f42225dd29f86b8848f45cace942b1 `
@@ -243,6 +254,7 @@ kn service create java-sample `
 ```
 
 MacOS/Linux Shell:
+
 ```shell
 kn service create java-sample \
   --image harbor.tanzuathome.net/tce/kpack-java-sample@sha256:7eb23df634e494ecab677434c506b1ad63f42225dd29f86b8848f45cace942b1 \
