@@ -25,7 +25,7 @@ kn service create kuard --image gcr.io/kuar-demo/kuard-amd64:blue
 ```
 
 Once the command completes, the application should be available at http://kuard.default.127-0-0-1.nip.io/ (substitute
-your domain name for `127-0-0-1/nip.io` if you changed the default during installation)
+your domain name for `127-0-0-1.nip.io` if you changed the default during installation)
 
 Take a look at what got created in your cluster:
 

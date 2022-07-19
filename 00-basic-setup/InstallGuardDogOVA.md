@@ -22,7 +22,23 @@ Once you've installed the OVA and started the VM, log in to the VM with either S
 Then clone the exercise repository so you will have local access to the configuration and exercise files:
 
 ```shell
+ssh root@192.168.128.140
+```
+
+```shell
+mkdir workspace
+```
+
+```shell
+cd workspace
+```
+
+```shell
 git clone https://github.com/jeffgbutler/TCEWorkshop.git
+```
+
+```shell
+cd TCEWorkshop
 ```
 
 

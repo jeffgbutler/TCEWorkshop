@@ -61,7 +61,7 @@ Here you see a Workload resource named "java-payment-calculator" that is the par
 an App, a GitRepository, and an Image. These correspond to the three parts of the supply chain. Notice
 that the Image resource also has child resources - we'll ignore those for now. Also know that the App resource is a
 Carvel Kapp definition for a Kubernetes application - the App also created several other resources that are not shown
-in the tree output. For example, there is a Knative service in the cluster related to this workload - you can see it's
+in the tree output. For example, there is a Knative service in the cluster related to this workload - you can see its
 definition with this command:
 
 ```shell

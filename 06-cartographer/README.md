@@ -95,7 +95,7 @@ You can also look at the Kapp application object with a command like this:
 kubectl describe app java-payment-calculator
 ```
 
-You can use the the Kubectl Tree plugin to get a good picture of how everything is related:
+You can use the Kubectl Tree plugin to get a good picture of how everything is related:
 
 ```shell
 kubectl tree workload java-payment-calculator

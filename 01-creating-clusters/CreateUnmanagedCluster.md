@@ -44,6 +44,12 @@ kubectl port-forward kuard 8080:8080
 
 Now you should be able to access the pod in a browser at http://localhost:8080
 
+If you don't have a browser on the system, you can also hit the main page with curl:
+
+```shell
+curl http://localhost:8080
+```
+
 Assuming all this works, then enter `ctrl-c` to stop the port forward, then enter the following command to delete
 the pod:
 

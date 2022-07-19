@@ -19,15 +19,15 @@ The file [config/app-toolkit-values.yaml](config/app-toolkit-values.yaml) must b
 values suitable for your environment. The following table has details of what needs to change. There are examples for
 the various registry values on the [Container Registry](../00-basic-setup/ContainerRegistry.md) page.
 
-| Configuration Value                      | Notes                                                                                                                                            |
-|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| contour.envoy.service.type               | Change this to "LoadBalancer" if your cluster has a load balancer available                                                                      |
-| knative_serving.domain.name              | If you have a LoadBalancer and DNS available, specify the domain name you will use. If you are running in Kind, the default value is sufficient. |
-| kpack.kp_default_repository              | This is a repository where certain images for Kpack will be pushed during install                                                                |
-| kpack.kp_default_repository_username     | User name for the repository                                                                                                                     |
-| kpack.kp_default_repository_password     | Password for the repository                                                                                                                      |
-| cartographer_catalog.registry.server     | Server name for images created by the out of the box supply chain. This value will be used to compose tags for images                            |
-| cartographer_catalog.registry.repository | Tag prefix for images created by the out of the box supply chain. This value will be prepended to image tags created by Cartographer             |
+| Configuration Value                      | Notes                                                                                                                                                                                                                                                                       |
+|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| contour.envoy.service.type               | Change this to "LoadBalancer" if your cluster has a load balancer available                                                                                                                                                                                                 |
+| knative_serving.domain.name              | If you have a LoadBalancer and DNS available, specify the domain name you will use. If you are running locally in Kind, the default value is sufficient for local workstation use. If you are using the Guard Dog OVA, replace `127-0-0-1` with the IP address of the VM.   |
+| kpack.kp_default_repository              | This is a repository where certain images for Kpack will be pushed during install. If you are using Docker Hub, use the value &lt;user_name&gt;/kpack                                                                                                                       |
+| kpack.kp_default_repository_username     | User name for the repository                                                                                                                                                                                                                                                |
+| kpack.kp_default_repository_password     | Password for the repository                                                                                                                                                                                                                                                 |
+| cartographer_catalog.registry.server     | Server name for images created by the out of the box supply chain. This value will be used to compose tags for images. If you are using Docker Hub, enter "index.docker.io"                                                                                                 |
+| cartographer_catalog.registry.repository | Tag prefix for images created by the out of the box supply chain. This value will be prepended to image tags created by Cartographer. If you are using Docker Hub, enter your Docker userid.                                                                                |
 
 
 ## App Toolkit Pre-Requisites
@@ -150,8 +150,8 @@ Once the app toolkit has finished reconciling, you can try a simple test with a 
 kn service create kuard --image gcr.io/kuar-demo/kuard-amd64:blue
 ```
 
-Once the command completes, the application should be available at http://kuard.default.127-0-0-1.nip.io/. If you
-used a load balancer and changed the domain name, you can retrieve the URL with this command:
+Once the command completes, the application should be available at http://kuard.default.127-0-0-1.nip.io/
+(or the IP address of your VM). If you used a load balancer or changed the domain name, you can retrieve the URL with this command:
 
 ```shell
 kn service describe kuard

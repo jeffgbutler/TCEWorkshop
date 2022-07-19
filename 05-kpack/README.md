@@ -22,6 +22,24 @@ As with Knative, you can define image builds with a CLI, or with Kubectl.
 We're going to use the Kubectl version because of the way we've created the service account - the Kpack CLI can only work with the
 default service account. Feel free to try one or all of the options below!
 
+## Kpack Overview
+
+Kpack is open source here: https://github.com/pivotal/kpack. There are a few important terms to learn with Kpack:
+
+| Term                     | Meaning                                                                                       |
+|--------------------------|-----------------------------------------------------------------------------------------------|
+| Cluster Store            | A Collection of build packs                                                                   |
+| Cluster Stack            | A base build and run image                                                                    |
+| Builder/ Cluster Builder | A combination of a store and stack. Also specifies the order in which build packs are checked |
+
+Kpack is, essentially, a Kubernetes based system for running build packs and publishing the resulting image. Kpack will
+offer source code to the configured build packs and the build packs will determine if they can operate on that source.
+If so, the build pack will contribute to the final image. It is very common for more than one build pack to be involved
+in the production of an image.
+
+You can also run build packs outside of Kubernetes. For example, Spring Boot includes support for running build packs
+during a Maven/Gradle build.
+
 ## Exploring Kpack
 
 Display cluster stores installed and their versions:
