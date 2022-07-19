@@ -75,7 +75,9 @@ Test it:
 
 ```shell
 kubectl run kuard --restart=Never --image=gcr.io/kuar-demo/kuard-amd64:blue
+```
 
+```shell
 kubectl expose pod kuard --type=LoadBalancer --port=80 --target-port=8080
 ```
 
