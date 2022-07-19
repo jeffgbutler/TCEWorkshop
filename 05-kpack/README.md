@@ -63,7 +63,7 @@ kp clusterbuilder status default
 
 ## .Net Core Image Build with Kpack CLI
 
-If you have the Kpack CLI installed, you can ceate images from the command line:
+If you have the Kpack CLI installed, you can create images from the command line:
 
 Powershell...
 
@@ -207,7 +207,7 @@ kn service delete dotnet-sample
 
 ## Java Image Build with Kpack CLI
 
-If you have the Kpack CLI installed, you can ceate images from the command line:
+If you have the Kpack CLI installed, you can create images from the command line:
 
 Powershell...
 
