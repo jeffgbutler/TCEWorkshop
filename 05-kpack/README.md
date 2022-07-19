@@ -22,6 +22,105 @@ As with Knative, you can define image builds with a CLI, or with Kubectl.
 We're going to use the Kubectl version because of the way we've created the service account - the Kpack CLI can only work with the
 default service account. Feel free to try one or all of the options below!
 
+## Exploring Kpack
+
+Display cluster stores installed and their versions:
+```shell
+kp clusterstore list
+```
+
+Display detailed information about a cluster store:
+
+```shell
+kp clusterstore status default -v
+```
+
+Display cluster stacks installed and their versions:
+```shell
+kp clusterstack list
+```
+
+Display detailed information about a cluster stack:
+```shell
+kp clusterstack status default -v
+```
+
+Display cluster builders installed and their versions...
+```shell
+kp clusterbuilder list
+```
+
+Display detailed information about a cluster builder...
+
+```shell
+kp clusterbuilder status default
+```
+
+
+## .Net Core Image Build with Kpack CLI
+
+If you have the Kpack CLI installed, you can ceate images from the command line:
+
+Powershell...
+```powershell
+kp image create dotnet-sample `
+ --tag harbor.tanzuathome.net/tce/kpack-dotnet-sample `
+ --git https://github.com/paketo-buildpacks/samples `
+ --git-revision main `
+ --sub-path ./dotnet-core/aspnet
+ ``
+
+MacOS/Linux Shell...
+```shell
+kp image create dotnet-sample \
+ --tag harbor.tanzuathome.net/tce/kpack-dotnet-sample \
+ --git https://github.com/paketo-buildpacks/samples \
+ --git-revision main \
+ --sub-path ./dotnet-core/aspnet
+ ``
+
+You can follow the build with this command:
+
+```shell
+kp build logs dotnet-sample
+```
+
+The build will be slow the first time it runs because the buildpack will need to download all the dependencies (like a .Net
+SDK!). Subsequent builds would be faster. Once the build completes, an image will be published. You can get the full image
+address with the following command:
+
+```shell
+kp image list
+```
+
+For me, the image was `harbor.tanzuathome.net/tce/kpack-dotnet-sample@sha256:e64109703a5293b55882d524d98690ebb73d6d775fd60c286149b1f360de5eba`.
+
+Now we can deploy that image with Knative (you will need to change this command to use the image you built):
+
+Powershell:
+```powershell
+kn service create dotnet-sample `
+  --image harbor.tanzuathome.net/tce/kpack-dotnet-sample@sha256:e64109703a5293b55882d524d98690ebb73d6d775fd60c286149b1f360de5eba `
+  --pull-secret registry-credentials
+```
+
+MacOS/Linux Shell:
+```shell
+kn service create dotnet-sample \
+  --image harbor.tanzuathome.net/tce/kpack-dotnet-sample@sha256:e64109703a5293b55882d524d98690ebb73d6d775fd60c286149b1f360de5eba \
+  --pull-secret registry-credentials
+```
+
+Note that we have to specify the image pull secret this time as we are pulling from a private registry.
+
+You should be able to access the application at http://dotnet-sample.default.127-0-0-1.nip.io/
+
+Once you are finished experimenting, you can delete the service with the following command:
+
+```shell
+kn service delete dotnet-sample
+```
+
 ## .Net Core Image Build with Kubectl
 
 Look at the file [kpack-test-image-dotnet.yaml](kpack-test-image-dotnet.yaml). This file
@@ -78,14 +177,14 @@ Windows Powershell:
 ```powershell
 kn service create dotnet-sample `
   --image harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0 `
-  --pull-secret tce-workshop-registry-secret
+  --pull-secret registry-credentials
 ```
 
 MacOS/Linux:
 ```shell
 kn service create dotnet-sample \
   --image harbor.tanzuathome.net/tce/dotnet-sample@sha256:f2da339367a7410f6f397288d540465b1446887fc08c727efeb4ddfde8325ae0 \
-  --pull-secret tce-workshop-registry-secret
+  --pull-secret registry-credentials
 ```
 
 Note that we have to specify the image pull secret this time as we are pulling from a private registry.
@@ -96,6 +195,68 @@ Once you are finished experimenting, you can delete the service with the followi
 
 ```shell
 kn service delete dotnet-sample
+```
+
+## Java Image Build with Kpack CLI
+
+If you have the Kpack CLI installed, you can ceate images from the command line:
+
+Powershell...
+```powershell
+kp image create spring-pet-clinic `
+ --tag harbor.tanzuathome.net/tce/kpack-java-sample `
+ --git https://github.com/spring-projects/spring-petclinic `
+ --git-revision 82cb521d636b282340378d80a6307a08e3d4a4c4
+ ``
+
+MacOS/Linux Shell...
+```shell
+kp image create spring-pet-clinic \
+ --tag harbor.tanzuathome.net/tce/kpack-java-sample \
+ --git https://github.com/spring-projects/spring-petclinic \
+ --git-revision 82cb521d636b282340378d80a6307a08e3d4a4c4
+ ``
+
+You can follow the build with this command:
+
+```shell
+kp build logs spring-pet-clinic
+```
+
+The build will be slow the first time it runs because the buildpack will need to download all the dependencies (like a .Net
+SDK!). Subsequent builds would be faster. Once the build completes, an image will be published. You can get the full image
+address with the following command:
+
+```shell
+kp image list
+```
+
+For me, the image was `harbor.tanzuathome.net/tce/kpack-java-sample@sha256:7eb23df634e494ecab677434c506b1ad63f42225dd29f86b8848f45cace942b1`.
+
+Now we can deploy that image with Knative (you will need to change this command to use the image you built):
+
+Powershell:
+```powershell
+kn service create java-sample `
+  --image harbor.tanzuathome.net/tce/kpack-java-sample@sha256:7eb23df634e494ecab677434c506b1ad63f42225dd29f86b8848f45cace942b1 `
+  --pull-secret registry-credentials
+```
+
+MacOS/Linux Shell:
+```shell
+kn service create java-sample \
+  --image harbor.tanzuathome.net/tce/kpack-java-sample@sha256:7eb23df634e494ecab677434c506b1ad63f42225dd29f86b8848f45cace942b1 \
+  --pull-secret registry-credentials
+```
+
+Note that we have to specify the image pull secret this time as we are pulling from a private registry.
+
+You should be able to access the application at http://java-sample.default.127-0-0-1.nip.io/
+
+Once you are finished experimenting, you can delete the service with the following command:
+
+```shell
+kn service delete java-sample
 ```
 
 ## Java Image Build with Kubectl
@@ -152,14 +313,14 @@ Windows Powershell:
 ```powershell
 kn service create spring-pet-clinic `
   --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:d150b6b0b9a28d72795efb2f9e6c1a353eeec84691e965cb110d787215f8941c `
-  --pull-secret tce-workshop-registry-secret
+  --pull-secret registry-credentials
 ```
 
 MacOS/Linux:
 ```shell
 kn service create spring-pet-clinic \
   --image harbor.tanzuathome.net/tce/spring-pet-clinic@sha256:d150b6b0b9a28d72795efb2f9e6c1a353eeec84691e965cb110d787215f8941c \
-  --pull-secret tce-workshop-registry-secret
+  --pull-secret registry-credentials
 ```
 
 Note that we have to specify the image pull secret this time as we are pulling from a private registry.
