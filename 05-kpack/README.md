@@ -15,12 +15,17 @@ buildpacks can recognize Gradle or Maven projects. Build packs exist for many ot
 Cloud Native Buildpacks define a standard API for creating and executing buildpacks. Another project - Paketo
 Buildpacks (https://paketo.io/) - provides open source buildpack implementations for many languages.
 
-We installed Kpack when we installed the app toolkit previously. The default app toolkit also includes a
-component called "kpack dependencies" that sets up many of the requirements to run Kpack in our cluster.
+Note that the app toolkit installed two packages related to Kpack:
 
-As with Knative, you can define image builds with a CLI, or with Kubectl.
-We're going to use the Kubectl version because of the way we've created the service account - the Kpack CLI can only work with the
-default service account. Feel free to try one or all of the options below!
+1. Kpack itself (the Kubernetes resources for Kpack)
+2. Kpack dependencies - which is a Kpack configuration that will build containers for Java, .Net Core, Python, Go, and NodeJS.
+   Source for the Kpack dependencies is here: https://github.com/vmware-tanzu/package-for-kpack-dependencies
+
+As with Knative, you can define image builds with a CLI (`kp`), or with Kubectl. The `kp` CLI is a bit limited in that
+it can only work with the default service account. That's OK for this workshop, but may not be enough in a production
+deployment. Also, the `kp` CLI is not currently supported on ARM based Macs (M1, M2).
+
+Feel free to try one or all of the options below!
 
 ## Kpack Overview
 

@@ -11,6 +11,11 @@ TCE ships with an "out of the box" supply chain does three things:
 
 We'll take a closer look at how this all fits together.
 
+Note that the app toolkit installed two packages related to Cartographer:
+
+1. Cartographer itself (the Kubernetes resources for Cartographer)
+2. The Cartographer Catalog - which is a pre-configured supply chain. Source for the supply chain is here: https://github.com/vmware-tanzu/cartographer-catalog
+
 ## Deploy a Sample Workload
 
 ### Powershell
