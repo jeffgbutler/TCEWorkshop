@@ -16,8 +16,9 @@ Some basic definitions:
 When a workload is created, Cartographer uses the templates in the supply chain to "stamp out" the Kubernetes resources
 defined by the templates. The supply chain will watch for each resource becoming ready, and in some cases will forward
 the outputs of one resource to the next dependent resource in the supply chain. Once all stamped out resources become
-ready, the supply chain is considered complete. If any resource in a supply chain changes, Cartographer will re-run the
-dependant resources.
+ready, the supply chain is considered complete. From there on, Cartographer will watch the outputs of the resources it created.
+If an output in one resource is used as an input in another resource, Cartographer will update the dependant resource - which may
+cause further changes as the resource reconciles.
 
 For example, suppose a resource is watching a Git Repository. The resource may self-mutate when a commit happens and change the value
 of the output variables. Cartographer will, in turn, update the dependant resources with new values - which may cause the
@@ -46,7 +47,7 @@ You can retrieve the definition of each of these resources using `kubectl`, or y
 
 When we ran the `tanzu apps workload create...` command, we created a `workload` - which is an instance of a
 `supply chain`. The workload, in turn, stamped out three resources in the cluster - one for each of the steps in the
-supply chain. In addition, there is a workload resource that manages the interactions between the three other
+supply chain. The workload resource is the true heart of Cartographer here - it manages the interactions between the three other
 resources. You can see these object using the "tree" plugin for kubectl:
 
 ```shell
