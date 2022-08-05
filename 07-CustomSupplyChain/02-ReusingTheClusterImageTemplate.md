@@ -16,6 +16,8 @@ In this exercise, we will learn how Cartographer choreographs the interactions b
 YAML for the new supply chain is as follows:
 
 ```yaml
+#@ load("@ytt:data", "data")
+---
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
@@ -23,6 +25,10 @@ metadata:
 spec:
   selector:
     apps.tanzu.vmware.com/workload-type: source-to-image-template
+
+  params:
+    - name: registry
+      default: #@ data.values.cartographer_catalog.registry
 
   resources:
     - name: source-provider
@@ -109,7 +115,7 @@ of the different templates accordingly.
 Create the new supply chain with this command:
 
 ```shell
-kubectl apply -f source-to-image-template-supply-chain.yaml
+ytt -f ./source-to-image-template-supply-chain.yaml --data-values-file ../03-app-toolkit/config/app-toolkit-values.yaml | kubectl apply -f-
 ```
 
 Create a new workload with this command:
@@ -124,5 +130,5 @@ tanzu apps workload create source-to-image-template `
 ```
 
 This time the supply chain will take a bit longer to run because it will use Kpack to build and publish an
-image. When the supply chain completes, you should see a new image names `source-to-image-template` in your
+image. When the supply chain completes, you should see a new image names `source-to-image-template-default` in your
 repository.
