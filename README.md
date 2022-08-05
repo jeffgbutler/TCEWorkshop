@@ -22,12 +22,17 @@ to the details and what's going on behind the scenes.
 
 ## How to Proceed
 
-To proceed, start with the pre-requisites page and follow the links through the workshop.
+To proceed, start with the pre-requisites page and follow the links through the workshop. You should follow the steps
+in order through #4 below (Install the App Toolkit). After that, you can skip any of the following sections
+or take them in any order you wish.
 
 1. [Install the Pre-Requisites](00-basic-setup/README.md)
 1. [Create a Cluster](01-creating-clusters/README.md)
 1. [Explore the Cluster](02-explore-the-cluster/README.md)
+   - [Basics of YTT](02-explore-the-cluster/ytt/README.md) (Optional)
+   - [Basics of the Secretgen Controller](02-explore-the-cluster/secretgen-controller/README.md) (Optional)
+   - [Basics of the Kapp Controller](02-explore-the-cluster/kapp-controller/README.md) (Optional) (TODO)
 1. [Install the App Toolkit](03-app-toolkit/README.md)
-1. [Deploy Applications with Knative](04-knative/README.md)
-1. [Build OCI Images with Kpack](05-kpack/README.md)
-1. [Software Supply Chains with Cartographer](06-cartographer/README.md)
+1. [Deploy Applications with Knative](04-knative/README.md) (Optional)
+1. [Build OCI Images with Kpack](05-kpack/README.md) (Optional)
+1. [Software Supply Chains with Cartographer](06-cartographer/README.md) (Optional)
