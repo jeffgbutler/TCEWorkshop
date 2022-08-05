@@ -10,7 +10,8 @@ Create a cluster:
 tanzu unmanaged-cluster create tceworkshop --port-map '80:80,443:443'
 ```
 
-Create a secret for your registry. On an unmanaged cluster, all you need is a simple secret named `registry-credentials`:
+Create a secret for your registry. On an unmanaged cluster, all you need is a simple secret named `registry-credentials`.
+The following is an example for my private Harbor instance. Change the secret to match your image repository:
 
 ```powershell
 kubectl create secret docker-registry registry-credentials `
@@ -19,9 +20,9 @@ kubectl create secret docker-registry registry-credentials `
   --docker-password=Harbor12345
 ```
 
-Install the app-toolkit. If needed,modify the values in
-[03-app-toolkit/config/app-toolkit-values.yaml](03-app-toolkit/config/app-toolkit-values.yaml), then install the app toolkit
-with the following command:
+Install the app-toolkit. First modify the values in
+[03-app-toolkit/config/app-toolkit-values.yaml](03-app-toolkit/config/app-toolkit-values.yaml) to match your image
+repository, then install the app toolkit with the following command:
 
 ```powershell
 tanzu package install app-toolkit `
