@@ -1,5 +1,0 @@
-envoy:
-  service:
-    type: ClusterIP
-  hostPorts:
-    enable: true

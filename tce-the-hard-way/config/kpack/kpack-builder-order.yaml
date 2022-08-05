@@ -1,6 +1,0 @@
-- group:
-  - id: paketo-buildpacks/dotnet-core
-- group:
-  - id: paketo-buildpacks/java
-- group:
-  - id: paketo-buildpacks/nodejs
