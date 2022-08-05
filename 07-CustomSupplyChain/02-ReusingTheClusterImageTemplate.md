@@ -135,5 +135,7 @@ tanzu apps workload create source-to-image-template `
 ```
 
 This time the supply chain will take a bit longer to run because it will use Kpack to build and publish an
-image. When the supply chain completes, you should see a new image names `source-to-image-template-default` in your
+image. When the supply chain completes, you should see a new image named `source-to-image-template-default` in your
 repository.
+
+[Next (Create a Cluster Template) -&gt;](03-ClusterTemplate.md)
