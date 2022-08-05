@@ -29,6 +29,15 @@ spec:
   ...
 ```
 
+## Workload Variables
+Templates can access values from the workload. We saw this in practice with the workload we deployed - every stamped out
+resource had the same name as the workload itself.
+
+| Template Variable              | YTT  Variable                              |
+|--------------------------------|--------------------------------------------|
+| `$(workload.metadata.name)$`   | `#@ data.values.workload.metadata.name`    |
+| `$(workload.spec.source.url)$` | `#@ data.values.workload.space.source.url` |
+
 ## ClusterSourceTemplate
 
 A `ClusterSourceTemplate` is responsible for supplying `url` and `revision` variables to a supply chain. Typically the template
