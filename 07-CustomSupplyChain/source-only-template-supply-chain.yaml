@@ -1,0 +1,13 @@
+apiVersion: carto.run/v1alpha1
+kind: ClusterSupplyChain
+metadata:
+  name: source-only-template
+spec:
+  selector:
+    apps.tanzu.vmware.com/workload-type: source-only-template
+
+  resources:
+    - name: source-provider
+      templateRef:
+        kind: ClusterSourceTemplate
+        name: git-repository-template

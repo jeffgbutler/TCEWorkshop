@@ -26,6 +26,9 @@ To proceed, start with the pre-requisites page and follow the links through the 
 in order through #4 below (Install the App Toolkit). After that, you can skip any of the following sections
 or take them in any order you wish.
 
+If you already have the pre-requisites installed and want to jump straight into Knative, Kpack, or Cartographer,
+you can create and prepare a cluster with the simple steps outlined on the [Quick Start](QuickStart.md).
+
 1. [Install the Pre-Requisites](00-basic-setup/README.md)
 1. [Create a Cluster](01-creating-clusters/README.md)
 1. [Explore the Cluster](02-explore-the-cluster/README.md)
@@ -37,3 +40,4 @@ or take them in any order you wish.
 1. [Build OCI Images with Kpack](05-kpack/README.md) (Optional)
 1. [Software Supply Chains with Cartographer](06-cartographer/README.md) (Optional)
    - [Cartographer Deep Dive](06-cartographer/CartographerDeepDive.md)
+1. [Create a Custom Supply Chain with Cartographer](07-CustomSupplyChain/README.md) (Optional)

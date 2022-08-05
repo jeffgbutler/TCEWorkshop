@@ -1,0 +1,25 @@
+apiVersion: carto.run/v1alpha1
+kind: ClusterSourceTemplate
+metadata:
+  name: git-repository-ytt
+spec:
+  params:
+    - name: git_implementation
+      default: go-git
+  urlPath: .status.artifact.url
+  revisionPath: .status.artifact.revision
+  ytt: |
+    #@ load("@ytt:data", "data")
+
+    apiVersion: source.toolkit.fluxcd.io/v1beta1
+    kind: GitRepository
+    metadata:
+      name: #@ data.values.workload.metadata.name
+      labels:
+        - app.kubernetes.io/component: source
+    spec:
+      interval: 1m0s
+      url: #@ data.values.workload.spec.source.git.url
+      ref: #@ data.values.workload.spec.source.git.url
+      gitImplementation: #@ data.values.params.git_implementation
+      ignore: '!.git'
