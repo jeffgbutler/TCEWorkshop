@@ -4,8 +4,8 @@ metadata:
   name: git-repository-ytt
 spec:
   params:
-    - name: git_implementation
-      default: go-git
+  - name: git_implementation
+    default: go-git
   urlPath: .status.artifact.url
   revisionPath: .status.artifact.revision
   ytt: |
@@ -16,10 +16,10 @@ spec:
     metadata:
       name: #@ data.values.workload.metadata.name
       labels:
-        - app.kubernetes.io/component: source
+        app.kubernetes.io/component: source
     spec:
       interval: 1m0s
       url: #@ data.values.workload.spec.source.git.url
-      ref: #@ data.values.workload.spec.source.git.url
+      ref: #@ data.values.workload.spec.source.git.ref
       gitImplementation: #@ data.values.params.git_implementation
       ignore: '!.git'

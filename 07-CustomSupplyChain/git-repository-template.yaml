@@ -4,8 +4,8 @@ metadata:
   name: git-repository-template
 spec:
   params:
-    - name: git_implementation
-      default: go-git
+  - name: git_implementation
+    default: go-git
   urlPath: .status.artifact.url
   revisionPath: .status.artifact.revision
   template:
@@ -14,10 +14,10 @@ spec:
     metadata:
       name: $(workload.metadata.name)$
       labels:
-        - app.kubernetes.io/component: source
+        app.kubernetes.io/component: source
     spec:
       interval: 1m0s
-      url: $(workload.spec.source.git.url)
-      ref: $(workload.spec.source.git.url)
+      url: $(workload.spec.source.git.url)$
+      ref: $(workload.spec.source.git.ref)$
       gitImplementation: $(params.git_implementation)$
       ignore: '!.git'

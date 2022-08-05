@@ -26,7 +26,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
   metadata:
     name: # MUST BE UNIQUE
     labels:
-      - app.kubernetes.io/component: source # HARDCODED
+      app.kubernetes.io/component: source # HARDCODED
   spec:
     interval: 1m0s
     url: # MUST BE UNIQUE
@@ -73,8 +73,8 @@ metadata:
   name: git-repository-template
 spec:
   params:
-    - name: git_implementation
-      default: go-git
+  - name: git_implementation
+    default: go-git
   urlPath: .status.artifact.url
   revisionPath: .status.artifact.revision
   template:
@@ -83,11 +83,11 @@ spec:
     metadata:
       name: $(workload.metadata.name)$
       labels:
-        - app.kubernetes.io/component: source
+        app.kubernetes.io/component: source
     spec:
       interval: 1m0s
-      url: $(workload.spec.source.git.url)
-      ref: $(workload.spec.source.git.url)
+      url: $(workload.spec.source.git.url)$
+      ref: $(workload.spec.source.git.ref)$
       gitImplementation: $(params.git_implementation)$
       ignore: '!.git'
 ```
@@ -130,8 +130,8 @@ metadata:
   name: git-repository-ytt
 spec:
   params:
-    - name: git_implementation
-      default: go-git
+  - name: git_implementation
+    default: go-git
   urlPath: .status.artifact.url
   revisionPath: .status.artifact.revision
   ytt: |
@@ -142,11 +142,11 @@ spec:
     metadata:
       name: #@ data.values.workload.metadata.name
       labels:
-        - app.kubernetes.io/component: source
+        app.kubernetes.io/component: source
     spec:
       interval: 1m0s
       url: #@ data.values.workload.spec.source.git.url
-      ref: #@ data.values.workload.spec.source.git.url
+      ref: #@ data.values.workload.spec.source.git.ref
       gitImplementation: #@ data.values.params.git_implementation
       ignore: '!.git'
 ```
@@ -207,11 +207,51 @@ Again, not much happens. But now we can create a workload to test this out.
 
 Just like we did with the full example, we can create a workload:
 
-```shell
-tanzu apps workload create source-only \
-  --git-repo https://github.com/jeffgbutler/java-payment-calculator \
-  --git-branch main \
-  --type source-only-template \
-  --yes \
+```powershell
+tanzu apps workload create source-only-template `
+  --git-repo https://github.com/jeffgbutler/java-payment-calculator `
+  --git-branch main `
+  --type source-only-template `
+  --yes `
   -n default
 ```
+
+This creates and applies YAML like the following:
+
+```yaml
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    apps.tanzu.vmware.com/workload-type: source-only-template
+  name: source-only
+  namespace: default
+spec:
+  source:
+    git:
+      ref:
+        branch: main
+      url: https://github.com/jeffgbutler/java-payment-calculator
+```
+
+Notice that the `tanzu` command maps the Git parameter values as follows:
+
+| Tanzu CLI Parameter | Resulting Spec Value |
+|---|---|
+| `--git-repo` | `spec.source.git.url` |
+| `--git-branch` | `spec.source.git.ref.branch` |
+
+The mapped values exactly match the values we need in the `ClusterSourceTemplate`.
+
+Now, you can inspect the stamped out object with the following command:
+
+```shell
+kubectl get GitRepository source-only-template -o json | jq
+```
+
+You should see `status.artifact.revision` and `status.artifact.url` values set. We can use these as inputs to the next step
+in our supply chain.
+
+## Further Exploration
+
+See if you can create a supply chain that uses the YTT version of the template and a corresponding workload.
