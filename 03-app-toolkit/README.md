@@ -163,4 +163,7 @@ When you are finished experimenting with Knative, you can delete the service wit
 kn service delete kuard
 ```
 
+If you would like to learn more about Contour and how to configure it, you can continue to
+[Contour Deep Dive](ContourDeepDive.md). Otherwise, continue to learning about Knative.
+
 [Next (Explore Knative) -&gt;](../04-knative/README.md)
