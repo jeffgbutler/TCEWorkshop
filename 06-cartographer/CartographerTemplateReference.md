@@ -2,7 +2,7 @@
 
 Several Cartographer templates emit values for use in other parts of the supply chain. Those values
 are made available as either simple template variables, or YTT variables depending on how you configure
-the receiving templates. In addition, there are "short cut" variables available if there is only one instance
+the receiving templates. In addition, there are "shortcut" variables available if there is only one instance
 of a particular template type in a supply chain. The following tables show the possibilities for
 the different templates that emit values.
 

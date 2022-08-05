@@ -42,7 +42,7 @@ Some of the items in this spec are optional, but we will use them to demonstrate
 This is a template - which means we will need to supply some values to make each stamped out resource unique.
 For a particular `GitRepository`, you can think that the name and location of the Git repository should be unique
 to each instance. `GitRepository` also supports two different Git implementations: `go-git` and `libgit2`. We will
-configure the templatre so that `go-git` is the default, but it can be overridden in the workload if we desire.
+configure the template so that `go-git` is the default, but it can be overridden in the workload if we desire.
 
 Notice also that we've hardcoded a label - this same label will be applied to every `GitRepository` stamped
 out by Cartographer.
@@ -52,13 +52,13 @@ out by Cartographer.
 A `ClusterSourceTemplate` needs two main things:
 
 1. It needs to know how to stamp out a resource that will supply source code in the cluster (i.e. it needs a resource template)
-1. It needs to know where to get the resulting source code
+1. It needs to know where to find the resulting source code
 
 In Cartographer, templates can be coded in two ways: as a simple Kubernetes template - very like the template definitions
-you see in other Kubernetes objects like `Deployments`, or as a YTT based template. YTT offers additional flexability to
+you see in other Kubernetes objects like deployments, or as a YTT based template. YTT offers additional flexibility to
 templates like conditionals, loops, etc. Choosing templates vs. YTT comes downs to a decision about how flexible the
 template definition needs to be. The templates supplied by VMware all use YTT because they are very flexible and need
-the programmability offered with YTT. For this exercise, we can use either one.
+the programing functions offered with YTT. For this exercise, we can use either one.
 
 First we will look at a simple template, then we'll look at it's YTT equivalent.
 
@@ -99,7 +99,7 @@ A few important things to notice here:
 1. The `spec.template` section contains the `GitRepository` template we showed above and contains parameter
    markers for the various values that can change with every workload.
 
-Notice in particular the parameter markers in the template. When using a simplet template like this,
+Notice in particular the parameter markers in the template. When using a simple template like this,
 the parameter markers have the form `$(...)$`. There are two top level variables available: `workload` and `params`.
 The `workload` variable provides access to any item in the workload that will stamp out this template. The `params`
 variable provides access to and parameter values - parameter values can have defaults as shown here, and can be specified in
@@ -193,7 +193,7 @@ This is a very simple supply chain. Some important things to notice:
 
 1. The workload type is `source-only-template`. We will use this in the workload definition to specify the supply chain
    we want to run
-1. The `spec.resources` section includes a reference to to the simple template based `ClusterSourceTemplate` we created above
+1. The `spec.resources` section includes a reference to the simple template based `ClusterSourceTemplate` we created above
 
 Let's create the supply chain:
 
@@ -224,7 +224,7 @@ kind: Workload
 metadata:
   labels:
     apps.tanzu.vmware.com/workload-type: source-only-template
-  name: source-only
+  name: source-only-template
   namespace: default
 spec:
   source:

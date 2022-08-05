@@ -1,6 +1,6 @@
 # Quick Start
 
-If you already have the prerequisites installed and want to get staight into Knative, Kpack, or Cartographer without
+If you already have the prerequisites installed and want to get straight into Knative, Kpack, or Cartographer without
 going through the background information about Tanzu Community Edition, you can create and prepare an unmanaged cluster
 on Kind with three simple commands:
 

@@ -74,7 +74,7 @@ In Cartographer, we say that the workload "choreographs" the interactions betwee
 
 ## Examining the GitRepository Resource
 
-The first thing to examine is the `GitRepository` resource. The out of the box supply chain uses the
+The first thing to examine is the `GitRepository` resource. The out-of-the-box supply chain uses the
 [Flux Source Controller](https://fluxcd.io/docs/components/source/) to supply source code for a supply chain.
 The source controller will download the source code from a Git repository and make it available in the cluster.
 You can see the configuration of the controller with this command:
@@ -115,7 +115,7 @@ chain.
 
 ## Examining the Image Resource
 
-The next thing to examine is the `Image` resource. The out of the box supply chain uses the
+The next thing to examine is the `Image` resource. The out-of-the-box supply chain uses the
 [Kpack Image](https://github.com/pivotal/kpack/blob/main/docs/image.md) to build images from source and publish
 them to a repository. Note that Kpack uses [Cloud Native Buildpacks](https://buildpacks.io) to build images.
 The Image resource will build an image, publish it to a repo, and make the resulting image tag in it's status.
@@ -164,7 +164,7 @@ flexibly as a Kapp application. You can see the configuration of the application
 kubectl describe App java-payment-calculator
 ```
 
-Use of the Kapp controller is beyond the scope of this workshop so we won't delve into this very
+Use of the Kapp controller is beyond the scope of this workshop, so we won't delve into this very
 much. Suffice to say that Kapp creates a Knative service named `java-payment-calculator` that we can recognize.
 You can see the service definition in the App resource with this command:
 

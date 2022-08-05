@@ -3,11 +3,11 @@
 Templates are meant to be reusable components. This makes it easier to build new supply chains based on existing
 functionality.
 
-For this exercise, we will build a new supply chain that has two stpes:
+For this exercise, we will build a new supply chain that has two steps:
 
 1. It will retrieve source code from Git using the template we created in the last step
 1. It will build and publish and image based on that source code using the existing `ClusterImageTemplate`
-   in the out of the box supply chain
+   in the out-of-the-box supply chain
 
 In this exercise, we will learn how Cartographer choreographs the interactions between stamped out resources.
 
@@ -46,7 +46,7 @@ spec:
 
 Notice that there are now two items under `spec.resources`: our `git-repository-template` as before, and a reference
 to a `ClusterImageTemplate` named `image`. Where did that `ClusterImageTemplate` come from? The answer is that it is
-provided by the out of the box supply chain. You can see it with the following command:
+provided by the out-of-the-box supply chain. You can see it with the following command:
 
 ```shell
 kubectl describe ClusterImageTemplate image
@@ -54,12 +54,14 @@ kubectl describe ClusterImageTemplate image
 
 If you look closely, you will see that this template is configured with YTT and is significantly more complex than the
 simple `ClusterSourceTemplate` we created in the last exercise. But the truth is, we don't really care about that.
-We know it works so we can simply reuse it.
+We know it works, so we can simply reuse it.
 
 You will also notice that this bit of YAML is a YTT template - you will need to run this through YTT before
-sending it to the cluster. The reason for this is the parameter named `registry`. The `ClusterImageTemplate` supplied with the out of the box supply chain requires this parameter - it needs to know where to publish the image! Using this YTT template, we can reuse the registry
-information from our initial configuration of the app-toolkit. You might ask how I learned this. Then answer is simple - trial and error.
-I could have decoded the configuration of the `ClusterImageTemplate` and found it also.
+sending it to the cluster. The reason for this is the parameter named `registry`. The `ClusterImageTemplate` supplied
+with the out-of-the-box supply chain requires this parameter - it needs to know where to publish the image! Using this
+YTT template, we can reuse the registry  information from our initial configuration of the app-toolkit. You might ask
+how I learned this. Then answer is simple - trial and error. I could have decoded the configuration of
+the `ClusterImageTemplate` and found it also.
 
 ## Template Dependencies and Choreography
 
@@ -75,11 +77,11 @@ Take a closer look at the definition of the `ClusterImageTemplate`:
           name: source
 ```
 
-There is a `sources` section that references our source provider. This sets up a dependenciy between the templates:
+There is a `sources` section that references our source provider. This sets up a dependency between the templates:
 the `image-builder` is dependent on the `source-provider`. But this is a different kind of dependency than you might imagine.
 
 In a traditional CI/CD system like Jenkins, you might expect that the `image-builder` resource would be created after the
-`source-provider` because of this dependency. But Cartographer doesn't work this way. Instead, Cartogrpher will
+`source-provider` because of this dependency. But Cartographer doesn't work this way. Instead, Cartographer
 will create both resources at the same time. But how can we create an image builder if we don't yet have
 a source path to provide it? Won't the `image-builder` be in a bad state when it is created? Yes, it will. But this is not
 a problem in Kubernetes. Kubernetes is constantly reconciling the current state of things with the desired state.
@@ -96,8 +98,8 @@ In that case, the `source-provider` will download the new source code and change
 say that the `GitRepository` resource is self-mutating). When this happens, Cartographer will see that the URL and revision
 have changed and simply pass that new information to the `image-builder` by updating its spec. That's all Cartographer does -
 it keeps track of output variable changes and updates the spec of dependent resources. Cartographer is working hand-in-hand
-with the Kubernetes reconciler itself. Cartographer does not need to implement a reconciliation engine because it can make
-use of Kubernetes - which already has the most powerful reconcilation engine on the planet.
+with the Kubernetes reconciliation engine itself. Cartographer does not need to implement a reconciliation engine because
+it can make use of Kubernetes - which already has the most powerful reconciliation engine on the planet.
 
 So how is information passed from one resource to another?
 
@@ -109,7 +111,8 @@ only allows templates of type `ClusterSourecTemplate` to be referenced in a `sou
 
 Now remember that when we built the `ClusterSourceTemplate` we had to specify where the template could find the URL and revision for
 source code. We used the `spec.urlPath` and `spec.revisionPath` values to set this up. Cartographer know these values are available
-and will pass them along to the `ClusterImageTemplate` in a standard way. You can look in the [Cartographer Template Reference](../06-cartographer/CartographerTemplateReference.md) page for details about the variable names.
+and will pass them along to the `ClusterImageTemplate` in a standard way. You can look in the
+[Cartographer Template Reference](../06-cartographer/CartographerTemplateReference.md) page for details about the variable names.
 
 In this supply chain, there is only one source template. In this case we can shortcut the naming and just use the name
 `source` by convention. If there were more than one source template, we would need to specify the name or names
