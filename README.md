@@ -36,3 +36,4 @@ or take them in any order you wish.
 1. [Deploy Applications with Knative](04-knative/README.md) (Optional)
 1. [Build OCI Images with Kpack](05-kpack/README.md) (Optional)
 1. [Software Supply Chains with Cartographer](06-cartographer/README.md) (Optional)
+   - [Cartographer Deep Dive](06-cartographer/CartographerDeepDive.md)
