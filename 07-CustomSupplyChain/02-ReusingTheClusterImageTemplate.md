@@ -56,6 +56,11 @@ If you look closely, you will see that this template is configured with YTT and 
 simple `ClusterSourceTemplate` we created in the last exercise. But the truth is, we don't really care about that.
 We know it works so we can simply reuse it.
 
+You will also notice that this bit of YAML is a YTT template - you will need to run this through YTT before
+sending it to the cluster. The reason for this is the parameter named `registry`. The `ClusterImageTemplate` supplied with the out of the box supply chain requires this parameter - it needs to know where to publish the image! Using this YTT template, we can reuse the registry
+information from our initial configuration of the app-toolkit. You might ask how I learned this. Then answer is simple - trial and error.
+I could have decoded the configuration of the `ClusterImageTemplate` and found it also.
+
 ## Template Dependencies and Choreography
 
 Take a closer look at the definition of the `ClusterImageTemplate`:
