@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard-ingress
+  name: kuard-ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard-ingress
+  template:
+    metadata:
+      labels:
+        app: kuard-ingress
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:blue
+        name: kuard
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kuard-ingress
+  name: kuard-ingress
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kuard-ingress
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kuard-ingress
+  labels:
+    app: ingress
+spec:
+  rules:
+  - host: kuard-ingress.127-0-0-1.nip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kuard-ingress
+            port:
+              number: 8080

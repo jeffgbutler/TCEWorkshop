@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard-httpproxy
+  name: kuard-httpproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard-httpproxy
+  template:
+    metadata:
+      labels:
+        app: kuard-httpproxy
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:blue
+        name: kuard
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kuard-httpproxy
+  name: kuard-httpproxy
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kuard-httpproxy
+  type: ClusterIP
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: kuard-httpproxy
+  labels:
+    app: ingress
+spec:
+  virtualhost:
+    fqdn: kuard-httpproxy.127-0-0-1.nip.io
+  routes:
+  - conditions:
+    - prefix: /
+    services:
+    - name: kuard-httpproxy
+      port: 8080
