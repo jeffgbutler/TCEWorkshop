@@ -255,3 +255,5 @@ in our supply chain.
 ## Further Exploration
 
 See if you can create a supply chain that uses the YTT version of the template and a corresponding workload.
+
+[Next (Reuse an Existing Template) -&gt;](02-ReusingTheClusterImageTemplate.md)
