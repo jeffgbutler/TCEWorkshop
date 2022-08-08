@@ -39,7 +39,7 @@ The supply chain has three templates:
 
 1. A `ClusterSourceTemplate` named `git-repository` that knows how to stamp out a Flux GitRepository resource that watches a git repo for source code changes
 1. A `ClusterImageTemplate` named `image` that knows how to stamp out a Kpack Image resource that will build an image based on the current source code and push the image into a repository
-1. A `ClusterTemplate` named `app` that knows how to stamp out resources that will run the image as a Knative service using Kapp
+1. A `ClusterTemplate` named `app` that knows how to stamp out a Kapp application (Kapp will wrap the Knative service)
 
 You can retrieve the definition of each of these resources using `kubectl`, or you can look at the source code on GitHub.
 

@@ -82,16 +82,34 @@ the `image-builder` is dependent on the `source-provider`. But this is a differe
 
 In a traditional CI/CD system like Jenkins, you might expect that the `image-builder` resource would be created after the
 `source-provider` because of this dependency. But Cartographer doesn't work this way. Instead, Cartographer
-will create both resources at the same time. But how can we create an image builder if we don't yet have
+will create both resources at the same time. How can we create an image builder if we don't yet have
 a source path to provide it? Won't the `image-builder` be in a bad state when it is created? Yes, it will. But this is not
 a problem in Kubernetes. Kubernetes is constantly reconciling the current state of things with the desired state.
 
 Once the `source-provider` is able to provide source code, Cartographer will update the `image-builder` and then the
 image builder can reconcile to a good state.
 
-So Cartographer doesn't need to concern itself with the order of creating things. It only needs to concern itself
+Cartographer doesn't need to concern itself with the order of creating things. It only needs to concern itself
 with passing information from one thing to another. Cartographer calls this "choreography" and it is a
 major distinction in how Cartographer works compared with traditional CI/CD systems.
+
+> **Choreography vs. Orchestration**
+>
+> In the documentation you will see Cartographer described as a "choreographer" not an "orchestrator". Those
+> words have little meaning without a bit of clarification.
+>
+> Cartographer works by creating Kubernetes resources and then forwarding the output of one resource to another.
+> Cartographer depends on Kubernetes resources to react to changes in configuration and reconcile appropriately.
+> This makes Cartographer compatible with virtually any Kubernetes resource. Any provider that embraces the CRD model in
+> Kuberntes is compatible with Cartographer out of the box.
+>
+> Cartographer does not implement any kind of reconciliation system. Cartographer also does not implement the
+> Kubernetes resources that do the actual work. This makes it different from something like
+> Terraform. Terraform understands an order of execution, and Terraform - or other suppliers - must also implement
+> plugins to extend the system.
+>
+> Cartographer relies on Kubernetes itself to be the orchestrator. Cartographer simply creates resources
+> and forwards configuration information as state changes occur. This is choreography.
 
 What happens when in the course of daily development, the `source-provider` notices a new commit in the Git repository?
 In that case, the `source-provider` will download the new source code and change it's state to expose a new URL and revision (we
