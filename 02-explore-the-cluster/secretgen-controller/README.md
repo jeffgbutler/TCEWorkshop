@@ -127,4 +127,4 @@ tanzu secret registry add some-secret \
 
 You will still need to create the `SecretImport` in the other namespaces using regular kubectl commands as shown above.
 
-[Next (Kapp-Controller Overview) -&gt;](../kapp-controller/README.md)
+[Next (Kapp Overview) -&gt;](../kapp/README.md)

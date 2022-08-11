@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard-ingress
+  name: kuard-ingress
+  namespace: kuard-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard-ingress
+  template:
+    metadata:
+      labels:
+        app: kuard-ingress
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:blue
+        name: kuard

@@ -34,6 +34,7 @@ you can create and prepare a cluster with the simple steps outlined on the [Quic
 1. [Explore the Cluster](02-explore-the-cluster/README.md)
    - [Basics of YTT](02-explore-the-cluster/ytt/README.md) (Optional)
    - [Basics of the Secretgen Controller](02-explore-the-cluster/secretgen-controller/README.md) (Optional)
+   - [Basics of Kapp](02-explore-the-cluster/kapp/README.md) (Optional) (TODO)
    - [Basics of the Kapp Controller](02-explore-the-cluster/kapp-controller/README.md) (Optional) (TODO)
 1. [Install the App Toolkit](03-app-toolkit/README.md)
 1. [Deploy Applications with Knative](04-knative/README.md) (Optional)
