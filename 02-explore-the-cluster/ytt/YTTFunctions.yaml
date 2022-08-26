@@ -1,0 +1,17 @@
+#@ load("@ytt:data", "data")
+
+#@ def labels():
+type: Name
+generated: true
+#@ end
+
+#@ def/end name(name):
+name:
+  #! intentional blank line below ignored by YTT
+
+  is: #@ name
+  labels: #@ labels()
+
+my: #@ name(data.values.my.name)
+---
+your: #@ name(data.values.your.name)

@@ -150,8 +150,6 @@ You can define functions in YTT that do a variety of things. One very useful thi
 
 Suppose we have an input file named `YTTFunctions.yaml` like this:
 
-<script src="https://gist.github.com/nisrulz/ffe76f40284bb35828640c1ed7db79cd.js"></script>
-
 ```yaml
 #@ load("@ytt:data", "data")
 
@@ -162,7 +160,7 @@ generated: true
 
 #@ def/end name(name):
 name:
-  #! intentional space below
+  #! intentional blank line below ignored by YTT
 
   is: #@ name
   labels: #@ labels()
@@ -177,11 +175,15 @@ There's a lot to unpack here!
    that accepts no parameters. This function returns a YAML fragment with two nodes - two hard coded labels.
 1. On line 8 we define a function named `name` that accepts one parameter - also called `name`. This function looks strange
    because of the usage of `def/end`. This is a shortcut we can use when the function returns a single thing. The definition of "single thing"
-   can be elusive and confusiong. In this case, the function is returning a single YAML node. Note that the end of the node is NOT
+   can be elusive and confusing. In this case, the function is returning a single YAML node. Note that the end of the node is NOT
    the blank line on line 11. Rather it is the logical end of the node on line 13. This illustrates that YTT is "YAML aware". Also,
    please don't write functions like this in real life!
 1. On line 10 we have a YTT comment (starts with `#!`) YTT will strip comments in the resulting YAML.
-
+1. On line 12 we are using the parameter passed into the function
+1. On line 13 we are calling the `labels` function. YTT is smart enough to know that the YAML fragment returned from the `labels`
+   function should be a child of the node on line 13. We don't need to worry about indenting and formatting - YTT will do it for us
+1. On line 15 we call the `name` function passing in an expected input value. Again, the resulting YAML fragment will be properly
+   indented and formatted as a child of the node on line 16.
 
 We can execute YTT with the following command:
 
