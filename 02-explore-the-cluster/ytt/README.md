@@ -21,7 +21,8 @@ is far more sophisticated than simple string substitution.
 This can be incredibly useful if you need to build a single template that can be reused many times (as we will
 do with Cartographer).
 
-Full details about YTT are here: https://carvel.dev/ytt/
+Full details about YTT are here: https://carvel.dev/ytt/. That page also includes an online "playground" for YTT that can be very
+helpful when learning more about YTT. You can access the playground directly here: https://carvel.dev/ytt/#playground
 
 ## Simple Example
 Here is a simple example. Suppose we have a YAML file named `MyName.yaml` like this:
@@ -47,7 +48,7 @@ my:
     is: Fred
 ```
 
-All YTT commands look like YAML comments, so YAML templates are always valid YAML and will pass validation tools.
+All YTT commands look like YAML comments, so YAML templates are valid YAML and will pass validation tools.
 In the source file, there are two YTT commands:
 
 1. `#@ load("@ytt:data", "data")` - this instructs YTT to load that `data` module and make all the `data` values available with the key `data.values` (`values` is built in and provides access to the individual data elements.)
@@ -140,7 +141,7 @@ your:
     is: Wilma
 ```
 
-As you can see, ytt created the same output as before and substituted the correct values in each input file.
+As you can see, YTT created the same output as before and substituted the correct values in each input file.
 
 ## YTT Schema
 
@@ -214,6 +215,7 @@ my: #@ name(data.values.my_name)
 ---
 your: #@ name(data.values.your_name)
 ```
+
 There's a lot to unpack here!
 
 1. Functions begin with `def function_name(parameters...):` and end with `end`. On line 3 we define a function named `labels`
@@ -276,10 +278,8 @@ my:
 
 ## YTT Built In Functions
 
-YTT comes with many functions for building more complex yaml. There are `ifs`, `loops`, etc. You can also substitute
-entire YAML documents into other documents and YTT will handle all the formatting, indenting, etc.
-
-We will show one more example using the `json` and `base64` modules to create a Kubernetes secret.
+YTT comes with many built in functions for building more complex YAML. We will show one more example using the `json` and `base64`
+modules to create a Kubernetes secret.
 
 Suppose we have an input file named `Secret.yaml` like this:
 
@@ -300,7 +300,7 @@ data:
 
 This file loads the normal `data` module we are used to, but also loads `json` and `base64` modules. These modules
 include encoding functions we can use to encode JSON (in case a supplied password has any special characters), and
-then we can base64 encode a string for setting the secret value. You can also see that we declare local variables
+then we can Base64 encode a string for setting the secret value. You can also see that we declare local variables
 names `registry_creds` and `encoded_creds` using YTT.
 
 Now we can combine this file with a `SecretValues.yaml` file like this:
@@ -342,7 +342,7 @@ You can pipe YTT output to `kubectl` and create the secret in a single command:
 ytt -f Secret.yaml --data-values-file SecretValues.yaml | kubectl create -f-
 ```
 
-Many of the Tanzu configuration commands make use of YTT to perform functions like this. In addition, Kapp and Cartographer
-both support YTT templating in their CRDs as we shall see shortly.
+Many of the Tanzu configuration commands make use of YTT to perform functions like this. In addition, the Kapp Controller and
+Cartographer both support YTT templating in their CRDs as we shall see shortly.
 
 [Next (Secretgen-Controller Overview) -&gt;](../secretgen-controller/README.md)
