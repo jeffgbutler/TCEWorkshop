@@ -144,7 +144,7 @@ As you can see, ytt created the same output as before and substituted the correc
 
 ## YTT Schema
 
-A schema file can be used to document the valraiables that are expected in a template, and provide default value for them.
+A schema file can be used to document the variables that are expected in a template, and provide default values for them.
 
 Here is a simple example. Suppose we have a YAML file named `schema.yaml` like this:
 
@@ -157,7 +157,7 @@ my_name: Barney
 your_name: ""
 ```
 
-This file indicates two variables - our familiar `my_name` and `your_name`. The `my_name` variable has a default value - "Barney".
+This file indicates two variables - our familiar `my_name` and `your_name`. The `my_name` variable has a default value of "Barney".
 The `your_name` variable is in a section denoted "nullable" - which means that if no value is specified for that variable, it's value
 will be null.
 
@@ -182,7 +182,7 @@ your:
 You can see that the default values were used for both `my_name` and `your_name`. The "null" for `your_name` isn't great - we'll deal
 with that in the next section.
 
-Of course we can suppliy values for these variable in the normal way. So this command produces what we expect:
+Of course we can supply values for these variable in the normal way. So this command produces what we've seen before:
 
 ```shell
 ytt -f MyName.yaml -f YourName.yaml -f schema.yaml --data-values-file values.yaml
@@ -229,9 +229,9 @@ There's a lot to unpack here!
    function should be a child of the node on line 13. We don't need to worry about indenting and formatting - YTT will do it for us
 1. On line 15 we call the `name` function passing in an expected input value. Again, the resulting YAML fragment will be properly
    indented and formatted as a child of the node on line 15.
-1. On line 16 there is an "if" statement using the same type of shortcut we saw before as "if/end". If we need more than one thing
+1. On line 16 there is an "if" statement using the same type of shortcut we saw before as `if/end`. If we need more than one thing
    output from the "if" statement we can move the "end" to a separate line as with functions. This "if" statement checks for a null value
-   (which is our default for `your_name`)
+   (which is our default for `your_name`) - it will only write the YAML fragment if the value is not null.
 
 We can execute YTT with the following command:
 
@@ -257,7 +257,7 @@ your:
       generated: true
 ```
 
-Is that what you expected? What happens if we leave off the values file?
+Is that what you expected? What happens if we omit the values file?
 
 ```shell
 ytt -f YTTFunctions.yaml -f schema.yaml
