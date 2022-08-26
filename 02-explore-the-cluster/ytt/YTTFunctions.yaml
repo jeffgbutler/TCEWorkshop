@@ -12,6 +12,6 @@ name:
   is: #@ name
   labels: #@ labels()
 
-my: #@ name(data.values.my.name)
+my: #@ name(data.values.my_name)
 ---
-your: #@ name(data.values.your.name)
+your: #@ name(data.values.your_name)

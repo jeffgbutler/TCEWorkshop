@@ -30,13 +30,13 @@ Here is a simple example. Suppose we have a YAML file named `MyName.yaml` like t
 #@ load("@ytt:data", "data")
 my:
   name:
-    is: #@ data.values.my.name
+    is: #@ data.values.my_name
 ```
 
 We can execute YTT with the following command:
 
 ```shell
-ytt -f MyName.yaml -v my.name=Fred
+ytt -f MyName.yaml -v my_name=Fred
 ```
 
 The output looks like this:
@@ -51,7 +51,7 @@ All YTT commands look like YAML comments, so YAML templates are always valid YAM
 In the source file, there are two YTT commands:
 
 1. `#@ load("@ytt:data", "data")` - this instructs YTT to load that `data` module and make all the `data` values available with the key `data.values` (`values` is built in and provides access to the individual data elements.)
-1. `#@ data.values.my.name` - this instructs YTT to insert the data value `my.name` into the YAML at this position
+1. `#@ data.values.my_name` - this instructs YTT to insert the data value `my_name` into the YAML at this position
 
 Data values can come from a variety of sources - most commonly from command line flags as shown above, or from a file as we
 will show below.
@@ -65,7 +65,7 @@ there are two input files named `MyName.yaml` and `YourName.yaml` as shown below
 #@ load("@ytt:data", "data")
 my:
   name:
-    is: #@ data.values.my.name
+    is: #@ data.values.my_name
 ```
 
 
@@ -73,13 +73,13 @@ my:
 #@ load("@ytt:data", "data")
 your:
   name:
-    is: #@ data.values.your.name
+    is: #@ data.values.your_name
 ```
 
 We can execute YTT with the following command:
 
 ```shell
-ytt -f MyName.yaml -f YourName.yaml -v my.name=Fred -v your.name=Wilma
+ytt -f MyName.yaml -f YourName.yaml -v my_name=Fred -v your_name=Wilma
 ```
 
 The output looks like this:
@@ -105,23 +105,21 @@ supply input values. For example, suppose we have the same two input files named
 #@ load("@ytt:data", "data")
 my:
   name:
-    is: #@ data.values.my.name
+    is: #@ data.values.my_name
 ```
 
 ```yaml
 #@ load("@ytt:data", "data")
 your:
   name:
-    is: #@ data.values.your.name
+    is: #@ data.values.your_name
 ```
 
 But now we have another file named `values.yaml` with content as shown below:
 
 ```yaml
-my:
-  name: Fred
-your:
- name: Wilma
+my_name: Fred
+your_name: Wilma
 ```
 
 We can execute YTT with the following command:
@@ -146,7 +144,7 @@ As you can see, ytt created the same output as before and substituted the correc
 
 ## YTT Functions
 
-You can define functions in YTT that do a variety of things. One very useful think to do with a function is to calculate and return a YAML fragment.
+You can define functions in YTT that do a variety of things. One very useful thing to do with a function is to calculate and return a YAML fragment.
 
 Suppose we have an input file named `YTTFunctions.yaml` like this:
 
@@ -165,9 +163,9 @@ name:
   is: #@ name
   labels: #@ labels()
 
-my: #@ name(data.values.my.name)
+my: #@ name(data.values.my_name)
 ---
-your: #@ name(data.values.your.name)
+your: #@ name(data.values.your_name)
 ```
 There's a lot to unpack here!
 

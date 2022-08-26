@@ -1,5 +1,2 @@
-my:
-  name: Fred
-your:
- name: Wilma
- 
+my_name: Fred
+your_name: Wilma
