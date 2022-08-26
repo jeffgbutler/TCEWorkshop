@@ -1,0 +1,6 @@
+#@data/values-schema
+---
+my_name: Barney
+
+#@schema/nullable
+your_name: ""

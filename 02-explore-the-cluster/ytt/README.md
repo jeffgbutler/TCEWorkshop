@@ -142,6 +142,52 @@ your:
 
 As you can see, ytt created the same output as before and substituted the correct values in each input file.
 
+## YTT Schema
+
+A schema file can be used to document the valraiables that are expected in a template, and provide default value for them.
+
+Here is a simple example. Suppose we have a YAML file named `schema.yaml` like this:
+
+```yaml
+#@data/values-schema
+---
+my_name: Barney
+
+#@schema/nullable
+your_name: ""
+```
+
+This file indicates two variables - our familiar `my_name` and `your_name`. The `my_name` variable has a default value - "Barney".
+The `your_name` variable is in a section denoted "nullable" - which means that if no value is specified for that variable, it's value
+will be null.
+
+We can try it out with this command:
+
+```shell
+ytt -f MyName.yaml -f YourName.yaml -f schema.yaml
+```
+
+The output is as follows:
+
+```yaml
+my:
+  name:
+    is: Barney
+---
+your:
+  name:
+    is: null
+```
+
+You can see that the default values were used for both `my_name` and `your_name`. The "null" for `your_name` isn't great - we'll deal
+with that in the next section.
+
+Of course we can suppliy values for these variable in the normal way. So this command produces what we expect:
+
+```shell
+ytt -f MyName.yaml -f YourName.yaml -f schema.yaml --data-values-file values.yaml
+```
+
 ## YTT Functions
 
 You can define functions in YTT that do a variety of things. One very useful thing to do with a function is to calculate and return a YAML fragment.
@@ -164,6 +210,7 @@ name:
   labels: #@ labels()
 
 my: #@ name(data.values.my_name)
+#@ if/end data.values.your_name:
 ---
 your: #@ name(data.values.your_name)
 ```
@@ -181,12 +228,15 @@ There's a lot to unpack here!
 1. On line 13 we are calling the `labels` function. YTT is smart enough to know that the YAML fragment returned from the `labels`
    function should be a child of the node on line 13. We don't need to worry about indenting and formatting - YTT will do it for us
 1. On line 15 we call the `name` function passing in an expected input value. Again, the resulting YAML fragment will be properly
-   indented and formatted as a child of the node on line 16.
+   indented and formatted as a child of the node on line 15.
+1. On line 16 there is an "if" statement using the same type of shortcut we saw before as "if/end". If we need more than one thing
+   output from the "if" statement we can move the "end" to a separate line as with functions. This "if" statement checks for a null value
+   (which is our default for `your_name`)
 
 We can execute YTT with the following command:
 
 ```shell
-ytt -f YTTFunctions.yaml --data-values-file values.yaml
+ytt -f YTTFunctions.yaml -f schema.yaml --data-values-file values.yaml
 ```
 
 The output will look like this:
@@ -207,7 +257,22 @@ your:
       generated: true
 ```
 
-Is that what you expected?
+Is that what you expected? What happens if we leave off the values file?
+
+```shell
+ytt -f YTTFunctions.yaml -f schema.yaml
+```
+
+Now we just get the first name with the default value:
+
+```yaml
+my:
+  name:
+    is: Barney
+    labels:
+      type: Name
+      generated: true
+```
 
 ## YTT Built In Functions
 

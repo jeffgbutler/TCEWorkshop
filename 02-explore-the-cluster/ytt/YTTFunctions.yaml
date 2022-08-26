@@ -13,5 +13,6 @@ name:
   labels: #@ labels()
 
 my: #@ name(data.values.my_name)
+#@ if/end data.values.your_name:
 ---
 your: #@ name(data.values.your_name)
