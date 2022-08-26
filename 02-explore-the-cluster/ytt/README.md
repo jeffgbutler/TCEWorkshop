@@ -1,8 +1,23 @@
 # YTT Overview
 
-YTT is a YAML templating tool that forms the basis for many of the configuration functions in Tanzu. You
-can think of it as a YAML aware string substitution engine. It will take one or more input YAML files,
+YTT is a YAML templating tool that forms the basis for many of the configuration functions in Tanzu. Many other tools
+in the Tanzu and Carvel portfolio rely on YTT so it is a fundamental tool in this space.
+
+YTT operates in two main modes: templating and overlays.
+
+1. You can create YAML templates that accept input values from a variety of sources. YTT includes a templating language based
+   on Google Starlink that can be used to build logic into templates (loops, conditionals, etc.) YTT templates are part of the
+   installation of many Tanzu tools. Further, you will most likely need to write YTT templates if you want to create your own
+   Cartographer supply chains or if you use the Kapp Controller. The template mode is the mode we will explore in this lesson.
+1. YTT can also operate in "overlay" mode where it can modify (or patch) existing YAML. This is useful if you need to modify
+   YAML that is not configured as a YTT template. If you want to build a Kapp controller package to install some third party tool,
+   you may need to use YTT's overlay capabilities to modify an installation YAML to match your cluster configuration.
+
+In templating mode, you can think of YTT as a YAML aware string substitution engine. It will take one or more input YAML files,
 substitute placeholder variables with actual values from a variety of sources, and output a final result.
+By "YAML aware" we mean that YTT understands the correct structure of YAML documents and can build valid YAML composed from
+fragments. If you are familar with compilers, you can think that YTT builds an AST (abstract syntax tree) for YAML - which
+is far more sophisticated than simple string substitution.
 This can be incredibly useful if you need to build a single template that can be reused many times (as we will
 do with Cartographer).
 
@@ -35,7 +50,7 @@ my:
 All YTT commands look like YAML comments, so YAML templates are always valid YAML and will pass validation tools.
 In the source file, there are two YTT commands:
 
-1. `#@ load("@ytt:data", "data")` - this instructs YTT to load that `data` modules and make all the `data` values available with the key `data.values` (`values` is built in and provides access to the individual data elements.)
+1. `#@ load("@ytt:data", "data")` - this instructs YTT to load that `data` module and make all the `data` values available with the key `data.values` (`values` is built in and provides access to the individual data elements.)
 1. `#@ data.values.my.name` - this instructs YTT to insert the data value `my.name` into the YAML at this position
 
 Data values can come from a variety of sources - most commonly from command line flags as shown above, or from a file as we
@@ -130,6 +145,71 @@ your:
 As you can see, ytt created the same output as before and substituted the correct values in each input file.
 
 ## YTT Functions
+
+You can define functions in YTT that do a variety of things. One very useful think to do with a function is to calculate and return a YAML fragment.
+
+Suppose we have an input file named `YTTFunctions.yaml` like this:
+
+<script src="https://gist.github.com/nisrulz/ffe76f40284bb35828640c1ed7db79cd.js"></script>
+
+```yaml
+#@ load("@ytt:data", "data")
+
+#@ def labels():
+type: Name
+generated: true
+#@ end
+
+#@ def/end name(name):
+name:
+  #! intentional space below
+
+  is: #@ name
+  labels: #@ labels()
+
+my: #@ name(data.values.my.name)
+---
+your: #@ name(data.values.your.name)
+```
+There's a lot to unpack here!
+
+1. Functions begin with `def function_name(parameters...):` and end with `end`. On line 3 we define a function named `labels`
+   that accepts no parameters. This function returns a YAML fragment with two nodes - two hard coded labels.
+1. On line 8 we define a function named `name` that accepts one parameter - also called `name`. This function looks strange
+   because of the usage of `def/end`. This is a shortcut we can use when the function returns a single thing. The definition of "single thing"
+   can be elusive and confusiong. In this case, the function is returning a single YAML node. Note that the end of the node is NOT
+   the blank line on line 11. Rather it is the logical end of the node on line 13. This illustrates that YTT is "YAML aware". Also,
+   please don't write functions like this in real life!
+1. On line 10 we have a YTT comment (starts with `#!`) YTT will strip comments in the resulting YAML.
+
+
+We can execute YTT with the following command:
+
+```shell
+ytt -f YTTFunctions.yaml --data-values-file values.yaml
+```
+
+The output will look like this:
+
+```yaml
+my:
+  name:
+    is: Fred
+    labels:
+      type: Name
+      generated: true
+---
+your:
+  name:
+    is: Wilma
+    labels:
+      type: Name
+      generated: true
+```
+
+Is that what you expected?
+
+## YTT Built In Functions
 
 YTT comes with many functions for building more complex yaml. There are `ifs`, `loops`, etc. You can also substitute
 entire YAML documents into other documents and YTT will handle all the formatting, indenting, etc.
