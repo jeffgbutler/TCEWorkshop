@@ -15,12 +15,14 @@ The following is an example for my private Harbor instance. Change the secret to
 
 <details><summary>Powershell</summary>
 <p>
+
 ```powershell
 kubectl create secret docker-registry registry-credentials `
   --docker-server=harbor.tanzuathome.net `
   --docker-username=admin `
   --docker-password=Harbor12345
 ```
+
 </p>
 </details>
 
