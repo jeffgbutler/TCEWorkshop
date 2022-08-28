@@ -13,10 +13,21 @@ tanzu unmanaged-cluster create tceworkshop --port-map '80:80,443:443'
 Create a secret for your registry. On an unmanaged cluster, all you need is a simple secret named `registry-credentials`.
 The following is an example for my private Harbor instance. Change the secret to match your image repository:
 
+<details><summary>Powershell</summary>
+<p>
 ```powershell
 kubectl create secret docker-registry registry-credentials `
   --docker-server=harbor.tanzuathome.net `
   --docker-username=admin `
+  --docker-password=Harbor12345
+```
+</p>
+</details>
+
+```shell
+kubectl create secret docker-registry registry-credentials \
+  --docker-server=harbor.tanzuathome.net \
+  --docker-username=admin \
   --docker-password=Harbor12345
 ```
 
