@@ -41,6 +41,7 @@ you can create and prepare a cluster with the simple steps outlined on the [Quic
 1. [Create a Custom Supply Chain with Cartographer](07-CustomSupplyChain/README.md) (Optional)
 
 Appendix: Explore the Carvel Tools (Optional):
+- [Carvel Overview](90-Carvel/README.md)
 - [Secretgen Controller](90-Carvel/secretgen-controller/README.md)
 - [YTT](90-Carvel/ytt/README.md)
 - [Kbld](90-Carvel/kbld/README.md) (TODO)
