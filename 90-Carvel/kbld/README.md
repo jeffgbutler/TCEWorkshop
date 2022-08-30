@@ -5,18 +5,18 @@ Kbld (k build) is a simple tool that does two main things...
 ## Image Building
 
 Kbld can orchestrate image builds for local development. This can be useful if you are doing Dockerfile or Pack
-based local development. In this way of working, Kbld can do the following:
+based local development. In this way of working, kbld can do the following:
 
-1. Call Dockerfile or Pack to build an image
+1. Call Docker or Pack to build an image
 1. Push the image to a registry
 1. Update a Kubernetes YAML with a tag that uniquely represents the new image
 
 You can see how this could be useful when rapidly iterating during local development. However, in the Tanzu world we typically
-want to use a Cartographer supply chain for this type of workflow, so this is not how we'll use Kbld in this workshop.
+want to use a Cartographer supply chain for this type of workflow, so this is not how we'll use kbld in this workshop.
 
 ## Image Resolution
 
-In a very simple usage, Kbld will seach Kubernetes YAML for image references and will transform the YAML to use
+In a very simple usage, kbld will seach Kubernetes YAML for image references and will transform the YAML to use
 digests instead of labels. This can be useful to convert Kubernetes YAML to use immutable image references.
 
 For example, suppose we have a simple Kubernetes pod definition like this:
@@ -38,7 +38,7 @@ spec:
         cpu: "500m"
 ```
 
-We can run Kbld with a command like this:
+We can run kbld with a command like this:
 
 ```shell
 kbld -f nginx-pod.yaml
