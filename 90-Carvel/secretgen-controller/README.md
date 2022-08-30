@@ -1,9 +1,9 @@
 # Secretgen-Controller Overview
 
-The secretgen-controller is part of the [Carvel](https://carvel.dev/) tool suite. It is currently marked as "experimental"
-on the Carvel site, but it is made available in all TCE clusters. On managed clusters it is installed automatically.
+The secretgen-controller is part of the [Carvel](https://carvel.dev/) tool suite. It is available in all TCE clusters.
+On managed clusters it is installed automatically.
 
-The secretgen controller does a few things:
+The secretgen-controller does a few things:
 
 1. It can generate secrets, keys, and certificates for use by other Kubernetes resources (we will not cover that usage in this workshop)
 1. It provides an operator makes it easy to share secrets across Kubernetes namespaces (we will cover this usage)
