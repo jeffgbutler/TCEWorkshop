@@ -17,6 +17,3 @@ Full details about the Kapp API are here: https://carvel.dev/kapp/
 ## Creating a Kubernetes Application
 
 
-TODO TODO
-
-[Next (Install the App Toolkit) -&gt;](../../03-app-toolkit/README.md)
