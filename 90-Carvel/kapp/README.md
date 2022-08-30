@@ -1,7 +1,7 @@
 # Kapp Overview
 
 The Kapp CLI understands how to install and update applications on Kubernetes.
-In the Kapp way of thinging, an "application" is a collection of Kubernetes resources that can be considered
+In the Kapp way of thinking, an "application" is a collection of Kubernetes resources that can be considered
 parts of a single thing.
 
 Full details about the Kapp CLI are here: https://carvel.dev/kapp/

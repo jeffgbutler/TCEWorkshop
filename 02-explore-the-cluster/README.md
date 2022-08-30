@@ -70,13 +70,10 @@ We will see an example of this in the next section.
 
 ## Next Steps
 
-If you are already familiar with the Carvel tools YTT, Kapp-Controller, and Secretgen-controller, you can proceed
+If you are already familiar with the Carvel tools YTT, Kapp, Kbld, Kapp Controller, and Secretgen-controller, you can proceed
 to install the app toolkit. If you are not familiar with those tools, we suggest you proceed to the pages
 about each one.
 
-Carvel Tools:
-- [YTT Overview -&gt;](./ytt/README.md)
-- [Secretgen-controller Overview -&gt;](./secretgen-controller/README.md)
-- [Kapp-controller Overview -&gt;](./kapp-controller/README.md)
+[Explore the Carvel Tools](../90-Carvel/README.md)
 
 [Next (Install App Toolkit) -&gt;](../03-app-toolkit/README.md)
