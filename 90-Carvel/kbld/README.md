@@ -1,6 +1,14 @@
 # Kbld Overview
 
-Kbld (k build) is a simple tool that does two main things...
+Kbld (k build) is another relatively simple tool. It does two main things:
+
+1. It can be used as a build tool for local development (we will not use this capability in this workshop)
+1. It can be used to transfor image references to their immutable form (we will use this capability)
+
+Kbld also includes an imaging packaging and relocation function that is deprecated. That function has been moved to another
+Carvel tool: [imgpkg](https://carvel.dev/imgpkg/).
+
+Full details about kbld are here: https://carvel.dev/kbld/
 
 ## Image Building
 
