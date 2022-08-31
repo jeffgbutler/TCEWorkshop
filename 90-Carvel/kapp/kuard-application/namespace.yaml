@@ -1,6 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kuard-app
-
-
+  name: kuard-ns1

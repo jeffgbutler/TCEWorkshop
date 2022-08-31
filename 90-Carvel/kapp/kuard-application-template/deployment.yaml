@@ -1,12 +1,13 @@
+#@ load("@ytt:data", "data")
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: kuard
   name: kuard
-  namespace: kuard-ns1
+  namespace: #@ data.values.namespace
 spec:
-  replicas: 1
+  replicas: #@ data.values.replicas
   selector:
     matchLabels:
       app: kuard
