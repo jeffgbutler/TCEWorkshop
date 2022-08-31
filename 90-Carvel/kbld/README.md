@@ -75,6 +75,7 @@ Notice two things:
 
 1. The `spec.containers.image` reference was changed to use the digest of the nginx image. Note that we are using the "latest"
    tag so the digest may be different if you run this command
+1. Kbld changed the image reference to the fully qualified value (including `index.docker.io/library/`)
 1. Kbld added an annotation `kbld.k14s.io/images` that details the before and after versions that were transformed
 
 Kbld can accept multiple input files, and can also transform all the YAML in a directory. The output will be a single
@@ -84,5 +85,7 @@ and pipe it to Kubectl with a command like this:
 ```shell
 kbld -f . | kubectl apply -f-
 ```
+
+If your input YAML already contains digests, then kbld will use them. It does not verify that the digest actually exists.
 
 [Next (Kapp Overview) -&gt;](../kapp/README.md)
