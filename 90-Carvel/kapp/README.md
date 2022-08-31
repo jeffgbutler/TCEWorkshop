@@ -21,7 +21,7 @@ These resources work together to comprise the application. But they are independ
 managed independantly. If we need to make changes, or delete the application, we need to remember to work
 with every resource.
 
-Further need to make these resources in the correct order. The namespace would need to exist before the other
+Further, we need to create these resources in the correct order. The namespace would need to exist before the other
 resources could be added to it.
 
 This scenario is where kapp is useful. Kapp can understand these three things as parts of a larger "application".
@@ -174,7 +174,7 @@ Kapp reconciles this change by deleting the old namespace "kuard-ns1" and recrea
 
 ![kapp change namespace with ytt](images/kapp-ytt-namespace.png)
 
-Kapp's ability to calculate a diff on old and new desired states, then apply the changes in the correct order make it a very
+Kapp's ability to calculate a diff on old and new desired states, and then apply the changes in the correct order, make it a very
 powerful tool in a GitOps workflow. Next we'll see how to run kapp in a cluster with the kapp-controller.
 
 [Next (Kapp-Controller Overview) -&gt;](../kapp-controller/README.md)
