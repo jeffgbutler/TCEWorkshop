@@ -9,54 +9,179 @@ The kapp-controller is a Kubernetes controller that has two main functions:
 
 Full details about the Kapp controller are here: https://carvel.dev/kapp-controller/
 
-The kapp-controller also has an associated CLI called "kctrl" to interact with the kapp-controller installed in a cluster.
+The kapp-controller also has an associated CLI called "kctrl" that can interact with the kapp-controller installed in a cluster.
 
 ## Running Kapp in a Cluster
 
 The kapp-controller runs kapp in a cluster. But what does that mean exactly?
 
-When we looked at running kapp on a workstation, we saw that:
+When we ran kapp on a workstation, we saw that:
 
-1. We needed to supply input files to kapp that contain Kubernetes YAML
+1. We supply input files to kapp that contain Kubernetes YAML
 1. We might want to run those input files through ytt or kbld (or both!) before we send them to kapp
 1. Ultimately we want kapp to create resources in Kubernetes based on these, possibly transformed, input files
 
 The kapp-controller does exactly this. When we install the kapp-controller in a cluster, we enable a new CRD
-of kind `App` with API version `kappctrl.k14s.io/v1alpha1`. This allows us to define "applications" that the
-kapp-controller will deploy and manage.
+of kind `App` with API version `kappctrl.k14s.io/v1alpha1`. This allows us to define input sources for kapp and
+transforms that should occur on those inputs before kapp creates the resources. Since the kapp-controller is
+Kubernetes native, any change to the definition of an App will cause the controller to reconcile again. So you
+can imagine a scenario where a pull request to a Git repository will be picked up by the kapp-controller and the
+app will be updated accordingly.
 
-Configuration of that CRD contains three major sections:
+Configuration of the App CRD contains three major sections:
 
-### spec.fetch
+1. `spec.fetch` where we define input sources for YAML or templates. Inputs can come from a variety of
+   sources including:
+   - Inline in the App spec
+   - From Git
+   - From a Helm chart
+   - From an arbitrary URL
+   - others
+1. `spec.template` where we define the transforms we want to apply to the input YAML. Valid templating engines include:
+   - ytt
+   - kbld
+   - helmTemplate
+   - others
+1. `spec.deploy` where we specify options for kapp on the deployment
 
-This is where we define where to get the input YAML for the application. It can come from a variety of
-sources including:
+This may seem a bit abstract, so we will walk through a simple example. But first we need to look at security.
 
-1. Inline in the YAML
-1. From Git
-1. From a Helm chart
-1. From an arbitrary URL
-1. etc.
+## Security for the Kapp Controller
 
-This is the first step in what we described above as a three step process.
-
-### spec.template
-
-This is where we define the templating we want to apply to the input YAML. Valid templating engines include:
-
-1. ytt
-1. kbld
-1. helmTemplate
-1. etc.
-
-This is the second step in what we described above as a three step process.
-
-### spec.deploy
-
-This is where we specify options for kapp on the deployment. This is the third step in what we described above as a three step process.
-
-This may seem a bit abstract, so let's look at a simple example.
+The kapp-controller will do it's work using a service account that you specify when you create the App spec. You will need
+to make sure that the service account has permission to all the API resources that can be created or updated by the app.
+The file [rbac.yaml](rbac.yaml) in this directory contains a `ClusterRole` with permissions for all the API resources used in
+these examples. It also includes a `ClusterRoleBinding` for the default service account in the default namespace. These are
+cluster resources rather than namespaced resources because we want the kapp-controller to be able to work across namespaces.
 
 ## Simple Application
 
+This is a very simple App spec:
 
+```yaml
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: kuard-kapp
+spec:
+  serviceAccountName: default
+  fetch:
+    - inline:
+        paths:
+          deployment.yaml: |
+            apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              labels:
+                app: kuard
+              name: kuard
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: kuard
+              template:
+                metadata:
+                  labels:
+                    app: kuard
+                spec:
+                  containers:
+                  - image: gcr.io/kuar-demo/kuard-amd64:blue
+                    name: kuard
+  template:
+    - kbld: {}
+  deploy:
+    - kapp: {}
+```
+
+Important things to notice in this spec:
+
+1. `spec.fetch` has a single hardcoded deployment spec. It's in a "file" named "deployment.yaml" but that is really
+   just to keep it separate from other hardcoded entries. There can be as many inline entries as you wish.
+1. The kapp-controller will run this input through kbld before applying it. This is specified by the following YAML:
+
+   ```yaml
+   template:
+     - kbld: {}
+   ```
+
+   That looks a little strange, but it is basically telling the kapp controller we want to run kbld. You can specify some options
+   for kbld if desired that roughly correspond to options on the kbld CLI. We don't need to specify anything in this case, so we just
+   supply an empty map (`{}`)
+
+1. `spec.deploy` has `kapp` as it's only value. Again we can specify kapp command line parameters if desired, but we don't need
+   any here, so we supply an empy map
+
+This spec creates an App resource that runs kapp and deploys the application. The App resource will check for updates every 30 seconds
+or so and make changes to the app. Very few changes are expected here since everything is hardcoded. If the label on the Kuard
+image changes it would trigger an update because kbld would move to the new digest.
+
+## Inspecting Applications with the kapp CLI
+
+The kapp-controller runs kapp, so we would expect the kapp CLI to work on applications deployed through the kapp-controller.
+And it does. The only caveat is that the application name is not what you might expect. In the example above, we created
+an App resource names "kuard-kapp". If you do "kapp list" you will see that the application name is "kuard-kapp-ctrl". The
+kapp-controller appends "-ctrl" to all the application names it creates.
+
+Once you know that, you can use any kapp CLI command. For example:
+
+```shell
+kapp logs -a kuard-kapp-ctrl
+```
+
+## Working With the kctrl CLI
+
+The kapp-controller's CLI is "kctrl". We'll show several useful commands below.
+
+List all applications managed by the kapp-controller:
+
+```shell
+kctrl app list
+```
+
+Get current application details:
+
+```shell
+kctrl app get -a kuard-kapp
+```
+
+Get current application status (shows how many reconciliations have happened):
+
+```shell
+kctrl app status -a kuard-kapp
+```
+
+Pause reconciliation:
+
+```shell
+kctrl app pause -a kuard-kapp
+```
+
+Force an app to reconcile again:
+
+```shell
+kctrl app kick -a kuard-kapp
+```
+
+## More Complete Example
+
+The file [complex-example.yaml](complex-example.yaml) in this directory contains a more complete example of using the
+kapp-controller. It has the following characteristics:
+
+1. There is inline YAML for a namespace, deployment, and service. These are the same files we used from the
+   kapp exercise - they are ytt templates that accept configuration values. There is also inline YAML for the ytt
+   schema with default values. This is basically copy/paste of existing YAML templates into an App spec.
+1. There is a reference to a Git repository to obtain configuration values. In this case, the reference directory has a single
+   file named "values.yaml" that looks something like this:
+
+   ```yaml
+   #@data/values
+   ---
+   namespace: kuard-app-ns
+   replicas: 3
+   ```
+1. The kapp-controller is configured to run both ytt and kbld on the input files before deploying the applcation with kapp
+
+If you want to experiment with this, then we suggest you change the Git reference to a repo where you can commit. Then
+deploy the application and watch it create all the resources you expect. If you make a change to the configuration in Git,
+then you should see the change reflected in your cluster in a minute or so.

@@ -1,3 +1,4 @@
 #@data/values
 ---
 namespace: barney-ns
+replicas: 3
