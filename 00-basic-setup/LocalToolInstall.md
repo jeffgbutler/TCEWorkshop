@@ -23,13 +23,10 @@ Install required tools:
    ```shell
    brew install jq
    ```
-- YTT (YAML Templating Tool):
+- Carvel Tools:
    ```shell
-   brew install ytt
-   ```
-- Kapp (Carvel Kapp CLI):
-   ```shell
-   brew install kapp
+   brew tap vmware-tanzu/carvel
+   brew install kapp kctrl ytt
    ```
 - Knative CLI:
    ```shell
@@ -59,13 +56,9 @@ Install required tools:
    ```shell
    choco install jq
    ```
-- YTT (YAML Templating Tool):
+- Carvel Tools:
    ```shell
-   choco install ytt
-   ```
-- Kapp (Carvel Kapp CLI):
-   ```shell
-   choco install kapp
+   choco install kapp ytt
    ```
 - Knative CLI: Go to https://github.com/knative/client/releases, download latest Windows binary, rename it to "kn", than add it to the path
 - Kpack CLI: Go to https://github.com/vmware-tanzu/kpack-cli/releases, download latest Windows binary, rename it to "kp", add it to the path
@@ -88,13 +81,10 @@ Install required tools:
    ```shell
    brew install jq
    ```
-- YTT (YAML Templating Tool):
+- Carvel Tools:
    ```shell
-   brew install ytt
-   ```
-- Kapp (Carvel Kapp CLI):
-   ```shell
-   brew install kapp
+   brew tap vmware-tanzu/carvel
+   brew install kapp kctrl ytt
    ```
 - Knative CLI:
    ```shell

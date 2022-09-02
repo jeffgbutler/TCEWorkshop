@@ -1,0 +1,87 @@
+apiVersion: carto.run/v1alpha1
+kind: ClusterTemplate
+metadata:
+  name: app-deployer
+spec:
+  ytt: |
+    #@ load("@ytt:data", "data")
+    #@ load("@ytt:yaml", "yaml")
+    
+    #@ def/end deployment():
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: #@ data.values.workload.metadata.name
+      name: #@ data.values.workload.metadata.name
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: #@ data.values.workload.metadata.name
+      template:
+        metadata:
+          labels:
+            app: #@ data.values.workload.metadata.name
+        spec:
+          containers:
+          - image: #@ data.values.image
+            name: #@ data.values.workload.metadata.name
+    
+    #@ def/end service():
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: #@ data.values.workload.metadata.name
+      name: #@ data.values.workload.metadata.name
+    spec:
+      ports:
+      - name: 8080-8080
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app: #@ data.values.workload.metadata.name
+      type: ClusterIP
+    
+    #@ def/end ingress():
+    ---
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: #@ data.values.workload.metadata.name
+      labels:
+        app: ingress
+    spec:
+      rules:
+      - host: #@ data.values.workload.metadata.name + ".127-0-0-1.nip.io"
+        http:
+          paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: #@ data.values.workload.metadata.name
+                port:
+                  number: 8080
+    
+    ---
+    apiVersion: kappctrl.k14s.io/v1alpha1
+    kind: App
+    metadata:
+      name: #@ data.values.workload.metadata.name
+    spec:
+      serviceAccountName: default
+      fetch:
+      - inline:
+          paths:
+            deployment.yml : #@ yaml.encode(deployment())
+            service.yml : #@ yaml.encode(service())
+            ingress.yml : #@ yaml.encode(ingress())
+      template:
+      - ytt: {}
+      deploy:
+      - kapp: {}

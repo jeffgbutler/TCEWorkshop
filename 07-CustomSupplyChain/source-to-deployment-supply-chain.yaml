@@ -1,0 +1,33 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: carto.run/v1alpha1
+kind: ClusterSupplyChain
+metadata:
+  name: source-to-deployment-template
+spec:
+  selector:
+    apps.tanzu.vmware.com/workload-type: source-to-deployment-template
+
+  params:
+    - name: registry
+      default: #@ data.values.cartographer_catalog.registry
+
+  resources:
+    - name: source-provider
+      templateRef:
+        kind: ClusterSourceTemplate
+        name: git-repository-template
+    - name: image-builder
+      templateRef:
+        kind: ClusterImageTemplate
+        name: image
+      sources:
+        - resource: source-provider
+          name: source
+    - name: app-deployer
+      templateRef:
+        kind: ClusterTemplate
+        name: app-deployer
+      images:
+        - name: image
+          resource: image-builder
