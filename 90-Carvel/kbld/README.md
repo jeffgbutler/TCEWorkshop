@@ -87,7 +87,7 @@ Notice two things:
 1. Kbld added an annotation `kbld.k14s.io/images` that details the before and after versions that were transformed
 
 Kbld can accept multiple input files, and can also transform all the YAML in a directory. The output will be a single
-consolidated YAML composed of all the input files. Foe example, you could transform all YAML in a directory
+consolidated YAML composed of all the input files. For example, you could transform all YAML in a directory
 and pipe it to Kubectl with a command like this:
 
 ```shell
