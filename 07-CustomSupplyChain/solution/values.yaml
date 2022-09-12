@@ -1,6 +1,5 @@
 # step 1...
-namespace: cartographer-workshop
-service_account: cartographer-workshop-serviceaccount
+namespace: default # only change if you configured TAP/TCE differently from default
 
 # step 2...
 image_template: image # use "kpack-image" on TAP clusters

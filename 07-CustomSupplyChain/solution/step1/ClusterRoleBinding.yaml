@@ -10,5 +10,5 @@ roleRef:
   name: cartographer-workshop-role
 subjects:
 - kind: ServiceAccount
-  name: #@ data.values.service_account
+  name: default
   namespace: #@ data.values.namespace

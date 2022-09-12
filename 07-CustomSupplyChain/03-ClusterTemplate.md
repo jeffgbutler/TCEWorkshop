@@ -5,14 +5,6 @@ to our cluster. To make this happen, we will add a `ClusterTemplate` to the supp
 
 TODO
 
-```powershell
-tanzu apps workload create source-to-deployment-template `
-  --git-repo https://github.com/jeffgbutler/java-payment-calculator `
-  --git-branch main `
-  --type source-to-deployment-template `
-  --yes `
-  -n default
+```shell
+ytt -f ./solution/step2/. --data-values-file ./solution/values.yaml | kapp deploy -a cartographer-workshop-supply-chain -y -f-
 ```
-
-
-kapp deploy -a nginx-ingress -f ..\03-app-toolkit\contour-test-ingress.yaml

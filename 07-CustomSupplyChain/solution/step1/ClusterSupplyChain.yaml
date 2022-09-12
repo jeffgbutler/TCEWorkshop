@@ -8,10 +8,6 @@ spec:
   selector:
     apps.tanzu.vmware.com/workload-type: source-to-ingress
 
-  serviceAccountRef:
-    name: #@ data.values.service_account
-    namespace: #@ data.values.namespace
-
   resources:
     - name: source-provider
       templateRef:

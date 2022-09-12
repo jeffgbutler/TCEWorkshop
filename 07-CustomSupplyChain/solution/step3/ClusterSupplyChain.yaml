@@ -3,10 +3,10 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: carto-workshop-supply-chain
+  name: cartographer-workshop-supply-chain
 spec:
   selector:
-    apps.tanzu.vmware.com/workload-type: carto-workshop
+    apps.tanzu.vmware.com/workload-type: source-to-ingress
 
   params:
     - name: registry
@@ -14,13 +14,13 @@ spec:
     - name: base_domain
       default: #@ data.values.base_domain
     - name: default_port
-      default: #@ data.values.default_port
+      default: 8080
 
   resources:
     - name: source-provider
       templateRef:
         kind: ClusterSourceTemplate
-        name: carto-workshop-git-repository-template
+        name: cartographer-workshop-git-repository-template
 
     - name: image-builder
       templateRef:
@@ -33,7 +33,7 @@ spec:
     - name: app-deployer
       templateRef:
         kind: ClusterTemplate
-        name: carto-workshop-app-deployer
+        name: cartographer-workshop-app-deployer
       images:
         - name: image
           resource: image-builder

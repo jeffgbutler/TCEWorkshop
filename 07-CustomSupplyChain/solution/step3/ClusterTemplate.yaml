@@ -1,7 +1,7 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterTemplate
 metadata:
-  name: carto-workshop-app-deployer
+  name: cartographer-workshop-app-deployer
 spec:
   ytt: |
     #@ load("@ytt:data", "data")
@@ -39,7 +39,7 @@ spec:
       name: #@ data.values.workload.metadata.name
     spec:
       ports:
-      - name: 8080-8080
+      - name: default
         port: 8080
         protocol: TCP
         targetPort: #@ data.values.params.default_port
@@ -57,7 +57,7 @@ spec:
         app: ingress
     spec:
       rules:
-      - host: #@ data.values.workload.metadata.name + ".127-0-0-1.nip.io"
+      - host: #@ data.values.workload.metadata.name + "." + data.values.params.base_domain
         http:
           paths:
           - path: /
