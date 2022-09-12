@@ -1,0 +1,11 @@
+# step 1...
+namespace: jgb-ns # use "default" for TCE, use your configured developer namespace on TAP
+
+# step 2...
+image_template: kpack-tamplate # use "image" on TCE, use "kpack-template" on TAP
+registry:
+  server: harbor.tanzuathome.net
+  repository: tap12
+
+# step 3...
+base_domain: "workshop.tap.tanzuathome.net" # use "127-0-0-1.nip.io" on TCE unmanaged cluster, use your configured ingress domain on TAP

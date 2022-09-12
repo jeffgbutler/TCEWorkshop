@@ -6,5 +6,5 @@ to our cluster. To make this happen, we will add a `ClusterTemplate` to the supp
 TODO
 
 ```shell
-ytt -f ./solution/step2/. --data-values-file ./solution/values.yaml | kapp deploy -a cartographer-workshop-supply-chain -y -f-
+ytt -f ./solution/step3/. --data-values-file ./solution/values.yaml | kapp deploy -a cartographer-workshop-supply-chain -y -f-
 ```

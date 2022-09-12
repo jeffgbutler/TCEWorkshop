@@ -2,7 +2,7 @@
 
 In this exercise, we will create a custom supply chain that:
 
-1. Retrives source code from Git
+1. Retrieves source code from Git
 1. Builds and publishes an images with Kpack
 1. Uses a Kubernetes deployment, services, and ingress to deploy the application
 
@@ -18,10 +18,12 @@ If you are not yet familiar with those tools we suggest you go through the
 [Carvel Tutorial](../90-Carvel/README.md) first.
 
 This exercise will work equally well on a TCE cluster with the app-toolkit installed, or a TAP cluster
-with the"full" profile installed. There are a few configuration differences we will point out as we progress.
+with the "full" profile installed. There are a few configuration differences we will point out as we progress.
 
 The easiest way to run the examples in this workshop is to clone this repository locally, then change the
 [solution/values.yaml](./solution/values.yaml) file to match your install of TAP or TCE.
 This workshop has been tested with TAP 1.2.1 and TCE 0.12.1.
+
+All commands assume you have a command window open to the same directory as this README file.
 
 [Next (Creating the Cluster Source Template) -&gt;](01-ClusterSourceTemplate.md)

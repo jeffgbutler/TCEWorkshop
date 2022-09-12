@@ -259,7 +259,8 @@ This will create the role, role binding, and the supply chain. We can now use th
 
 ## Create a Workload
 
-We can create a workload with a command like this:
+We can create a workload with a command like the following. **Important:** if you are using TAP, change the namespace
+below to your configured developer namespace.
 
 ```shell
 tanzu apps workload create java-payment-calculator \

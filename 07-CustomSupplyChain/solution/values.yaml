@@ -8,4 +8,4 @@ registry:
   repository: tce
 
 # step 3...
-base_domain: "127-0-0-1.nip.io" # use "127-0-0-1.nip.io" on TCE unmanaged cluster, use your configured ingress domain on TAP
+base_domain: "127-0-0-1.nip.io" # use "127-0-0-1.nip.io" on TCE unmanaged cluster, use a domain that will resolve to your ingress on TAP
