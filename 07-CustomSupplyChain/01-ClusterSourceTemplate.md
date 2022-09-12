@@ -202,11 +202,11 @@ Supply chains all run with a service account. By default, the "default" service 
 where the workload resides. A developer can also specify a service account when creating a workload.
 
 This can be difficult to manage because the service account will need permission to create every kind of resource
-stamped out by the supply chain. In this workshop we will take a different approach - we will create a service account
-that has all the permissions needed and then it can be reused by every workload in every namespace.
+stamped out by the supply chain. When we installed TAP/TCE some of this was setup for us and we will reuse it as much
+as possible.
 
-In [solution/values.yaml](./solution/values.yaml) we provide a default name for a service account and a namespace. These
-should be sufficient for most uses. There is also yaml in the solution directories to create the namespace and service account.
+In [solution/values.yaml](./solution/values.yaml) we provide a default name for a namespace. We're going to use "default" because it
+will match what is setup in TAP/TCE. If for some reason you changes it when you installed TAP/TCE then you should change it here also.
 
 Let's examine the cluster role:
 
@@ -221,7 +221,7 @@ rules:
     verbs: ['*']
 ```
 
-This role gives access to create `GitRepository` resources as needed by out `ClusterSourceTemplate`. We will add to this role
+This role gives access to create `GitRepository` resources as needed by our `ClusterSourceTemplate`. We will add to this role
 as we add items to the supply chain.
 
 Now let's examine the role binding:
@@ -239,34 +239,13 @@ roleRef:
   name: cartographer-workshop-role
 subjects:
 - kind: ServiceAccount
-  name: #@ data.values.service_account
+  name: default
   namespace: #@ data.values.namespace
 ```
 
-This is a ytt template that will bind the ClusterRole to the service account. Finally, let's see how the service account is
-specified in the supply chain:
-
-```yaml
-#@ load("@ytt:data", "data")
----
-apiVersion: carto.run/v1alpha1
-kind: ClusterSupplyChain
-metadata:
-  name: cartographer-workshop-supply-chain
-spec:
-  selector:
-    apps.tanzu.vmware.com/workload-type: source-to-ingress
-
-  serviceAccountRef:
-    name: #@ data.values.service_account
-    namespace: #@ data.values.namespace
-
-  resources:
-    - name: source-provider
-      templateRef:
-        kind: ClusterSourceTemplate
-        name: cartographer-workshop-git-repository-template
-```
+This is a ytt template that will bind the ClusterRole to the service account. Note that the out of the box supply chains have
+already given this permission to the default service account - we're including it here for clarity and also to setup for future
+permissions we will add in the following sections.
 
 Let's create the supply chain. We're going to use kapp to create and update the supply chain because it is a simple way to
 deploy many things as a single "application". In this case, the "application" is the supply chain.
@@ -275,8 +254,8 @@ deploy many things as a single "application". In this case, the "application" is
 ytt -f solution/step1/. --data-values-file solution/values.yaml | kapp deploy -a cartographer-workshop-supply-chain -y -f-
 ```
 
-This command runs all the files in the "step1" directory through ytt, then applies the result with kapp.
-This will create the namespace, service account, role binding, and the supply chain. We can now use this supply chain in a workload.
+This command runs all the files in the "step1" directory through ytt, then apply the result with kapp.
+This will create the role, role binding, and the supply chain. We can now use this supply chain in a workload.
 
 ## Create a Workload
 
@@ -298,7 +277,7 @@ apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
   labels:
-    apps.tanzu.vmware.com/workload-type: carto-workshop
+    apps.tanzu.vmware.com/workload-type: source-to-ingress
   name: java-payment-calculator
   namespace: default
 spec:

@@ -26,10 +26,6 @@ spec:
   selector:
     apps.tanzu.vmware.com/workload-type: source-to-ingress
 
-  serviceAccountRef:
-    name: #@ data.values.service_account
-    namespace: #@ data.values.namespace
-
   params:
     - name: registry
       default: #@ data.values.registry
@@ -50,7 +46,8 @@ spec:
 ```
 
 Notice that there are now two items under `spec.resources`: our `ClusterSourceTemplate` as before, and a reference
-to a `ClusterImageTemplate` named `image`. Where did that `ClusterImageTemplate` come from? The answer is that it is
+to a `ClusterImageTemplate` who's name we retrive from ytt configuration. We've coded it this way because the template
+name is different on TAP and TCE. Where did that `ClusterImageTemplate` come from? The answer is that it is
 provided by the out-of-the-box supply chain. You can see it with the following command:
 
 ```shell
