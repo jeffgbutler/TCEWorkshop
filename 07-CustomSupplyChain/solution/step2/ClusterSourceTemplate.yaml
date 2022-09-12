@@ -1,7 +1,7 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterSourceTemplate
 metadata:
-  name: git-repository-template
+  name: carto-workshop-git-repository-template
 spec:
   params:
   - name: git_implementation

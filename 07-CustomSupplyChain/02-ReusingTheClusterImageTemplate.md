@@ -3,7 +3,7 @@
 Templates are meant to be reusable components. This makes it easier to build new supply chains based on existing
 functionality.
 
-For this exercise, we will build a new supply chain that has two steps:
+For this exercise, we will update the supply chain so that it has two steps:
 
 1. It will retrieve source code from Git using the template we created in the last step
 1. It will build and publish and image based on that source code using the existing `ClusterImageTemplate`
@@ -21,24 +21,24 @@ YAML for the new supply chain is as follows:
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: source-to-image-template
+  name: carto-workshop-supply-chain
 spec:
   selector:
-    apps.tanzu.vmware.com/workload-type: source-to-image-template
+    apps.tanzu.vmware.com/workload-type: carto-workshop
 
   params:
     - name: registry
-      default: #@ data.values.cartographer_catalog.registry
+      default: #@ data.values.registry
 
   resources:
     - name: source-provider
       templateRef:
         kind: ClusterSourceTemplate
-        name: git-repository-template
+        name: carto-workshop-git-repository-template
     - name: image-builder
       templateRef:
         kind: ClusterImageTemplate
-        name: image
+        name: #@ data.values.image_template
       sources:
         - resource: source-provider
           name: source
@@ -141,22 +141,17 @@ of the different templates accordingly.
 Create the new supply chain with this command:
 
 ```shell
-ytt -f ./source-to-image-template-supply-chain.yaml --data-values-file ../03-app-toolkit/config/app-toolkit-values.yaml | kubectl apply -f-
+ytt -f ./solution/step2/. --data-values-file ./solution/values.yaml | kapp deploy -a carto-workshop-supply-chain -y -f-
 ```
 
-Create a new workload with this command:
+You can watch the workload update with
 
-```powershell
-tanzu apps workload create source-to-image-template `
-  --git-repo https://github.com/jeffgbutler/java-payment-calculator `
-  --git-branch main `
-  --type source-to-image-template `
-  --yes `
-  -n default
+```shell
+tanzu apps workload tail java-payment-calcuator
 ```
 
-This time the supply chain will take a bit longer to run because it will use Kpack to build and publish an
-image. When the supply chain completes, you should see a new image named `source-to-image-template-default` in your
+This time the supply chain will take a bit longer to reconcile because it will use Kpack to build and publish an
+image. When the supply chain completes, you should see a new image named `jav-payment-calculator-default` in your
 repository.
 
 [Next (Create a Cluster Template) -&gt;](03-ClusterTemplate.md)

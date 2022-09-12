@@ -1,0 +1,13 @@
+apiVersion: carto.run/v1alpha1
+kind: ClusterSupplyChain
+metadata:
+  name: carto-workshop-supply-chain
+spec:
+  selector:
+    apps.tanzu.vmware.com/workload-type: carto-workshop
+
+  resources:
+    - name: source-provider
+      templateRef:
+        kind: ClusterSourceTemplate
+        name: carto-workshop-git-repository-template

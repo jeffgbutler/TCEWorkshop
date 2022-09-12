@@ -9,7 +9,7 @@ What we need is a template that will stamp out a `GitRepository` for the first s
 
 Templates can receive inputs from several places:
 
-1. The can access the standard values of the workload they are associated with
+1. They can access the standard values of the workload they are associated with
 1. They can access the values of parameters specified in the workload (and use default values if not supplied)
 1. They can access the output values of other templates they rely on
 
@@ -70,7 +70,7 @@ A simple template to stamp out a `GitRepository` follows:
 apiVersion: carto.run/v1alpha1
 kind: ClusterSourceTemplate
 metadata:
-  name: git-repository-template
+  name: carto-workshop-git-repository-template
 spec:
   params:
   - name: git_implementation
@@ -94,7 +94,7 @@ spec:
 
 A few important things to notice here:
 
-1. The template name is `git-repository-template` - we will need this when building a supply chain
+1. The template name is `carto-workshop-git-repository-template` - we will need this when building a supply chain
 1. The `spec.params` section defines a default value for the parameter `git_implementation`
 1. The `spec.template` section contains the `GitRepository` template we showed above and contains parameter
    markers for the various values that can change with every workload.
@@ -110,15 +110,6 @@ where to obtain the source code provided by the stamped out resource: `spec.urlP
 specify where *in the stamped out resource's spec* to find the source code. The values we have shown are correct
 for a `GitRepository` resource.
 
-Let's create the template in our cluster:
-
-```shell
-kubectl apply -f git-repository-template.yaml
-```
-
-You will notice that not much happened! The template was created, but nothing is using it yet. For that we'll need to build a
-supply chain and a workload. But first, we will look at the YTT equivalent of this template.
-
 ### YTT Based ClusterSourceTemplate
 
 The YTT equivalent of the template looks very similar:
@@ -127,7 +118,7 @@ The YTT equivalent of the template looks very similar:
 apiVersion: carto.run/v1alpha1
 kind: ClusterSourceTemplate
 metadata:
-  name: git-repository-ytt
+  name: carto-workshop-git-repository-template
 spec:
   params:
   - name: git_implementation
@@ -158,47 +149,40 @@ Several important things to notice:
    Since this is a simple template, there are no conditionals or loops here.
 1. The format of the variables has changed - now we are using the YTT variable format `#@ data.values ...`
 
-Let's create this template in our cluster:
-
-```shell
-kubectl apply -f git-repository-ytt.yaml
-```
-
-Again, not much happens yet.
-
 ## Building a Supply Chain
 
-To test this out, let's build a simple supply chain that only uses this one template. It's not much of
+Now let's build a supply chain that uses this template. It's not much of
 a supply chain as it will only download source code! But it will be a good test to make sure the template is working correctly.
 
-Here's the YAML for a supply chain that uses the simple template version of the `ClusterSourceTemplate`:
+Here's the YAML for a supply chain that uses the `ClusterSourceTemplate`:
 
 ```yaml
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: source-only-template
+  name: carto-workshop-supply-chain
 spec:
   selector:
-    apps.tanzu.vmware.com/workload-type: source-only-template
+    apps.tanzu.vmware.com/workload-type: carto-workshop
 
   resources:
     - name: source-provider
       templateRef:
         kind: ClusterSourceTemplate
-        name: git-repository-template
+        name: carto-workshop-git-repository-template
 ```
 
 This is a very simple supply chain. Some important things to notice:
 
-1. The workload type is `source-only-template`. We will use this in the workload definition to specify the supply chain
+1. The workload type is `carto-workshop`. We will use this in the workload definition to specify the supply chain
    we want to run
 1. The `spec.resources` section includes a reference to the simple template based `ClusterSourceTemplate` we created above
 
-Let's create the supply chain:
+Let's create the supply chain. We're going to use kapp to create and update the supply chain because it is a simple way to
+deploy many things as a single "application". In this case, the "application" is the supply chain.
 
 ```shell
-kubectl apply -f source-only-template-supply-chain.yaml
+kapp deploy -a carto-workshop-supply-chain -f solution/step1/.
 ```
 
 Again, not much happens. But now we can create a workload to test this out.
@@ -207,12 +191,12 @@ Again, not much happens. But now we can create a workload to test this out.
 
 Just like we did with the full example, we can create a workload:
 
-```powershell
-tanzu apps workload create source-only-template `
-  --git-repo https://github.com/jeffgbutler/java-payment-calculator `
-  --git-branch main `
-  --type source-only-template `
-  --yes `
+```shell
+tanzu apps workload create java-payment-calculator \
+  --git-repo https://github.com/jeffgbutler/java-payment-calculator \
+  --git-branch main \
+  --type carto-workshop \
+  --yes \
   -n default
 ```
 
@@ -223,8 +207,8 @@ apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
   labels:
-    apps.tanzu.vmware.com/workload-type: source-only-template
-  name: source-only-template
+    apps.tanzu.vmware.com/workload-type: carto-workshop
+  name: java-payment-calculator
   namespace: default
 spec:
   source:
@@ -246,7 +230,7 @@ The mapped values exactly match the values we need in the `ClusterSourceTemplate
 Now, you can inspect the stamped out object with the following command:
 
 ```shell
-kubectl get GitRepository source-only-template -o json | jq
+kubectl get GitRepository java-payment-calculator -o json | jq
 ```
 
 You should see `status.artifact.revision` and `status.artifact.url` values set. We can use these as inputs to the next step

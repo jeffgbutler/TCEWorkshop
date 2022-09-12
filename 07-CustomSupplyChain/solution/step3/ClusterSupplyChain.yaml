@@ -1,0 +1,37 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: carto.run/v1alpha1
+kind: ClusterSupplyChain
+metadata:
+  name: carto-workshop-supply-chain
+spec:
+  selector:
+    apps.tanzu.vmware.com/workload-type: carto-workshop
+
+  params:
+    - name: registry
+      default: #@ data.values.registry
+    - name: base_domain
+      default: #@ data.values.base_domain
+
+  resources:
+    - name: source-provider
+      templateRef:
+        kind: ClusterSourceTemplate
+        name: carto-workshop-git-repository-template
+
+    - name: image-builder
+      templateRef:
+        kind: ClusterImageTemplate
+        name: #@ data.values.image_template
+      sources:
+        - resource: source-provider
+          name: source
+
+    - name: app-deployer
+      templateRef:
+        kind: ClusterTemplate
+        name: carto-workshop-app-deployer
+      images:
+        - name: image
+          resource: image-builder

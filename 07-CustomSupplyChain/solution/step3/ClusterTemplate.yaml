@@ -1,7 +1,7 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterTemplate
 metadata:
-  name: app-deployer
+  name: carto-workshop-app-deployer
 spec:
   ytt: |
     #@ load("@ytt:data", "data")
@@ -83,5 +83,6 @@ spec:
             ingress.yml : #@ yaml.encode(ingress())
       template:
       - ytt: {}
+      - kbld: {}
       deploy:
       - kapp: {}

@@ -1,0 +1,5 @@
+image_template: image # use "kpack-image" on TAP clusters
+registry:
+  server: harbor.tanzuathome.net
+  repository: tce
+base_domain: "127-0-0-1.nip.io"
