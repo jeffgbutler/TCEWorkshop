@@ -1,6 +1,12 @@
+# step 1...
+namespace: cartographer-workshop
+service_account: cartographer-workshop-serviceaccount
+
+# step 2...
 image_template: image # use "kpack-image" on TAP clusters
 registry:
   server: harbor.tanzuathome.net
   repository: tce
+
+# step 3...
 base_domain: "127-0-0-1.nip.io"
-default_port: 8080
