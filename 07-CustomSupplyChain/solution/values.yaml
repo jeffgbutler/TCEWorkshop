@@ -1,11 +1,11 @@
 # step 1...
-namespace: default # only change if you configured TAP/TCE differently from default
+namespace: default # use "default" for TCE, use your configured developer namespace on TAP
 
 # step 2...
-image_template: image # use "kpack-template" on TAP clusters, "image" on TCE clusters
+image_template: image # use "image" on TCE, use "kpack-template" on TAP
 registry:
   server: harbor.tanzuathome.net
   repository: tce
 
 # step 3...
-base_domain: "127-0-0-1.nip.io"
+base_domain: "127-0-0-1.nip.io" # use "127-0-0-1.nip.io" on TCE unmanaged cluster, use your configured ingress domain on TAP
