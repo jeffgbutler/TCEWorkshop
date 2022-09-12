@@ -138,9 +138,9 @@ In this supply chain, there is only one source template. In this case we can sho
 `source` by convention. If there were more than one source template, we would need to specify the name or names
 of the different templates accordingly.
 
-## Create and Test the New Supply Chain
+## Create and Test the Updated Supply Chain
 
-Create the new supply chain with this command:
+Update the supply chain with this command:
 
 ```shell
 ytt -f ./solution/step2/. --data-values-file ./solution/values.yaml | kapp deploy -a cartographer-workshop-supply-chain -y -f-

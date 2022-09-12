@@ -58,9 +58,9 @@ In Cartographer, templates can be coded in two ways: as a simple Kubernetes temp
 you see in other Kubernetes objects like deployments, or as a YTT based template. YTT offers additional flexibility to
 templates like conditionals, loops, etc. Choosing templates vs. YTT comes downs to a decision about how flexible the
 template definition needs to be. The templates supplied by VMware all use YTT because they are very flexible and need
-the programing functions offered with YTT. For this exercise, we can use either one.
+the programming functions offered with YTT. For this exercise, we can use either one.
 
-First we will look at a simple template, then we'll look at it's YTT equivalent.
+First we will look at a simple template, then we'll look at its YTT equivalent.
 
 ### Simple ClusterSourceTemplate
 
