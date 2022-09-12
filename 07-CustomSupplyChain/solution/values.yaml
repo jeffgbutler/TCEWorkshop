@@ -2,7 +2,7 @@
 namespace: default # only change if you configured TAP/TCE differently from default
 
 # step 2...
-image_template: image # use "kpack-image" on TAP clusters
+image_template: image # use "kpack-template" on TAP clusters, "image" on TCE clusters
 registry:
   server: harbor.tanzuathome.net
   repository: tce

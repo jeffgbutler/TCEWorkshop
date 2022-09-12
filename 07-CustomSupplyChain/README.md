@@ -20,4 +20,8 @@ If you are not yet familiar with those tools we suggest you go through the
 This exercise will work equally well on a TCE cluster with the app-toolkit installed, or a TAP cluster
 with the"full" profile installed. There are a few configuration differences we will point out as we progress.
 
+The easiest way to run the examples in this workshop is to clone this repository locally, then change the
+[solution/values.yaml](./solution/values.yaml) file to match your install of TAP or TCE.
+This workshop has been tested with TAP 1.2.1 and TCE 0.12.1.
+
 [Next (Creating the Cluster Source Template) -&gt;](01-ClusterSourceTemplate.md)
