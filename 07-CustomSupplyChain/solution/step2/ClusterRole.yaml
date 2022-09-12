@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cartographer-workshop-role
+rules:
+  - apiGroups: [source.toolkit.fluxcd.io]
+    resources: [gitrepositories]
+    verbs: ['*']
+  - apiGroups: [kpack.io]
+    resources: [images]
+    verbs: ['*']

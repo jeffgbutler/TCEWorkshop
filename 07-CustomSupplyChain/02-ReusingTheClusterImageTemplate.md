@@ -21,10 +21,14 @@ YAML for the new supply chain is as follows:
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: carto-workshop-supply-chain
+  name: cartographer-workshop-supply-chain
 spec:
   selector:
-    apps.tanzu.vmware.com/workload-type: carto-workshop
+    apps.tanzu.vmware.com/workload-type: source-to-ingress
+
+  serviceAccountRef:
+    name: #@ data.values.service_account
+    namespace: #@ data.values.namespace
 
   params:
     - name: registry
@@ -34,7 +38,8 @@ spec:
     - name: source-provider
       templateRef:
         kind: ClusterSourceTemplate
-        name: carto-workshop-git-repository-template
+        name: cartographer-workshop-git-repository-template
+
     - name: image-builder
       templateRef:
         kind: ClusterImageTemplate
@@ -44,7 +49,7 @@ spec:
           name: source
 ```
 
-Notice that there are now two items under `spec.resources`: our `git-repository-template` as before, and a reference
+Notice that there are now two items under `spec.resources`: our `ClusterSourceTemplate` as before, and a reference
 to a `ClusterImageTemplate` named `image`. Where did that `ClusterImageTemplate` come from? The answer is that it is
 provided by the out-of-the-box supply chain. You can see it with the following command:
 
@@ -141,7 +146,7 @@ of the different templates accordingly.
 Create the new supply chain with this command:
 
 ```shell
-ytt -f ./solution/step2/. --data-values-file ./solution/values.yaml | kapp deploy -a carto-workshop-supply-chain -y -f-
+ytt -f ./solution/step2/. --data-values-file ./solution/values.yaml | kapp deploy -a cartographer-workshop-supply-chain -y -f-
 ```
 
 You can watch the workload update with
@@ -151,7 +156,7 @@ tanzu apps workload tail java-payment-calcuator
 ```
 
 This time the supply chain will take a bit longer to reconcile because it will use Kpack to build and publish an
-image. When the supply chain completes, you should see a new image named `jav-payment-calculator-default` in your
+image. When the supply chain completes, you should see a new image named `java-payment-calculator-default` in your
 repository.
 
 [Next (Create a Cluster Template) -&gt;](03-ClusterTemplate.md)
