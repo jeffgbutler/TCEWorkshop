@@ -243,7 +243,30 @@ subjects:
   namespace: #@ data.values.namespace
 ```
 
-This is a ytt template that will bind the ClusterRole to the service account.
+This is a ytt template that will bind the ClusterRole to the service account. Finally, let's see how the service account is
+specified in the supply chain:
+
+```yaml
+#@ load("@ytt:data", "data")
+---
+apiVersion: carto.run/v1alpha1
+kind: ClusterSupplyChain
+metadata:
+  name: cartographer-workshop-supply-chain
+spec:
+  selector:
+    apps.tanzu.vmware.com/workload-type: source-to-ingress
+
+  serviceAccountRef:
+    name: #@ data.values.service_account
+    namespace: #@ data.values.namespace
+
+  resources:
+    - name: source-provider
+      templateRef:
+        kind: ClusterSourceTemplate
+        name: cartographer-workshop-git-repository-template
+```
 
 Let's create the supply chain. We're going to use kapp to create and update the supply chain because it is a simple way to
 deploy many things as a single "application". In this case, the "application" is the supply chain.
@@ -294,6 +317,12 @@ Notice that the `tanzu` command maps the Git parameter values as follows:
 | `--git-branch` | `spec.source.git.ref.branch` |
 
 The mapped values exactly match the values we need in the `ClusterSourceTemplate`.
+
+This supply chain should resolve fairly quickly since it is only downloading source cdoe from GitHub. You can check the status with this command:
+
+```shell
+tanzu apps workload get java-payment-calculator
+```
 
 Now, you can inspect the stamped out object with the following command:
 
