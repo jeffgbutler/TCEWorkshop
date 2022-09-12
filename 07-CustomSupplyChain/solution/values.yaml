@@ -3,3 +3,4 @@ registry:
   server: harbor.tanzuathome.net
   repository: tce
 base_domain: "127-0-0-1.nip.io"
+default_port: 8080

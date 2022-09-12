@@ -42,7 +42,7 @@ spec:
       - name: 8080-8080
         port: 8080
         protocol: TCP
-        targetPort: 8080
+        targetPort: #@ data.values.params.default_port
       selector:
         app: #@ data.values.workload.metadata.name
       type: ClusterIP

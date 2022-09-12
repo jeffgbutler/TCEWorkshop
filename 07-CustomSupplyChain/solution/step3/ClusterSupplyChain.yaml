@@ -13,6 +13,8 @@ spec:
       default: #@ data.values.registry
     - name: base_domain
       default: #@ data.values.base_domain
+    - name: default_port
+      default: #@ data.values.default_port
 
   resources:
     - name: source-provider
