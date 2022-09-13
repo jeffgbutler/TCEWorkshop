@@ -2,9 +2,9 @@
 
 In this exercise, we will create a custom supply chain that:
 
-1. Retrieves source code from Git
+1. Retrieves source code from Git and watches for updates
 2. Builds and publishes an images with Kpack
-3. Uses a Kubernetes deployment, services, and ingress to deploy the application
+3. Uses a Kapp-Controller application consisting of a deployment, service, and ingress to deploy the application
 
 This is similar to the out-of-the-box supply chain except that it does not use Knative to deploy the application.
 Our supply chain will be simpler than the out-of-the-box supply chain - at the loss of some flexibility.
@@ -22,11 +22,11 @@ This workshop has been tested with TAP 1.2.1 and TCE 0.12.1.
 
 All commands assume you have a command window open to the same directory as this README file.
 
-This workshop uses a Spring Boot application with a Swagger UI as the default application. The source code for that application is here:
-https://github.com/jeffgbutler/java-payment-calculator. You may use that application for testing if you wish. If you want to
-test triggering a supply chain with a commit, then please fork this repo and change the Git URL in the workload
-definition. You may also use any other application you desire as long as it can be built with Cloud Native Buildpacks
-(most SpringBoot, .Net Core, and NodeJS applications should work).
+This workshop uses a Spring Boot application with a Swagger UI as the default application. The source code for that
+application is here: https://github.com/jeffgbutler/java-payment-calculator. You may use that application for testing
+if you wish. If you want to test triggering a supply chain with a commit, then please fork the repo and change the
+Git URL in the workload definition. You may also use any other application you desire as long as it can be built with
+Cloud Native Buildpacks and Kpack (most SpringBoot, .Net Core, and NodeJS applications should work).
 
 ## Pre-Requisites: Carvel Tools
 
