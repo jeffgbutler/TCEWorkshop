@@ -180,6 +180,11 @@ To define the `ClusterTemplate` we will add all of this to the `spec.ytt` sectio
 will fully define what needs to be stamped out for each workload. You can see the final definition in
 [solution/step3/ClusterTemplate.yaml](./solution/step3/ClusterTemplate.yaml)
 
+Yes, this is a "wall of YAML" inside a `ClusterTemplate` definition. An alternative would be to create three
+`ClusterTemplate` definitions - one for the Deployment, Service, and Ingress. But that has the disadvantage of bypassing
+the kapp controller and defining three independent resources. We think the kapp-controller approach is better and worth
+the complexity.
+
 ## Updating the Supply Chain
 
 Once we define the `ClusterTemplate`, we also need to update the supply chain:
