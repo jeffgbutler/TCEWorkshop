@@ -1,4 +1,4 @@
 #@data/values
 ---
-namespace: barney-ns
+namespace: kuard-app-ns
 replicas: 3

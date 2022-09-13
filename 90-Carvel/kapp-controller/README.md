@@ -194,6 +194,29 @@ kapp-controller. It has the following characteristics:
    ```
 3. The kapp-controller is configured to run both ytt and kbld on the input files before deploying the application with kapp
 
+You can deploy this application with the following command:
+
+```shell
+kubectl apply -f complex-example.yaml
+```
+
+Note that the rbac.yaml file isn't necessary if you haven't deleted the previous app. Once the app has reconciled,
+you will see the deployment in the "kuard-app-ns" namespace:
+
+```shell
+kubectl get all -n kuard-app-ns
+```
+
 If you want to experiment with this, then we suggest you change the Git reference to a repo where you can commit. Then
 deploy the application and watch it create all the resources you expect. If you make a change to the configuration in Git,
 then you should see the change reflected in your cluster in a minute or so.
+
+## Cleanup
+
+```shell
+kapp delete -a kapp-controller-simple-example
+```
+
+```shell
+kctrl app delete kuard-kapp-gitops
+```
