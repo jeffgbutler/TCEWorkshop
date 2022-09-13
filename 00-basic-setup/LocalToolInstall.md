@@ -26,7 +26,7 @@ Install required tools:
 - Carvel Tools:
    ```shell
    brew tap vmware-tanzu/carvel
-   brew install kapp kctrl ytt
+   brew install kapp kctrl ytt kbld imgpkg vendir
    ```
 - Knative CLI:
    ```shell
@@ -84,7 +84,7 @@ Install required tools:
 - Carvel Tools:
    ```shell
    brew tap vmware-tanzu/carvel
-   brew install kapp kctrl ytt
+   brew install kapp kctrl ytt kbld imgpkg vendir
    ```
 - Knative CLI:
    ```shell
