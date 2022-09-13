@@ -47,9 +47,9 @@ The stamped out resource will usually update it's local copy of the source code 
 The `source-to-url` supply chain supplied with TCE stamps out a
 [Flux GitRepository](https://fluxcd.io/docs/components/source/gitrepositories/) resource to perform this function for each workload.
 
-| Configuration | Template Variable                                                                                | YTT Variable                                                                                                           |
-|---------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| spec.urlPath  | `$(source.url)$` (Single Template) <br/> `$(sources.<name>.url)$` (Multiple Templates)           | `#@ data.values.source.url` (Single Template) <br/> `#@ data.values.sources.<name>.url` (Multiple Templates)           |
+| Configuration     | Template Variable                                                                                | YTT Variable                                                                                                           |
+|-------------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| spec.urlPath      | `$(source.url)$` (Single Template) <br/> `$(sources.<name>.url)$` (Multiple Templates)           | `#@ data.values.source.url` (Single Template) <br/> `#@ data.values.sources.<name>.url` (Multiple Templates)           |
 | spec.revisionPath | `$(source.revision)$` (Single Template) <br/> `$(sources.<name>.revision)$` (Multiple Templates) | `#@ data.values.source.revision` (Single Template) <br/> `#@ data.values.sources.<name>.revision` (Multiple Templates) |
 
 ## ClusterImageTemplate
