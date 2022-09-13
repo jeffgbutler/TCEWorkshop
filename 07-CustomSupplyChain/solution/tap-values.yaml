@@ -2,7 +2,7 @@
 namespace: jgb-ns # use "default" for TCE, use your configured developer namespace on TAP
 
 # step 2...
-image_template: kpack-tamplate # use "image" on TCE, use "kpack-template" on TAP
+image_template: kpack-template # use "image" on TCE, use "kpack-template" on TAP
 registry:
   server: harbor.tanzuathome.net
   repository: tap12
