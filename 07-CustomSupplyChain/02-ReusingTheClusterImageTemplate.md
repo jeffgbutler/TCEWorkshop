@@ -155,6 +155,18 @@ In this supply chain, there is only one source template. In this case we can sho
 `source` by convention. If there were more than one source template, we would need to specify the name or names
 of the different templates accordingly.
 
+## Update the RBAC
+
+We also need to update the `ClusterRole` to give the service account permission to create the new resources we've
+used in this new part of the supply chain. We added the following permissions:
+
+```yaml
+rules:
+   - apiGroups: [kpack.io]
+     resources: [images]
+     verbs: ['*']
+```
+
 ## Create and Test the Updated Supply Chain
 
 Update the supply chain with this command:
@@ -172,5 +184,20 @@ tanzu apps workload tail java-payment-calcuator
 This time the supply chain will take a bit longer to reconcile because it will use Kpack to build and publish an
 image. When the supply chain completes, you should see a new image named `java-payment-calculator-default` in your
 repository.
+
+The supply chain stamps out a normal Kpack image resource - which means that you can use any of the kpack CLI commands
+to monitor the build, for example:
+
+```shell
+kp image list
+```
+
+```shell
+kp build list
+```
+
+```shell
+kp build logs java-payment-calculator
+```
 
 [Next (Create a Cluster Template) -&gt;](03-ClusterTemplate.md)
