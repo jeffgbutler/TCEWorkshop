@@ -205,8 +205,8 @@ This can be difficult to manage because the service account will need permission
 stamped out by the supply chain. When we installed TAP/TCE some of this was setup for us and we will reuse it as much
 as possible.
 
-In [solution/values.yaml](./solution/values.yaml) we provide a default name for a namespace. We're going to use "default" because it
-will match what is setup in TAP/TCE. If for some reason you changes it when you installed TAP/TCE then you should change it here also.
+In [solution/values.yaml](./solution/values.yaml) we provide a default name for a namespace. We will use "default" on TCE
+clusters because TCE sets things up very simply. On a TAP cluster, you should use the name of your configured developer namespace.
 
 Let's examine the cluster role:
 
@@ -243,9 +243,9 @@ subjects:
   namespace: #@ data.values.namespace
 ```
 
-This is a ytt template that will bind the ClusterRole to the service account. Note that the out of the box supply chains have
-already given this permission to the default service account - we're including it here for clarity and also to setup for future
-permissions we will add in the following sections.
+This is a ytt template that will bind the ClusterRole to the default service account in the namespace we will use.
+Note that the out of the box supply chains have already given this permission to the default service account - we're
+including it here for clarity and also to setup for future permissions we will add in the following sections.
 
 Let's create the supply chain. We're going to use kapp to create and update the supply chain because it is a simple way to
 deploy many things as a single "application". In this case, the "application" is the supply chain.
