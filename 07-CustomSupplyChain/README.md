@@ -3,11 +3,11 @@
 In this exercise, we will create a custom supply chain that:
 
 1. Retrieves source code from Git
-1. Builds and publishes an images with Kpack
-1. Uses a Kubernetes deployment, services, and ingress to deploy the application
+2. Builds and publishes an images with Kpack
+3. Uses a Kubernetes deployment, services, and ingress to deploy the application
 
-This is similar to the out of the box supply chain except that it does not use Knative to deploy the application.
-Our supply chain will be simpler than the out of the box supply chain - at the loss of some flexability.
+This is similar to the out-of-the-box supply chain except that it does not use Knative to deploy the application.
+Our supply chain will be simpler than the out-of-the-box supply chain - at the loss of some flexibility.
 We will also reuse one part of the existing supply chain to show how Cartographer can compose supply
 chains from reusable parts.
 

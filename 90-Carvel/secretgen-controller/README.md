@@ -6,7 +6,7 @@ On managed clusters it is installed automatically.
 The secretgen-controller does a few things:
 
 1. It can generate secrets, keys, and certificates for use by other Kubernetes resources (we will not cover that usage in this workshop)
-1. It provides an operator makes it easy to share secrets across Kubernetes namespaces (we will cover this usage)
+2. It provides an operator makes it easy to share secrets across Kubernetes namespaces (we will cover this usage)
 
 The Tanzu CLI includes a function that will create a registry secret. The Tanzu CLI secret functionality
 requires the secretgen-controller to be installed! This is not strictly necessary in an unmanaged cluster currently, but we assume it
@@ -14,8 +14,8 @@ will be coming shortly.
 
 Full details about the secretgen-controller are here: https://github.com/vmware-tanzu/carvel-secretgen-controller
 
-**Important:** We will not use the secretgen-controller in this workshop so you can safely skip this section. Using the
-secretgen-controller is useful if you want to setup different namespaces for different developers.
+**Important:** We will not use the secretgen-controller in this workshop, so you can safely skip this section. Using the
+secretgen-controller is useful if you want to set up different namespaces for different developers.
 
 ## Install the secretgen-controller in an Unmanaged Cluster
 
@@ -36,7 +36,7 @@ If you don't see the secretgen-controller, follow these steps to install it:
 
    On my unmanaged cluster, I can see that version 0.7.1 is available.
 
-1. Install secretgen-controller
+2. Install secretgen-controller
 
    Powershell...
    ```powershell

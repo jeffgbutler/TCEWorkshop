@@ -14,11 +14,11 @@ Suppose we want to install an application and make it available on our cluster. 
 following:
 
 1. Create a namespace
-1. Create a deployment
-1. Create a service
+2. Create a deployment
+3. Create a service
 
 These resources work together to comprise the application. But they are independent resources and could be
-managed independantly. If we need to make changes, or delete the application, we need to remember to work
+managed independently. If we need to make changes, or delete the application, we need to remember to work
 with every resource.
 
 Further, we need to create these resources in the correct order. The namespace would need to exist before the other
@@ -29,7 +29,7 @@ This scenario is where kapp is useful. Kapp can understand these three things as
 ## How does Kapp Work?
 
 Kapp parses Kubernetes YAML and then calculates a "diff" with what's actually deployed on a cluster. Kapp then displays
-a summary of the changes it will makes and the order in which it will do those changes. By default, it will wait for all
+a summary of the changes it will make and the order in which it will do those changes. By default, it will wait for all
 resources to reconcile.
 
 Calculating the "diff" is one of the most powerful features of kapp. Kapp can navigate very complex changes in application
@@ -141,7 +141,7 @@ In the directory [kuard-application-template](kuard-application-template/) there
 The templates accept two values: "namespaces" and "replicas" with defaults "kuard-ns1" and "2" respectively. Note that the replicas value
 is an integer - this will need some special care when calling ytt.
 
-We can combine combine ytt and kapp to deploy or change the application as needed. When we pipe ytt output into kapp, we need to specify
+We can combine ytt and kapp to deploy or change the application as needed. When we pipe ytt output into kapp, we need to specify
 the "-y" flag on the kapp command to apply changes without asking for confirmation because there will be no stdin available in that case.
 
 First let's do a simply deploy that shouldn't change anything - the current state of the application should match the defaults:
@@ -159,7 +159,7 @@ Now let's change the number of replicas:
 ytt -f kuard-application-template/. --data-value-yaml replicas=3 | kapp deploy -a kuard -y -f-
 ```
 
-Now we've changed the number of replicas to three - kapp should report that the deloyment needs to be updated and will wait until
+Now we've changed the number of replicas to three - kapp should report that the deployment needs to be updated and will wait until
 that change reconciles.
 
 ![kapp change replicas with ytt](images/kapp-ytt-replicas.png)

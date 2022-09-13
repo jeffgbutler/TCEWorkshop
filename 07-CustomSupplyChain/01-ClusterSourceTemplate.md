@@ -1,6 +1,6 @@
 # Create a Cluster Source Template
 
-The out of the box supply chain includes a fully functioning `ClusterSourceTemplate` that we can reuse. However, it is fairly complex
+The out-of-the-box supply chain includes a fully functioning `ClusterSourceTemplate` that we can reuse. However, it is fairly complex
 because it includes functionality for secrets and labels. We won't need this for a simple example, so let's recreate it as an exercise.
 
 What we need is a template that will stamp out a `GitRepository` for the first step in our supply chain.
@@ -10,8 +10,8 @@ What we need is a template that will stamp out a `GitRepository` for the first s
 Templates can receive inputs from several places:
 
 1. They can access the standard values of the workload they are associated with
-1. They can access the values of parameters specified in the workload (and use default values if not supplied)
-1. They can access the output values of other templates they rely on
+2. They can access the values of parameters specified in the workload (and use default values if not supplied)
+3. They can access the output values of other templates they rely on
 
 For the `ClusterSourceTemplate` we will only interact with the first two.
 
@@ -22,22 +22,22 @@ for a simple `GitRepository` resource:
 
 ```yaml
 apiVersion: source.toolkit.fluxcd.io/v1beta1
-  kind: GitRepository
-  metadata:
-    name: # MUST BE UNIQUE
-    labels:
-      app.kubernetes.io/component: source # HARDCODED
-  spec:
-    interval: 1m0s
-    url: # MUST BE UNIQUE
-    ref: # MUST BE UNIQUE
-    gitImplementation: # SET A DEFAULT THAT CAN BE OVERRIDDEN
-    ignore: '!.git' # HARDCODED
+kind: GitRepository
+metadata:
+  name: # MUST BE UNIQUE
+  labels:
+    app.kubernetes.io/component: source # HARDCODED
+spec:
+  interval: 1m0s
+  url: # MUST BE UNIQUE
+  ref: # MUST BE UNIQUE
+  gitImplementation: # SET A DEFAULT THAT CAN BE OVERRIDDEN
+  ignore: '!.git' # HARDCODED
 ```
 
 (for full details about this CRD see https://fluxcd.io/docs/components/source/gitrepositories/)
 
-Some of the items in this spec are optional, but we will use them to demonstrate capabilities in Cartographer.
+Some items in this spec are optional, but we will use them to demonstrate capabilities in Cartographer.
 
 This is a template - which means we will need to supply some values to make each stamped out resource unique.
 For a particular `GitRepository`, you can think that the name and location of the Git repository should be unique
@@ -52,7 +52,7 @@ out by Cartographer.
 A `ClusterSourceTemplate` needs two main things:
 
 1. It needs to know how to stamp out a resource that will supply source code in the cluster (i.e. it needs a resource template)
-1. It needs to know where to find the resulting source code
+2. It needs to know where to find the resulting source code
 
 In Cartographer, templates can be coded in two ways: as a simple Kubernetes template - very like the template definitions
 you see in other Kubernetes objects like deployments, or as a YTT based template. YTT offers additional flexibility to
@@ -95,8 +95,8 @@ spec:
 A few important things to notice here:
 
 1. The template name is `cartographer-workshop-git-repository-template` - we will need this when building a supply chain
-1. The `spec.params` section defines a default value for the parameter `git_implementation`
-1. The `spec.template` section contains the `GitRepository` template we showed above and contains parameter
+2. The `spec.params` section defines a default value for the parameter `git_implementation`
+3. The `spec.template` section contains the `GitRepository` template we showed above and contains parameter
    markers for the various values that can change with every workload.
 
 Notice in particular the parameter markers in the template. When using a simple template like this,
@@ -147,7 +147,7 @@ Several important things to notice:
 1. The basic structure of the template and parameters are the same. But instead of `spec.template` we now
    use `spec.ytt`. In `spec.ytt` we can specify any YTT script we want and use any of the YTT functionality.
    Since this is a simple template, there are no conditionals or loops here.
-1. The format of the variables has changed - now we are using the YTT variable format `#@ data.values ...`
+2. The format of the variables has changed - now we are using the YTT variable format `#@ data.values ...`
 
 ## Building a Supply Chain
 
@@ -176,23 +176,23 @@ This is a very simple supply chain. Some important things to notice:
 
 1. The workload type is `source-to-ingress`. We will use this in the workload definition to specify the supply chain
    we want to run
-1. The `spec.resources` section includes a reference to the simple template based `ClusterSourceTemplate` we created above
-1. We haven't discussed security yet, so this supply chain may not function as is in your cluster
+2. The `spec.resources` section includes a reference to the simple template based `ClusterSourceTemplate` we created above
+3. We haven't discussed security yet, so this supply chain may not function as is in your cluster
 
 ## Note about YTT and Kapp
 
-We are going to use ytt and kapp to create the supply supply chain. There are a couple of reasons for this:
+We are going to use ytt and kapp to create the supply chain. There are a couple of reasons for this:
 
-1. The supply chain will be composed of many different resources and kapp is a natural tool to use for managing 
+1. The supply chain will be composed of many resources and kapp is a natural tool to use for managing 
    multiple resources
-1. We will add to the supply chain in a few iterations. Again, kapp is a natural tool for incrementally implementing
+2. We will add to the supply chain in a few iterations. Again, kapp is a natural tool for incrementally implementing
    an application.
-1. We will provide some sensible default for many values in the supply chain, but also provide a method for overriding the
+3. We will provide some sensible default for many values in the supply chain, but also provide a method for overriding the
    default. YTT is a natural for this.
 
 In the [solution](./solution/) directory there is a `values.yaml` file with sensible defaults. We will discuss each value
 as we get to it. Also in that directory are subdirectories with the different stages of the supply chain. We have taken the
-typical approach with kapp where each resources is in it's own yaml file, and kapp will deploy things in the correct order.
+typical approach with kapp where each resource is in its own yaml file, and kapp will deploy things in the correct order.
 
 We will also run each file through ytt before sending the yaml to kapp.
 
@@ -202,7 +202,7 @@ Supply chains all run with a service account. By default, the "default" service 
 where the workload resides. A developer can also specify a service account when creating a workload.
 
 This can be difficult to manage because the service account will need permission to create every kind of resource
-stamped out by the supply chain. When we installed TAP/TCE some of this was setup for us and we will reuse it as much
+stamped out by the supply chain. When we installed TAP/TCE some of this was set up for us and we will reuse it as much
 as possible.
 
 In [solution/values.yaml](./solution/values.yaml) we provide a default name for a namespace. We will use "default" on TCE
@@ -244,8 +244,8 @@ subjects:
 ```
 
 This is a ytt template that will bind the ClusterRole to the default service account in the namespace we will use.
-Note that the out of the box supply chains have already given this permission to the default service account - we're
-including it here for clarity and also to setup for future permissions we will add in the following sections.
+Note that the out-of-the-box supply chains have already given this permission to the default service account - we're
+including it here for clarity and also to set up for future permissions we will add in the following sections.
 
 Let's create the supply chain. We're going to use kapp to create and update the supply chain because it is a simple way to
 deploy many things as a single "application". In this case, the "application" is the supply chain.
@@ -291,14 +291,14 @@ spec:
 
 Notice that the `tanzu` command maps the Git parameter values as follows:
 
-| Tanzu CLI Parameter | Resulting Spec Value |
-|---|---|
-| `--git-repo` | `spec.source.git.url` |
-| `--git-branch` | `spec.source.git.ref.branch` |
+| Tanzu CLI Parameter | Resulting Spec Value         |
+|---------------------|------------------------------|
+| `--git-repo`        | `spec.source.git.url`        |
+| `--git-branch`      | `spec.source.git.ref.branch` |
 
 The mapped values exactly match the values we need in the `ClusterSourceTemplate`.
 
-This supply chain should resolve fairly quickly since it is only downloading source cdoe from GitHub. You can check the status with this command:
+This supply chain should resolve fairly quickly since it is only downloading source code from GitHub. You can check the status with this command:
 
 ```shell
 tanzu apps workload get java-payment-calculator

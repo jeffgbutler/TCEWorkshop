@@ -3,8 +3,8 @@
 The kapp-controller is a Kubernetes controller that has two main functions:
 
 1. It can run kapp in a cluster - this is the usage we will discuss in this workshop
-1. It can be used to package software for easy installation in a cluster, and it understands how to install and modify
-   software packages. All of the software available for TCE from VMware is packaged for easy use with the kapp-controller.
+2. It can be used to package software for easy installation in a cluster, and it understands how to install and modify
+   software packages. All the software available for TCE from VMware is packaged for easy use with the kapp-controller.
    We have already seen the package repositories and installed packages available in the TCE cluster.
 
 Full details about the Kapp controller are here: https://carvel.dev/kapp-controller/
@@ -18,8 +18,8 @@ The kapp-controller runs kapp in a cluster. But what does that mean exactly?
 When we ran kapp on a workstation, we saw that:
 
 1. We supply input files to kapp that contain Kubernetes YAML
-1. We might want to run those input files through ytt or kbld (or both!) before we send them to kapp
-1. Ultimately we want kapp to create resources in Kubernetes based on these, possibly transformed, input files
+2. We might want to run those input files through ytt or kbld (or both!) before we send them to kapp
+3. Ultimately we want kapp to create resources in Kubernetes based on these, possibly transformed, input files
 
 The kapp-controller does exactly this. When we install the kapp-controller in a cluster, we enable a new CRD
 of kind `App` with API version `kappctrl.k14s.io/v1alpha1`. This allows us to define input sources for kapp and
@@ -37,12 +37,12 @@ Configuration of the App CRD contains three major sections:
    - From a Helm chart
    - From an arbitrary URL
    - others
-1. `spec.template` where we define the transforms we want to apply to the input YAML. Valid templating engines include:
+2. `spec.template` where we define the transforms we want to apply to the input YAML. Valid templating engines include:
    - ytt
    - kbld
    - helmTemplate
    - others
-1. `spec.deploy` where we specify options for kapp on the deployment
+3. `spec.deploy` where we specify options for kapp on the deployment
 
 This may seem a bit abstract, so we will walk through a simple example. But first we need to look at security.
 
@@ -98,7 +98,7 @@ Important things to notice in this spec:
 
 1. `spec.fetch` has a single hardcoded deployment spec. It's in a "file" named "deployment.yaml" but that is really
    just to keep it separate from other hardcoded entries. There can be as many inline entries as you wish.
-1. The kapp-controller will run this input through kbld before applying it. This is specified by the following YAML:
+2. The kapp-controller will run this input through kbld before applying it. This is specified by the following YAML:
 
    ```yaml
    template:
@@ -109,7 +109,7 @@ Important things to notice in this spec:
    for kbld if desired that roughly correspond to options on the kbld CLI. We don't need to specify anything in this case, so we just
    supply an empty map (`{}`)
 
-1. `spec.deploy` has `kapp` as it's only value. Again we can specify kapp command line parameters if desired, but we don't need
+3. `spec.deploy` has `kapp` as it's only value. Again we can specify kapp command line parameters if desired, but we don't need
    any here, so we supply an empy map
 
 This spec creates an App resource that runs kapp and deploys the application. The App resource will check for updates every 30 seconds
@@ -171,7 +171,7 @@ kapp-controller. It has the following characteristics:
 1. There is inline YAML for a namespace, deployment, and service. These are the same files we used from the
    kapp exercise - they are ytt templates that accept configuration values. There is also inline YAML for the ytt
    schema with default values. This is basically copy/paste of existing YAML templates into an App spec.
-1. There is a reference to a Git repository to obtain configuration values. In this case, the reference directory has a single
+2. There is a reference to a Git repository to obtain configuration values. In this case, the reference directory has a single
    file named "values.yaml" that looks something like this:
 
    ```yaml
@@ -180,7 +180,7 @@ kapp-controller. It has the following characteristics:
    namespace: kuard-app-ns
    replicas: 3
    ```
-1. The kapp-controller is configured to run both ytt and kbld on the input files before deploying the applcation with kapp
+3. The kapp-controller is configured to run both ytt and kbld on the input files before deploying the application with kapp
 
 If you want to experiment with this, then we suggest you change the Git reference to a repo where you can commit. Then
 deploy the application and watch it create all the resources you expect. If you make a change to the configuration in Git,

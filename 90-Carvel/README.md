@@ -3,7 +3,7 @@
 Understanding the Carvel tools is fundamental to success with Tanzu. Most of the Carvel tools are command line tools that do
 relatively simple things. Used together, they form a very capable toolchain for working with Kubernetes.
 
-Some of the Carvel tools are installed into Kubernetes clusters as controllers. In fact, the definition of a "Tanzu" cluster
+Some Carvel tools are installed into Kubernetes clusters as controllers. In fact, the definition of a "Tanzu" cluster
 is just a plain old Kubernetes cluster with two specific Carvel tools installed: the secretgen-controller and the kapp-controller.
 
 For some historical context, the Carvel tools were previously called simply "Kubernetes Tools" which was shortened to "k14s" in

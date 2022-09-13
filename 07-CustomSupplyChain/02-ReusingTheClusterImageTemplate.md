@@ -6,7 +6,7 @@ functionality.
 For this exercise, we will update the supply chain so that it has two steps:
 
 1. It will retrieve source code from Git using the template we created in the last step
-1. It will build and publish and image based on that source code using the existing `ClusterImageTemplate`
+2. It will build and publish and image based on that source code using the existing `ClusterImageTemplate`
    in the out-of-the-box supply chain
 
 In this exercise, we will learn how Cartographer choreographs the interactions between stamped out resources.
@@ -46,13 +46,30 @@ spec:
 ```
 
 Notice that there are now two items under `spec.resources`: our `ClusterSourceTemplate` as before, and a reference
-to a `ClusterImageTemplate` who's name we retrive from ytt configuration. We've coded it this way because the template
+to a `ClusterImageTemplate` whose name we retrieve from ytt configuration. We've coded it this way because the template
 name is different on TAP and TCE. Where did that `ClusterImageTemplate` come from? The answer is that it is
-provided by the out-of-the-box supply chain. You can see it with the following command:
+provided by the out-of-the-box supply chain. You can see it with on of the following commands (these show the different template
+names on TAP and TCE):
+
+<details><summary>ClusterImageTemplate on TAP</summary>
+<p>
+
+```shell
+kubectl describe ClusterImageTemplate kpack-template
+```
+
+</p>
+</details>
+
+<details><summary>ClusterImageTemplate on TCE</summary>
+<p>
 
 ```shell
 kubectl describe ClusterImageTemplate image
 ```
+
+</p>
+</details>
 
 If you look closely, you will see that this template is configured with YTT and is significantly more complex than the
 simple `ClusterSourceTemplate` we created in the last exercise. But the truth is, we don't really care about that.
@@ -61,9 +78,9 @@ We know it works, so we can simply reuse it.
 You will also notice that this bit of YAML is a YTT template - you will need to run this through YTT before
 sending it to the cluster. The reason for this is the parameter named `registry`. The `ClusterImageTemplate` supplied
 with the out-of-the-box supply chain requires this parameter - it needs to know where to publish the image! Using this
-YTT template, we can reuse the registry  information from our initial configuration of the app-toolkit. You might ask
-how I learned this. Then answer is simple - trial and error. I could have decoded the configuration of
-the `ClusterImageTemplate` and found it also.
+YTT template, we can use the registry information from an external configuration. You might ask
+how I learned about this parameter. Then answer is simple - trial and error. I could also have inspected the
+configuration of the `ClusterImageTemplate` and found it there.
 
 ## Template Dependencies and Choreography
 
@@ -73,7 +90,7 @@ Take a closer look at the definition of the `ClusterImageTemplate`:
     - name: image-builder
       templateRef:
         kind: ClusterImageTemplate
-        name: image
+        name: #@ data.values.image_template
       sources:
         - resource: source-provider
           name: source
@@ -103,7 +120,7 @@ major distinction in how Cartographer works compared with traditional CI/CD syst
 > Cartographer works by creating Kubernetes resources and then forwarding the output of one resource to another.
 > Cartographer depends on Kubernetes resources to react to changes in configuration and reconcile appropriately.
 > This makes Cartographer compatible with virtually any Kubernetes resource. Any provider that embraces the CRD model in
-> Kuberntes is compatible with Cartographer out of the box.
+> Kubernetes is compatible with Cartographer out of the box.
 >
 > Cartographer does not implement any kind of reconciliation system. Cartographer also does not implement the
 > Kubernetes resources that do the actual work. This makes it different from something like
