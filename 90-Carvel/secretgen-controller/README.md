@@ -1,26 +1,31 @@
 # Secretgen-Controller Overview
 
-The secretgen-controller is part of the [Carvel](https://carvel.dev/) tool suite. It is available in all TCE clusters.
-On managed clusters it is installed automatically.
+The secretgen-controller is part of the [Carvel](https://carvel.dev/) tool suite. It is available as a package in all
+Tanzu clusters. On TCE unmanaged clusters it is available but not installed - on all other Tanzu clusters it is
+installed.
 
 The secretgen-controller does a few things:
 
 1. It can generate secrets, keys, and certificates for use by other Kubernetes resources (we will not cover that usage in this workshop)
 2. It provides an operator makes it easy to share secrets across Kubernetes namespaces (we will cover this usage)
+3. As of version 0.9.0, it includes a CRD `SecretTemplate` that can be used to create secrets with arbitrary fields, and
+   secrets composed of other secrets. There are interesting use cases associated with this facility related to service
+   binding. We will not cover that use in this workshop, but you can read a good blog post about it here:
+   https://tanzu.vmware.com/developer/guides/tanzu-service-secret-sauce/
 
 The Tanzu CLI includes a function that will create a registry secret. The Tanzu CLI secret functionality
-requires the secretgen-controller to be installed! This is not strictly necessary in an unmanaged cluster currently, but we assume it
-will be coming shortly.
+requires the secretgen-controller to be installed! This is not strictly necessary in a TCE unmanaged cluster currently,
+but we assume it will be coming shortly.
 
 Full details about the secretgen-controller are here: https://github.com/vmware-tanzu/carvel-secretgen-controller
 
 **Important:** We will not use the secretgen-controller in this workshop, so you can safely skip this section. Using the
 secretgen-controller is useful if you want to set up different namespaces for different developers.
 
-## Install the secretgen-controller in an Unmanaged Cluster
+## Install the secretgen-controller in a TCE Unmanaged Cluster
 
-If you created an unmanaged cluster you will need to install the secretgen-controller. You can see if the controller is already
-installed with the following command:
+If you created a TCE unmanaged cluster you will need to install the secretgen-controller. You can see if the controller
+is already installed with the following command:
 
 ```shell
 tanzu package installed list -A
@@ -38,21 +43,31 @@ If you don't see the secretgen-controller, follow these steps to install it:
 
 2. Install secretgen-controller
 
-   Powershell...
+   <details><summary>Powershell</summary>
+   <p>
+
    ```powershell
    tanzu package install secretgen-controller `
      --package-name secretgen-controller.community.tanzu.vmware.com `
      --version 0.7.1 `
      --namespace tkg-system
    ```
+   
+   </p>
+   </details>
 
-   MacOS/Linux...
+   <details><summary>MacOS/Linux</summary>
+   <p>
+
    ```shell
    tanzu package install secretgen-controller \
      --package-name secretgen-controller.community.tanzu.vmware.com \
      --version 0.7.1 \
      --namespace tkg-system
    ```
+
+   </p>
+   </details>
 
 One the package reconciles, you should see it in the installed packages list:
 
@@ -82,7 +97,6 @@ apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretExport
 metadata:
   name: some-secret
-  namespace: default
 spec:
   toNamespace: '*' # we can also specify a specific namespace, or a list of namespaces
 ```
@@ -118,13 +132,21 @@ The Tanzu CLI is also capable of creating secrets when the secretgen-controller 
 The following command will create both the `Secret`, and the `SecretExport` in a single command:
 
 ```shell
-tanzu secret registry add some-secret \
+tanzu secret registry add another-secret \
   --server harbor.tanzuathome.net \
   --username=admin \
   --password=Harbor12345 \
   --export-to-all-namespaces
 ```
 
+You can see the `SecretExport` with this command:
+
+```shell
+kubectl get SecretExports.secretgen.carvel.dev
+```
+
 You will still need to create the `SecretImport` in the other namespaces using regular kubectl commands as shown above.
+
+If you delete the secret with the Tanzu CLI, the secret export will also be deleted.
 
 [Next (YTT Overview) -&gt;](../ytt/README.md)

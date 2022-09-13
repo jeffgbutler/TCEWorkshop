@@ -4,12 +4,17 @@ The kapp-controller is a Kubernetes controller that has two main functions:
 
 1. It can run kapp in a cluster - this is the usage we will discuss in this workshop
 2. It can be used to package software for easy installation in a cluster, and it understands how to install and modify
-   software packages. All the software available for TCE from VMware is packaged for easy use with the kapp-controller.
-   We have already seen the package repositories and installed packages available in the TCE cluster.
+   software packages. All the software available for Tanzu from VMware is packaged for easy use with the kapp-controller.
+   We have already seen the package repositories and installed packages available in the clusters we have created.
+
+Every Tanzu cluster has the kapp-controller pre-installed. Having the kapp-controller installed is one of the defining
+characteristics of a "Tanzu cluster" (the other being the secretgen-controller). But the kapp-controller can be
+easily installed and used on any Kubernetes cluster - Tanzu or not.
 
 Full details about the Kapp controller are here: https://carvel.dev/kapp-controller/
 
-The kapp-controller also has an associated CLI called "kctrl" that can interact with the kapp-controller installed in a cluster.
+The kapp-controller also has an associated CLI called "kctrl" that can interact with the kapp-controller installed in a
+cluster.
 
 ## Running Kapp in a Cluster
 
@@ -21,7 +26,7 @@ When we ran kapp on a workstation, we saw that:
 2. We might want to run those input files through ytt or kbld (or both!) before we send them to kapp
 3. Ultimately we want kapp to create resources in Kubernetes based on these, possibly transformed, input files
 
-The kapp-controller does exactly this. When we install the kapp-controller in a cluster, we enable a new CRD
+The kapp-controller does exactly this. When the kapp-controller is installed in a cluster, there is a new CRD
 of kind `App` with API version `kappctrl.k14s.io/v1alpha1`. This allows us to define input sources for kapp and
 transforms that should occur on those inputs before kapp creates the resources. Since the kapp-controller is
 Kubernetes native, any change to the definition of an App will cause the controller to reconcile again. So you
@@ -105,16 +110,23 @@ Important things to notice in this spec:
      - kbld: {}
    ```
 
-   That looks a little strange, but it is basically telling the kapp controller we want to run kbld. You can specify some options
-   for kbld if desired that roughly correspond to options on the kbld CLI. We don't need to specify anything in this case, so we just
-   supply an empty map (`{}`)
+   That looks a little strange, but it is basically telling the kapp controller we want to run kbld. You can specify
+   some options for kbld if desired that roughly correspond to command line options on the kbld CLI. We don't need to
+   specify anything in this case, so we just supply an empty map (`{}`)
 
-3. `spec.deploy` has `kapp` as it's only value. Again we can specify kapp command line parameters if desired, but we don't need
-   any here, so we supply an empy map
+3. `spec.deploy` has `kapp` as it's only value. Again we can specify kapp command line options if desired, but we don't need
+   any here, so we supply an empty map
 
 This spec creates an App resource that runs kapp and deploys the application. The App resource will check for updates every 30 seconds
 or so and make changes to the app. Very few changes are expected here since everything is hardcoded. If the label on the Kuard
 image changes it would trigger an update because kbld would move to the new digest.
+
+To deploy this, we need to run rbac.yaml as well as simple-example.yaml. Sounds like a job for kapp! Yes - we can use
+kapp to deploy an application based on the kapp-controller.
+
+```shell
+kapp deploy -a kapp-controller-simple-example -f rbac.yaml -f simple-example.yaml
+```
 
 ## Inspecting Applications with the kapp CLI
 

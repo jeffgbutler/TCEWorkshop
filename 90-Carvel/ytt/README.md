@@ -8,21 +8,21 @@ YTT operates in two main modes: templating and overlays.
 1. You can create YAML templates that accept input values from a variety of sources. YTT includes a templating language based
    on Google Starlink that can be used to build logic into templates (loops, conditionals, etc.) YTT templates are part of the
    installation of many Tanzu tools. Further, you will most likely need to write YTT templates if you want to create your own
-   Cartographer supply chains or if you use the Kapp Controller. The template mode is the mode we will explore in this lesson.
+   Cartographer supply chains or if you use the kapp-controller. The template mode is the mode we will explore in this lesson.
 2. YTT can also operate in "overlay" mode where it can modify (or patch) existing YAML. This is useful if you need to modify
-   YAML that is not configured as a YTT template. If you want to build a Kapp controller package to install some third party tool,
+   YAML that is not configured as a YTT template. If you want to build a kapp-controller package to install some third party tool,
    you may need to use YTT's overlay capabilities to modify an installation YAML to match your cluster configuration.
 
-In templating mode, you can think of YTT as a YAML aware string substitution engine. It will take one or more input YAML files,
-substitute placeholder variables with actual values from a variety of sources, and output a final result.
-By "YAML aware" we mean that YTT understands the correct structure of YAML documents and can build valid YAML composed of
-fragments. If you are familiar with compilers, you can think that YTT builds an AST (abstract syntax tree) for YAML - which
-is far more sophisticated than simple string substitution.
-This can be incredibly useful if you need to build a single template that can be reused many times (as we will
-do with Cartographer).
+In templating mode, YTT will take one or more input YAML files, substitute placeholder variables with actual values
+from a variety of sources, and output a final result. YTT is "YAML aware" which means that YTT understands the correct
+structure of YAML documents and can build valid YAML composed of fragments. If you are familiar with compilers, you
+can think that YTT builds an AST (abstract syntax tree) for YAML - which is far more sophisticated than simple string
+substitution. This can be incredibly useful if you need to build a single template that can be reused many times (as we
+will do with Cartographer).
 
-Full details about YTT are here: https://carvel.dev/ytt/. That page also includes an online "playground" for YTT that can be very
-helpful when learning more about YTT. You can access the playground directly here: https://carvel.dev/ytt/#playground
+Full details about YTT are here: https://carvel.dev/ytt/. That page also includes an online "playground" for YTT that
+can be very helpful when learning more about YTT. You can access the playground directly
+here: https://carvel.dev/ytt/#playground
 
 ## Simple Example
 Here is a simple example. Suppose we have a YAML file named `MyName.yaml` like this:
@@ -48,18 +48,19 @@ my:
     is: Fred
 ```
 
-All YTT commands look like YAML comments, so YAML templates are valid YAML and will pass validation tools.
+All YTT commands look like YAML comments, so YAML templates are usually valid YAML and will pass validation tools.
 In the source file, there are two YTT commands:
 
-1. `#@ load("@ytt:data", "data")` - this instructs YTT to load that `data` module and make all the `data` values available with the key `data.values` (`values` is built in and provides access to the individual data elements.)
+1. `#@ load("@ytt:data", "data")` - this instructs YTT to load that `data` module and make all the `data` values
+   available with the key `data.values` (`values` is built in and provides access to the individual data elements.)
 2. `#@ data.values.my_name` - this instructs YTT to insert the data value `my_name` into the YAML at this position
 
-Data values can come from a variety of sources - most commonly from command line flags as shown above, or from a file as we
-will show below.
+Data values can come from a variety of sources - most commonly from command line flags as shown above, or from a file
+as we will show below.
 
 ## Multiple Input Files
 
-If you supply multiple input files to YTT, the output will be a single consolidated YAML file. For example, suppose
+If you supply more than one input file to YTT, the output will be a single consolidated YAML file. For example, suppose
 there are two input files named `MyName.yaml` and `YourName.yaml` as shown below:
 
 ```yaml
@@ -68,7 +69,6 @@ my:
   name:
     is: #@ data.values.my_name
 ```
-
 
 ```yaml
 #@ load("@ytt:data", "data")

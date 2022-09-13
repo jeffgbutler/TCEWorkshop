@@ -2,9 +2,15 @@
 
 The kapp CLI understands how to install and update applications on Kubernetes.
 In the kapp way of thinking, an "application" is a collection of Kubernetes resources that can be considered
-parts of a single thing. The kapp CLI does not require anything to be installed on a Kubernetes cluster - every
-action is calculated on the workstation where the kapp command is run. The Carvel tool "kapp-controller" can
-be used to run kapp in a cluster - we will look at the kapp controller in a separate exercise.
+parts of a single thing.
+
+**Important: The kapp CLI does not require anything to be installed on a Kubernetes cluster.** Every
+action is calculated on the workstation where the kapp command is run. Also, kapp does not require any special
+privileges in a cluster - if the signed-in user has authority to create the resources requested in a kapp
+application, then kapp can do its work.
+
+The Carvel tool "kapp-controller" can be used to run kapp in a cluster - we will look at the kapp-controller in a
+separate exercise.
 
 Full details about the Kapp CLI are here: https://carvel.dev/kapp/
 
@@ -79,8 +85,8 @@ You can see that kapp has determined that only the deployment needs to be update
 
 In addition to the resources created from the YAML we create, kapp also creates ConfigMaps on the cluster to keep track of
 the current state of an application and all the different changes that have been made to it. Unless you specify differently,
-those ConfigMaps will be in the default namespace, and will be named based on the application name. In my cluster, there are now
-four ConfigMaps related to the kuard application we created and modified in the last exercise.
+those ConfigMaps will be in the default namespace for your context, and will be named based on the application name.
+In my cluster, there are now four ConfigMaps related to the kuard application we created and modified in the last exercise.
 
 It's important to understand that the definition of an application is tied to the namespace where the ConfigMaps live.
 
@@ -151,7 +157,8 @@ ytt -f kuard-application-template/. | kapp deploy -a kuard -y -f-
 ```
 
 This creates a consolidated YAML describing the application (wuth ytt defaults applied), pipes the output to kapp, and
-instructs kapp to update the application without asking for confirmation. Kapp should report that no changes were required.
+instructs kapp to update the application without asking for confirmation. Kapp may report that no changes were required
+if you didn't delete the application above.
 
 Now let's change the number of replicas:
 

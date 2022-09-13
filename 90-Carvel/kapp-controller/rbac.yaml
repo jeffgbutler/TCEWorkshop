@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: tce-workshop-role
+  name: carvel-workshop-role
   namespace: default
 rules:
   - apiGroups: [""]
@@ -26,11 +26,11 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: tce-workshop-role-binding
+  name: carvel-workshop-role-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: tce-workshop-role
+  name: carvel-workshop-role
 subjects:
 - kind: ServiceAccount
   name: default
