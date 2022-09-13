@@ -267,8 +267,7 @@ tanzu apps workload create java-payment-calculator \
   --git-repo https://github.com/jeffgbutler/java-payment-calculator \
   --git-branch main \
   --type source-to-ingress \
-  --yes \
-  -n default
+  --yes
 ```
 
 This creates and applies YAML like the following:
@@ -307,7 +306,7 @@ tanzu apps workload get java-payment-calculator
 Now, you can inspect the stamped out object with the following command:
 
 ```shell
-kubectl get GitRepository java-payment-calculator -o json | jq
+kubectl get GitRepository java-payment-calculator -o json
 ```
 
 You should see `status.artifact.revision` and `status.artifact.url` values set. We can use these as inputs to the next step

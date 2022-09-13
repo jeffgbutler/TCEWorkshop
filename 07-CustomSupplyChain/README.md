@@ -20,6 +20,13 @@ The easiest way to run the examples in this workshop is to clone this repository
 [solution/values.yaml](./solution/values.yaml) file to match your install of TAP or TCE.
 This workshop has been tested with TAP 1.2.1 and TCE 0.12.1.
 
+If you are running this workshop on TAP, it will help if you set the default namespace for your context to your
+configured developer namespace:
+
+```shell
+kubectl config set-context --current --namespace=jgb-ns
+```
+
 All commands assume you have a command window open to the same directory as this README file.
 
 This workshop uses a Spring Boot application with a Swagger UI as the default application. The source code for that
