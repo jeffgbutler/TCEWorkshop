@@ -5,10 +5,11 @@ The kapp-controller is a Kubernetes controller that has two main functions:
 1. It can run kapp in a cluster - this is the usage we will discuss in this workshop
 2. It can be used to package software for easy installation in a cluster, and it understands how to install and modify
    software packages. All the software available for Tanzu from VMware is packaged for easy use with the kapp-controller.
-   We have already seen the package repositories and installed packages available in the clusters we have created.
+   If you are interested in learning more about package authoring, there is a good introductory post on the Carvel site
+   here: https://carvel.dev/blog/kctrl-pkg-authoring-cmds/
 
-Every Tanzu cluster has the kapp-controller pre-installed. Having the kapp-controller installed is one of the defining
-characteristics of a "Tanzu cluster" (the other being the secretgen-controller). But the kapp-controller can be
+Every Tanzu cluster has the kapp-controller pre-installed. In fact, having the kapp-controller installed is one of the
+defining characteristics of a "Tanzu cluster" (the other being the secretgen-controller). But the kapp-controller can be
 easily installed and used on any Kubernetes cluster - Tanzu or not.
 
 Full details about the Kapp controller are here: https://carvel.dev/kapp-controller/
@@ -58,6 +59,10 @@ to make sure that the service account has permission to all the API resources th
 The file [rbac.yaml](rbac.yaml) in this directory contains a `ClusterRole` with permissions for all the API resources used in
 these examples. It also includes a `ClusterRoleBinding` for the default service account in the default namespace. These are
 cluster resources rather than namespaced resources because we want the kapp-controller to be able to work across namespaces.
+
+In addition to permissions for the resources you create, the kapp-controller service account also needs permissions
+to create ConfigMaps - which makes sense as that is where kapp stores application configuration. You can read more
+about the kapp-controller security model here: https://carvel.dev/kapp-controller/docs/v0.40.0/security-model/
 
 ## Simple Application
 
