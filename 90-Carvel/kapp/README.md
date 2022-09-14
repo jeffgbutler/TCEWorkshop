@@ -113,6 +113,21 @@ This shows four applications. The "kuard" application we installed and three oth
 when the cluster was created. The "kuard" application is in the "default" namespace and kapp knows that resources
 were created in the "kuard-ns1" namespace.
 
+## Looking at History
+
+Kapp keeps a history of all application changes. The history of each change is stored in a ConfigMap in the cluster.
+Kapp has a command that will show the history:
+
+```shell
+kapp app-change list -a kuard
+```
+
+In my cluster, the answer looks like this:
+
+![kapp History](images/kapp-app-change.png)
+
+In this output, the "name" of the change is also the name of the ConfigMap where the details of the change are stored.
+
 ## Inspecting Applications with Kapp
 
 The kapp CLI has several commands that can show the state of applications:
@@ -182,6 +197,76 @@ Kapp reconciles this change by deleting the old namespace "kuard-ns1" and recrea
 ![kapp change namespace with ytt](images/kapp-ytt-namespace.png)
 
 Kapp's ability to calculate a diff on old and new desired states, and then apply the changes in the correct order, make it a very
-powerful tool in a GitOps workflow. Next we'll see how to run kapp in a cluster with the kapp-controller.
+powerful tool in a GitOps workflow.
+
+## Kapp Configuration
+
+One of the primary functions of kapp is calculating a diff between current state and desired state, then applying those
+changes in the correct order. Kapp is very good at this for many cases. In our examples we are using well known
+Kubernetes resources and Kapp knows how to deal with them. But kapp may not understand how to apply changes for every
+resource available on any particular cluster. To deal with this problem, kapp includes a very powerful configuration
+mechanism.
+
+If you examine the out-of-the-box supply chain, you will see a kapp configuration like this included in the
+templates that deploy applications to Knative:
+
+```yaml
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+rebaseRules:
+  - path: [metadata, annotations, serving.knative.dev/creator]
+    type: copy
+    sources: [new, existing]
+    resourceMatchers: &matchers
+      - apiVersionKindMatcher: {apiVersion: serving.knative.dev/v1, kind: Service}
+  - path: [metadata, annotations, serving.knative.dev/lastModifier]
+    type: copy
+    sources: [new, existing]
+    resourceMatchers: *matchers
+```
+
+I retrieved this from the following command:
+
+<details><summary>TAP</summary>
+<p>
+
+```shell
+kubectl get ClusterDeploymentTemplate app-deploy -o yaml
+```
+
+</p>
+</details>
+
+<details><summary>TCE</summary>
+<p>
+
+```shell
+kubectl get ClusterTemplate app -o yaml 
+```
+
+</p>
+</details>
+
+We won't dig into the details of this configuration except to say that it informs kapp of some annotations
+specific to Knative that kapp should manage. Note that this is not YAML for a Kubernetes resource - it is YAML to
+configure kapp. You should include configuration YAML in the set of fies that is deployed in a kapp application,
+but it is strictly to alter the execution of kapp. Nothing is deployed on a cluster as a result of this YAML alone.
+
+If you want to see the details of kapp's default configuration, you can retrieve it with the following command:
+
+```shell
+kapp deploy-config
+```
+
+Warning - it is a huge amount of configuration detail!
+
+You can read all about kapp configuration in the documentation here: https://carvel.dev/kapp/docs/v0.52.0/config/
+
+If kapp doesn't calculate the correct order for changes with your resources, you can also add annotations
+to the resource definitions that will alter the order of execution. You can read about that
+here: https://carvel.dev/kapp/docs/v0.52.0/apply-ordering/
+
+
+Next we'll see how to run kapp in a cluster with the kapp-controller.
 
 [Next (Kapp-Controller Overview) -&gt;](../kapp-controller/README.md)
