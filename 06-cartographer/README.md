@@ -30,6 +30,15 @@ tanzu apps workload create java-payment-calculator `
   -n default
 ```
 
+```powershell
+tanzu apps workload create csharp-payment-calculator `
+  --git-repo https://github.com/jeffgbutler/csharp-payment-calculator `
+  --git-branch main `
+  --type web `
+  --label app.kubernetes.io/part-of=csharp-payment-calculator `
+  -n default
+```
+
 ### Linux/MacOS Shell
 
 ```shell
