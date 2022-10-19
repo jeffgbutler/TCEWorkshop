@@ -5,12 +5,13 @@ are required.
 
 Examples of the values required for various container registries are as follows:
 
-| Registry                 | Kpack Default Repository                    | Cartographer Catalog Server Name | Cartographer Catalog Repository |
-|--------------------------|---------------------------------------------|----------------------------------|---------------------------------|
-| Azure Container Registry | foo.azurecr.io/tce/kpack                    | foo.azurecr.io                   | tce                             |
-| Dockerhub                | jeffgbutler/kpack                           | index.docker.io                  | jeffgbutler                     |
-| Harbor                   | harbor.tanzuathome.net/tce/kpack [^1]       | harbor.tanzuathome.net           | tce                             |
-| Google Artifact Registry | us-east1-docker.pkg.dev/foo/tce/kpack [^2]  | us-east1-docker.pkg.dev          | foo/tce                         |
+| Registry                  | Kpack Default Repository                    | Cartographer Catalog Server Name | Cartographer Catalog Repository |
+|---------------------------|---------------------------------------------|----------------------------------|---------------------------------|
+| Azure Container Registry  | foo.azurecr.io/tce/kpack                    | foo.azurecr.io                   | tce                             |
+| Dockerhub                 | jeffgbutler/kpack                           | index.docker.io                  | jeffgbutler                     |
+| Harbor                    | harbor.tanzuathome.net/tce/kpack [^1]       | harbor.tanzuathome.net           | tce                             |
+| GitHub Container Registry | ghcr.io/jeffgbutler/kpack                   | ghcr.io                          | jeffgbutler                     |
+| Google Artifact Registry  | us-east1-docker.pkg.dev/foo/tce/kpack [^2]  | us-east1-docker.pkg.dev          | foo/tce                         |
 
 [Next (Install TCE Locally) -&gt;](LocalToolInstall.md)
 
